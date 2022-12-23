@@ -1,21 +1,17 @@
 import axios from "axios";
-import {useState} from "react";
+import {useContext, useState} from "react";
+import AuthContext from "../context";
 
 const useRequest = (callback) => {
-    const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState('')
+    const {isAuth, setIsAuth, isLoading, setIsLoading} = useContext(AuthContext)
+    // async const error = ''
 
     const request = async () =>{
-        try{
             setIsLoading(true)
             await callback()
-        }catch (e){
-            setError(e.message)
-        }finally {
             setIsLoading(false)
-        }
     }
-    return [isLoading, error, request]
+    return [request]
 
     // const request = (method, path, data, callback) => {
     //     const local_callback = (response) => {
