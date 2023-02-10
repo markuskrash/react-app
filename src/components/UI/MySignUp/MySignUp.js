@@ -3,14 +3,14 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import 'bootstrap/dist/css/bootstrap.min.css'
-import classes from './MyLogIn.module.css'
+import classes from './MySignUp.module.css'
 import AuthContext from "../../../context";
 import useRequest from "../../../hooks/useRequest";
 import LogIn from "../../../API/LogIn";
 import {Alert, FormText} from "react-bootstrap";
 
 
-const MyLogIn = () => {
+const MySignUp = () => {
     const [show, setShow] = useState(false);
 
     const handleClose = () => {
@@ -67,14 +67,12 @@ const MyLogIn = () => {
                     ?
 
                     <Button variant="light" onClick={handleShow}>
-                        Log in
+                        Sign up
                     </Button>
-                    : <button className={classes.accauntName} onClick={logout}>
-                        {email}
-                    </button>}
+                    : <></>}
             </div>
             <Modal show={show} onHide={handleClose} animation={false}>
-                <Form noValidate onSubmit={sumbit}>
+                <Form noValidate onSubmit>
                     <Modal.Header closeButton>
                         {/*<Modal.Title>Log in</Modal.Title>*/}
                     </Modal.Header>
@@ -112,6 +110,65 @@ const MyLogIn = () => {
                             />
                             <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                         </Form.Group>
+                        <Form.Group
+                            className="mb-3"
+                            controlId="exampleForm.ControlInput1"
+                        >
+                            <Form.Label>Surname</Form.Label>
+                            <Form.Control
+                                required
+                                // value={password}
+                                type="text"
+                                className={classes.inputInfo}
+                                // onChange={(e) => {
+                                //     setPassword(e.target.value)
+                                // }}
+                            />
+                            <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                        </Form.Group>
+                        <Form.Group
+                            className="mb-3"
+                            controlId="exampleForm.ControlInput1"
+                        >
+                            <Form.Label>First name</Form.Label>
+                            <Form.Control
+                                required
+                                // value={password}
+                                type="text"
+                                className={classes.inputInfo}
+                                // onChange={(e) => {
+                                //     setPassword(e.target.value)
+                                // }}
+                            />
+                            <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                        </Form.Group>
+                        <Form.Group
+                            className="mb-3"
+                            controlId="exampleForm.ControlInput1"
+                        >
+                            <Form.Label>Second name</Form.Label>
+                            <Form.Control
+                                required
+                                type="text"
+                                className={classes.inputInfo}
+                                // onChange={(e) => {
+                                //     setPassword(e.target.value)
+                                // }}
+                            />
+                            <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                        </Form.Group>
+                        <Form.Group
+                            className="mb-3"
+                            controlId="exampleForm.ControlInput1"
+                        >
+                            <Form.Label>Standing</Form.Label>
+                            <Form.Select aria-label="Default select example" className={classes.inputInfo}>
+                                <option disabled={true}>Your standing in school</option>
+                                <option value="1">Teacher</option>
+                                <option value="2">Student</option>
+                            </Form.Select>
+                            <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                        </Form.Group>
                         <Alert variant='danger' show={isTryToAuth && isAuth === false}>
                             <div className={classes.alertText}>
                                 {isTryToAuth && isAuth === false
@@ -123,7 +180,7 @@ const MyLogIn = () => {
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="dark" type='submit'>
-                            Log in
+                            Sign up
                         </Button>
                     </Modal.Footer>
                 </Form>
@@ -133,4 +190,4 @@ const MyLogIn = () => {
         ;
 };
 
-export default MyLogIn;
+export default MySignUp;

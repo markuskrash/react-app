@@ -1,0 +1,23 @@
+.alertText{
+    text-align: center;
+}
+
+.myButton{
+    margin: 15px 10px;
+}
+
+.inputInfo:focus{
+    box-shadow: none;
+    border-color: black;
+}
+
+.accauntName{
+    color: white;
+    margin: 0;
+    background: none;
+    border: none;
+}
+
+.accauntName:hover{
+    color: rgba(255,255,255, 0.8);
+}

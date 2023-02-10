@@ -1,19 +1,19 @@
 import './App.css';
-import MyLogIn from "./components/UI/MyLogin/MyLogIn";
 import Loading from "./components/UI/Loading/Loading";
 import React, {useEffect, useState} from "react";
 import AuthContext from './context/index'
+import Header from "./components/UI/Header/Header";
 
 
 function App() {
     const [isAuth, setIsAuth] = useState(false)
     useEffect(() => {
-        // localStorage.setItem('error', '')
         localStorage.clear()
-        if (localStorage.getItem('accessToken')) {
+        localStorage.setItem('error', '')
+        if (localStorage.getItem('accessToken') !== "" && localStorage.getItem('accessToken') !== null) {
             setIsAuth(true)
         } else {
-            setIsAuth((false))
+            setIsAuth(false)
         }
     }, [])
 
@@ -26,16 +26,14 @@ function App() {
             isLoading,
             setIsLoading
         }}>
+            <Header/>
             {isLoading
                 ? <Loading isLoading={isLoading}/>
                 : <></>}
-                    {isAuth
-                        ? <h1>Вы вошли в аккаунт</h1>
-                        : <></>
-                    }
-                    <MyLogIn/>
-            {/*    </>*/}
-            {/*}*/}
+            {isAuth
+                ? <h3>Вы вошли в аккаунт</h3>
+                : <></>
+            }
         </AuthContext.Provider>
     )
         ;
