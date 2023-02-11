@@ -8,6 +8,7 @@ import AuthContext from "../../../context";
 import useRequest from "../../../hooks/useRequest";
 import LogIn from "../../../API/LogIn";
 import {Alert, FormText} from "react-bootstrap";
+import SignUp from "../../../API/SignUp";
 
 
 const MySignUp = () => {
@@ -21,10 +22,14 @@ const MySignUp = () => {
     const {isAuth, setIsAuth, isLoading, setIsLoading} = useContext(AuthContext)
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [surname, setSurname] = useState('');
+    const [first_name, setFirst_name] = useState('');
+    const [second_name, setSecond_name] = useState('');
+    const [standing, setStanding] = useState('1');
 
 
     const [request] = useRequest(async () => {
-        await LogIn.post(email, password, setIsAuth, setIsTryToAuth, handleClose)
+        await SignUp.post(email, password, surname, first_name, second_name, standing, setIsAuth, setIsTryToSign, handleClose)
     })
 
     // useEffect(() => {
@@ -36,15 +41,7 @@ const MySignUp = () => {
         request()
     }
 
-    const logout = (event) => {
-        localStorage.setItem('accessToken', "")
-        localStorage.setItem('refreshToken', "")
-        localStorage.setItem('email', "")
-        setIsAuth(false)
-        setIsTryToAuth(false)
-    }
-
-    const [isTryToAuth, setIsTryToAuth] = useState(false);
+    const [isTryToSign, setIsTryToSign] = useState(false);
 
 
     const sumbit = (event) => {
@@ -72,7 +69,7 @@ const MySignUp = () => {
                     : <></>}
             </div>
             <Modal show={show} onHide={handleClose} animation={false}>
-                <Form noValidate onSubmit>
+                <Form noValidate onSubmit={sumbit}>
                     <Modal.Header closeButton>
                         {/*<Modal.Title>Log in</Modal.Title>*/}
                     </Modal.Header>
@@ -120,9 +117,9 @@ const MySignUp = () => {
                                 // value={password}
                                 type="text"
                                 className={classes.inputInfo}
-                                // onChange={(e) => {
-                                //     setPassword(e.target.value)
-                                // }}
+                                onChange={(e) => {
+                                    setSurname(e.target.value)
+                                }}
                             />
                             <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                         </Form.Group>
@@ -136,9 +133,9 @@ const MySignUp = () => {
                                 // value={password}
                                 type="text"
                                 className={classes.inputInfo}
-                                // onChange={(e) => {
-                                //     setPassword(e.target.value)
-                                // }}
+                                onChange={(e) => {
+                                    setFirst_name(e.target.value)
+                                }}
                             />
                             <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                         </Form.Group>
@@ -151,9 +148,9 @@ const MySignUp = () => {
                                 required
                                 type="text"
                                 className={classes.inputInfo}
-                                // onChange={(e) => {
-                                //     setPassword(e.target.value)
-                                // }}
+                                onChange={(e) => {
+                                    setSecond_name(e.target.value)
+                                }}
                             />
                             <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                         </Form.Group>
@@ -162,17 +159,20 @@ const MySignUp = () => {
                             controlId="exampleForm.ControlInput1"
                         >
                             <Form.Label>Standing</Form.Label>
-                            <Form.Select aria-label="Default select example" className={classes.inputInfo}>
+                            <Form.Select aria-label="Default select example" className={classes.inputInfo}
+                                         onChange={(e) => {
+                                             setStanding(e.target.value)
+                                         }}>
                                 <option disabled={true}>Your standing in school</option>
                                 <option value="1">Teacher</option>
                                 <option value="2">Student</option>
                             </Form.Select>
                             <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                         </Form.Group>
-                        <Alert variant='danger' show={isTryToAuth && isAuth === false}>
+                        <Alert variant='danger' show={isTryToSign && isAuth === false}>
                             <div className={classes.alertText}>
-                                {isTryToAuth && isAuth === false
-                                    ? 'Email or password is wrong'
+                                {isTryToSign && isAuth === false
+                                    ? 'Not all fields are entered correctly'
                                     : ''
                                 }
                             </div>
