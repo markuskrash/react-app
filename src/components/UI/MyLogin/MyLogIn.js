@@ -7,7 +7,9 @@ import classes from './MyLogIn.module.css'
 import AuthContext from "../../../context";
 import useRequest from "../../../hooks/useRequest";
 import LogIn from "../../../API/LogIn";
-import {Alert, FormText} from "react-bootstrap";
+import {Alert, FormText, Nav, NavDropdown} from "react-bootstrap";
+import DropdownMenu from "react-bootstrap/DropdownMenu";
+import DropdownToggle from "react-bootstrap/DropdownToggle";
 
 
 const MyLogIn = () => {
@@ -66,12 +68,29 @@ const MyLogIn = () => {
                 {isAuth === false
                     ?
 
-                    <Button variant="light" onClick={handleShow}>
-                        Log in
-                    </Button>
-                    : <button className={classes.accauntName} onClick={logout}>
-                        {email}
-                    </button>}
+                    <Nav.Item>
+                        <Nav.Link variant="dark" onClick={handleShow}>
+                            Log in
+                        </Nav.Link>
+                    </Nav.Item>
+
+                    :
+                    <NavDropdown
+                        id="nav-dropdown-dark-example"
+                        title={email}
+                        menuVariant="dark"
+                        variant="red"
+                        className={classes.dropdown}
+                    >
+                            <NavDropdown.Item as="button" className={classes.dropdown_toggle}>
+                                My accaunt
+                            </NavDropdown.Item>
+                            <NavDropdown.Divider/>
+                            <NavDropdown.Item as="button" onClick={logout} className={classes.dropdown_toggle_out}>
+                                Log out
+                            </NavDropdown.Item>
+                    </NavDropdown>
+                }
             </div>
             <Modal show={show} onHide={handleClose} animation={false}>
                 <Form noValidate onSubmit={sumbit}>

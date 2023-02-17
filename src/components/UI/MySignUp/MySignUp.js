@@ -7,7 +7,7 @@ import classes from './MySignUp.module.css'
 import AuthContext from "../../../context";
 import useRequest from "../../../hooks/useRequest";
 import LogIn from "../../../API/LogIn";
-import {Alert, FormText} from "react-bootstrap";
+import {Alert, FormText, Nav} from "react-bootstrap";
 import SignUp from "../../../API/SignUp";
 
 
@@ -62,10 +62,11 @@ const MySignUp = () => {
             <div className={classes.myButton}>
                 {isAuth === false
                     ?
-
-                    <Button variant="light" onClick={handleShow}>
-                        Sign up
-                    </Button>
+                        <Nav.Item>
+                            <Nav.Link variant="dark" onClick={handleShow}>
+                                Sign up
+                            </Nav.Link>
+                        </Nav.Item>
                     : <></>}
             </div>
             <Modal show={show} onHide={handleClose} animation={false}>

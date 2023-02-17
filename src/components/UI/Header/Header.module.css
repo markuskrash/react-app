@@ -5,3 +5,9 @@
     align-items: center;
     background: #212529;
 }
+
+.dropdown{
+    display: flex;
+    align-items: center;
+}
+
