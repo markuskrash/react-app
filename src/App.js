@@ -22,12 +22,13 @@ function App() {
     const [isLoading, setIsLoading] = useState(false);
 
     return (
-        // <IntlProvider messages={{}} locale='en' defaultLocale='en'>
+        <IntlProvider messages={{}} locale='en' defaultLocale='en'>
             <AuthContext.Provider value={{
                 isAuth,
                 setIsAuth,
                 isLoading,
-                setIsLoading
+                setIsLoading,
+                // intl
             }}>
                 <Header/>
                 {isLoading
@@ -38,7 +39,7 @@ function App() {
                     : <></>
                 }
             </AuthContext.Provider>
-        // {/*</IntlProvider>*/}
+         </IntlProvider>
     )
         ;
 }

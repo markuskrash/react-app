@@ -80,15 +80,16 @@ const MyLogIn = () => {
                         title={email}
                         menuVariant="dark"
                         variant="red"
+                        align={{lg: 'end'}}
                         className={classes.dropdown}
                     >
-                            <NavDropdown.Item as="button" className={classes.dropdown_toggle}>
-                                My accaunt
-                            </NavDropdown.Item>
-                            <NavDropdown.Divider/>
-                            <NavDropdown.Item as="button" onClick={logout} className={classes.dropdown_toggle_out}>
-                                Log out
-                            </NavDropdown.Item>
+                        <NavDropdown.Item as="button" className={classes.dropdown_toggle}>
+                            My accaunt
+                        </NavDropdown.Item>
+                        <NavDropdown.Divider/>
+                        <NavDropdown.Item as="button" onClick={logout} className={classes.dropdown_toggle_out}>
+                            Log out
+                        </NavDropdown.Item>
                     </NavDropdown>
                 }
             </div>
