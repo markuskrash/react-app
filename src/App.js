@@ -4,10 +4,13 @@ import React, {useEffect, useState} from "react";
 import AuthContext from './context/index'
 import Header from "./components/UI/Header/Header";
 import {IntlProvider, useIntl} from 'react-intl';
+import {LOCALES} from "./languages/locales";
+import {messages} from "./languages/messages";
 
 
 function App() {
     // const intl = useIntl()
+    // console.log(intl)
     const [isAuth, setIsAuth] = useState(false)
     useEffect(() => {
         localStorage.clear()
@@ -21,13 +24,17 @@ function App() {
 
     const [isLoading, setIsLoading] = useState(false);
 
+    const [locale, setLocale] = useState(LOCALES.RUSSIAN)
+
     return (
-        <IntlProvider messages={{}} locale='en' defaultLocale='en'>
+        <IntlProvider messages={messages[locale]} locale={locale} defaultLocale={LOCALES.ENGLISH}>
             <AuthContext.Provider value={{
                 isAuth,
                 setIsAuth,
                 isLoading,
                 setIsLoading,
+                locale,
+                setLocale,
                 // intl
             }}>
                 <Header/>

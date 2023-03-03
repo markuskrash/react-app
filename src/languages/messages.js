@@ -1,0 +1,40 @@
+import { LOCALES } from './locales'
+
+export const messages = {
+  [LOCALES.ENGLISH]: {
+    login: 'Log in',
+    logout: 'Log out',
+    signup: 'Sign up',
+    my_accaunt: 'My accaunt',
+    email_address: 'Email address',
+    email: 'Email',
+    password: 'Password',
+    alert: 'Email or password is wrong',
+    surname: 'Surname',
+    first_name: 'First name',
+    second_name: 'Second name',
+    standing: 'Standing',
+    standing_info: 'Your standing in school',
+    teacher: 'Teacher',
+    student: 'Student',
+    logo: 'Ask lyceum',
+  },
+  [LOCALES.RUSSIAN]: {
+    login: "Вход",
+    logout: 'Выход',
+    signup: 'Регистрация',
+    my_accaunt: 'Мой аккаунт',
+    email_address: 'Почтовый адрес',
+    email: 'Почта',
+    password: 'Пароль',
+    alert: 'Почта или пароль некорректны',
+    surname: 'Фамилия',
+    first_name: 'Имя',
+    second_name: 'Отчество',
+    standing: 'Положение',
+    standing_info: 'Твое положение в школе',
+    teacher: 'Учитель',
+    student: 'Ученик',
+    logo: 'Спрашивай лицей',
+  }
+}

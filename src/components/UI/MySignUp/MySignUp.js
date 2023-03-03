@@ -9,6 +9,8 @@ import useRequest from "../../../hooks/useRequest";
 import LogIn from "../../../API/LogIn";
 import {Alert, FormText, Nav} from "react-bootstrap";
 import SignUp from "../../../API/SignUp";
+import {FormattedMessage} from "react-intl";
+import {messages} from "../../../languages/messages";
 
 
 const MySignUp = () => {
@@ -19,7 +21,7 @@ const MySignUp = () => {
     }
     const handleShow = () => setShow(true);
 
-    const {isAuth, setIsAuth, isLoading, setIsLoading} = useContext(AuthContext)
+    const {isAuth, setIsAuth, isLoading, setIsLoading, locale, setLocale} = useContext(AuthContext)
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [surname, setSurname] = useState('');
@@ -64,7 +66,7 @@ const MySignUp = () => {
                     ?
                         <Nav.Item>
                             <Nav.Link variant="dark" onClick={handleShow}>
-                                Sign up
+                                <FormattedMessage id='signup'/>
                             </Nav.Link>
                         </Nav.Item>
                     : <></>}
@@ -72,47 +74,41 @@ const MySignUp = () => {
             <Modal show={show} onHide={handleClose} animation={false}>
                 <Form noValidate onSubmit={sumbit}>
                     <Modal.Header closeButton>
-                        {/*<Modal.Title>Log in</Modal.Title>*/}
                     </Modal.Header>
                     <Modal.Body>
-
                         <Form.Group className="mb-3" controlId="validationCustom02">
-                            <Form.Label>Email address</Form.Label>
+                            <Form.Label><FormattedMessage id='email_address'/></Form.Label>
                             <Form.Control
                                 value={email}
                                 required
                                 type="email"
                                 autoFocus
                                 className={classes.inputInfo}
-                                placeholder="Email"
                                 onChange={(e) => {
                                     setEmail(e.target.value)
                                 }}
                             />
-                            <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                         </Form.Group>
                         <Form.Group
                             className="mb-3"
                             controlId="exampleForm.ControlInput1"
                         >
-                            <Form.Label>Password</Form.Label>
+                            <Form.Label><FormattedMessage id='password'/></Form.Label>
                             <Form.Control
                                 required
                                 value={password}
                                 type="password"
                                 className={classes.inputInfo}
-                                placeholder="Password"
                                 onChange={(e) => {
                                     setPassword(e.target.value)
                                 }}
                             />
-                            <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                         </Form.Group>
                         <Form.Group
                             className="mb-3"
                             controlId="exampleForm.ControlInput1"
                         >
-                            <Form.Label>Surname</Form.Label>
+                            <Form.Label><FormattedMessage id='surname'/></Form.Label>
                             <Form.Control
                                 required
                                 // value={password}
@@ -122,13 +118,12 @@ const MySignUp = () => {
                                     setSurname(e.target.value)
                                 }}
                             />
-                            <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                         </Form.Group>
                         <Form.Group
                             className="mb-3"
                             controlId="exampleForm.ControlInput1"
                         >
-                            <Form.Label>First name</Form.Label>
+                            <Form.Label><FormattedMessage id='first_name'/></Form.Label>
                             <Form.Control
                                 required
                                 // value={password}
@@ -138,13 +133,12 @@ const MySignUp = () => {
                                     setFirst_name(e.target.value)
                                 }}
                             />
-                            <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                         </Form.Group>
                         <Form.Group
                             className="mb-3"
                             controlId="exampleForm.ControlInput1"
                         >
-                            <Form.Label>Second name</Form.Label>
+                            <Form.Label><FormattedMessage id='second_name'/></Form.Label>
                             <Form.Control
                                 required
                                 type="text"
@@ -153,22 +147,20 @@ const MySignUp = () => {
                                     setSecond_name(e.target.value)
                                 }}
                             />
-                            <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                         </Form.Group>
                         <Form.Group
                             className="mb-3"
                             controlId="exampleForm.ControlInput1"
                         >
-                            <Form.Label>Standing</Form.Label>
+                            <Form.Label><FormattedMessage id='standing'/></Form.Label>
                             <Form.Select aria-label="Default select example" className={classes.inputInfo}
                                          onChange={(e) => {
                                              setStanding(e.target.value)
                                          }}>
-                                <option disabled={true}>Your standing in school</option>
-                                <option value="1">Teacher</option>
-                                <option value="2">Student</option>
+                                <option disabled={true}><FormattedMessage id='standing_info'/></option>
+                                <option value="1"><FormattedMessage id='teacher'/></option>
+                                <option value="2"><FormattedMessage id='student'/></option>
                             </Form.Select>
-                            <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                         </Form.Group>
                         <Alert variant='danger' show={isTryToSign && isAuth === false}>
                             <div className={classes.alertText}>
@@ -181,7 +173,7 @@ const MySignUp = () => {
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="dark" type='submit'>
-                            Sign up
+                            <FormattedMessage id='signup'/>
                         </Button>
                     </Modal.Footer>
                 </Form>

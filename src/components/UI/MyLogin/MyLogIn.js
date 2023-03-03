@@ -10,6 +10,8 @@ import LogIn from "../../../API/LogIn";
 import {Alert, FormText, Nav, NavDropdown} from "react-bootstrap";
 import DropdownMenu from "react-bootstrap/DropdownMenu";
 import DropdownToggle from "react-bootstrap/DropdownToggle";
+import {FormattedMessage} from "react-intl";
+import {messages} from "../../../languages/messages";
 
 
 const MyLogIn = () => {
@@ -20,7 +22,7 @@ const MyLogIn = () => {
     }
     const handleShow = () => setShow(true);
 
-    const {isAuth, setIsAuth, isLoading, setIsLoading} = useContext(AuthContext)
+    const {isAuth, setIsAuth, isLoading, setIsLoading, locale, setLocale} = useContext(AuthContext)
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -70,7 +72,7 @@ const MyLogIn = () => {
 
                     <Nav.Item>
                         <Nav.Link variant="dark" onClick={handleShow}>
-                            Log in
+                            <FormattedMessage id='login'/>
                         </Nav.Link>
                     </Nav.Item>
 
@@ -84,11 +86,11 @@ const MyLogIn = () => {
                         className={classes.dropdown}
                     >
                         <NavDropdown.Item as="button" className={classes.dropdown_toggle}>
-                            My accaunt
+                            <FormattedMessage id='my_accaunt'/>
                         </NavDropdown.Item>
                         <NavDropdown.Divider/>
                         <NavDropdown.Item as="button" onClick={logout} className={classes.dropdown_toggle_out}>
-                            Log out
+                            <FormattedMessage id='logout'/>
                         </NavDropdown.Item>
                     </NavDropdown>
                 }
@@ -99,43 +101,38 @@ const MyLogIn = () => {
                         {/*<Modal.Title>Log in</Modal.Title>*/}
                     </Modal.Header>
                     <Modal.Body>
-
                         <Form.Group className="mb-3" controlId="validationCustom02">
-                            <Form.Label>Email address</Form.Label>
+                            <Form.Label><FormattedMessage id='email_address' /></Form.Label>
                             <Form.Control
                                 value={email}
                                 required
                                 type="email"
                                 autoFocus
                                 className={classes.inputInfo}
-                                placeholder="Email"
                                 onChange={(e) => {
                                     setEmail(e.target.value)
                                 }}
                             />
-                            <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                         </Form.Group>
                         <Form.Group
                             className="mb-3"
                             controlId="exampleForm.ControlInput1"
                         >
-                            <Form.Label>Password</Form.Label>
+                            <Form.Label><FormattedMessage id='password' /></Form.Label>
                             <Form.Control
                                 required
                                 value={password}
                                 type="password"
                                 className={classes.inputInfo}
-                                placeholder="Password"
                                 onChange={(e) => {
                                     setPassword(e.target.value)
                                 }}
                             />
-                            <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                         </Form.Group>
                         <Alert variant='danger' show={isTryToAuth && isAuth === false}>
                             <div className={classes.alertText}>
                                 {isTryToAuth && isAuth === false
-                                    ? 'Email or password is wrong'
+                                    ? <FormattedMessage id='alert' />
                                     : ''
                                 }
                             </div>
@@ -143,7 +140,7 @@ const MyLogIn = () => {
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="dark" type='submit'>
-                            Log in
+                            <FormattedMessage id='login' />
                         </Button>
                     </Modal.Footer>
                 </Form>
