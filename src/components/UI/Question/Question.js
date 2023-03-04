@@ -1,5 +1,5 @@
-import React, {useContext} from "react";
-import classes from "./Language.module.css"
+import React, {useContext, useState} from "react";
+import classes from "./Question.module.css"
 import {NavDropdown, Nav} from "react-bootstrap";
 import AuthContext from "../../../context";
 import {messages} from "../../../languages/messages";
@@ -11,8 +11,11 @@ const Question = () => {
 
 
 
-    return (
 
+    return (
+        <div className={classes.question}>
+
+        </div>
     )
 }
 

@@ -1,0 +1,10 @@
+.question{
+    border:solid;
+    border-radius: 15px;
+    border-color: rgba(33, 37, 41, 0.5);
+    /*background-color: #61dafb;*/
+    border-width: 2px;
+    height: 300px;
+    margin:15px;
+    display: flex;
+}

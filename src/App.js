@@ -6,6 +6,8 @@ import Header from "./components/UI/Header/Header";
 import {IntlProvider, useIntl} from 'react-intl';
 import {LOCALES} from "./languages/locales";
 import {messages} from "./languages/messages";
+import Ask from "./components/UI/Ask/Ask";
+import Question from "./components/UI/Question/Question";
 
 
 function App() {
@@ -41,10 +43,12 @@ function App() {
                 {isLoading
                     ? <Loading isLoading={isLoading}/>
                     : <></>}
-                {isAuth
-                    ? <h3>Вы вошли в аккаунт</h3>
-                    : <></>
-                }
+                {/*{isAuth*/}
+                {/*    ? <h3>Вы вошли в аккаунт</h3>*/}
+                {/*    : <></>*/}
+                {/*}*/}
+                <Ask/>
+                <Question/>
             </AuthContext.Provider>
          </IntlProvider>
     )

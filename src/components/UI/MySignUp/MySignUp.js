@@ -27,11 +27,11 @@ const MySignUp = () => {
     const [surname, setSurname] = useState('');
     const [first_name, setFirst_name] = useState('');
     const [second_name, setSecond_name] = useState('');
-    const [standing, setStanding] = useState('1');
+    const [position, setPosition] = useState('1');
 
 
     const [request] = useRequest(async () => {
-        await SignUp.post(email, password, surname, first_name, second_name, standing, setIsAuth, setIsTryToSign, handleClose)
+        await SignUp.post(email, password, surname, first_name, second_name, position, setIsAuth, setIsTryToSign, handleClose)
     })
 
     // useEffect(() => {
@@ -39,7 +39,7 @@ const MySignUp = () => {
     //     setValidated(true)
     // }, [isAuth, x])
 
-    const login = (event) => {
+    const signup = (event) => {
         request()
     }
 
@@ -54,7 +54,7 @@ const MySignUp = () => {
         } else {
             event.preventDefault()
         }
-        login(event)
+        signup(event)
 
     }
 
@@ -152,12 +152,12 @@ const MySignUp = () => {
                             className="mb-3"
                             controlId="exampleForm.ControlInput1"
                         >
-                            <Form.Label><FormattedMessage id='standing'/></Form.Label>
+                            <Form.Label><FormattedMessage id='position'/></Form.Label>
                             <Form.Select aria-label="Default select example" className={classes.inputInfo}
                                          onChange={(e) => {
-                                             setStanding(e.target.value)
+                                             setPosition(e.target.value)
                                          }}>
-                                <option disabled={true}><FormattedMessage id='standing_info'/></option>
+                                <option disabled={true}><FormattedMessage id='position_info'/></option>
                                 <option value="1"><FormattedMessage id='teacher'/></option>
                                 <option value="2"><FormattedMessage id='student'/></option>
                             </Form.Select>
@@ -165,7 +165,7 @@ const MySignUp = () => {
                         <Alert variant='danger' show={isTryToSign && isAuth === false}>
                             <div className={classes.alertText}>
                                 {isTryToSign && isAuth === false
-                                    ? 'Not all fields are entered correctly'
+                                    ? <FormattedMessage id='signup_alert' />
                                     : ''
                                 }
                             </div>

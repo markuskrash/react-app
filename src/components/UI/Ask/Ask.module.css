@@ -1,0 +1,13 @@
+.inputInfo:focus{
+    box-shadow: none;
+    border-color: black;
+}
+
+.ask{
+    display: flex;
+    justify-content: end;
+}
+
+.ask_btn{
+    margin: 15px
+}

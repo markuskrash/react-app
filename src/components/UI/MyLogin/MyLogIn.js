@@ -132,7 +132,7 @@ const MyLogIn = () => {
                         <Alert variant='danger' show={isTryToAuth && isAuth === false}>
                             <div className={classes.alertText}>
                                 {isTryToAuth && isAuth === false
-                                    ? <FormattedMessage id='alert' />
+                                    ? <FormattedMessage id='login_alert' />
                                     : ''
                                 }
                             </div>
