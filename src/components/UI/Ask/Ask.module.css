@@ -11,3 +11,17 @@
 .ask_btn{
     margin: 15px
 }
+
+.form_switch > input  {
+    margin-top: 6px;
+}
+
+.form_switch > input:focus {
+    box-shadow: none;
+    border-color: black;
+}
+
+.form_switch > input:checked {
+    background-color: black;
+    border-color: black;
+    }

@@ -7,7 +7,7 @@ import {IntlProvider, useIntl} from 'react-intl';
 import {LOCALES} from "./languages/locales";
 import {messages} from "./languages/messages";
 import Ask from "./components/UI/Ask/Ask";
-import Question from "./components/UI/Question/Question";
+import OneQuestion from "./components/UI/OneQuestion/OneQuestion";
 
 
 function App() {
@@ -48,7 +48,7 @@ function App() {
                 {/*    : <></>*/}
                 {/*}*/}
                 <Ask/>
-                <Question/>
+                <OneQuestion/>
             </AuthContext.Provider>
          </IntlProvider>
     )

@@ -20,7 +20,12 @@ export const messages = {
     student: 'Student',
     logo: 'Ask lyceum',
     question: 'Your question',
-    ask: 'Ask'
+    ask: 'Ask',
+    reciever: 'Recipient',
+    reciever_info: 'Who do you want to ask the question to',
+    answer: 'Answer',
+    max_length: 'Symbols left',
+    public: 'Anonymous question'
   },
   [LOCALES.RUSSIAN]: {
     login: "Вход",
@@ -42,5 +47,10 @@ export const messages = {
     logo: 'Спрашивай лицей',
     question: 'Ваш вопрос',
     ask: 'Спросить',
+    reciever: 'Получатель',
+    reciever_info: 'Кому вы хотите задать вопрос',
+    answer: 'Ответ',
+    max_length: 'Осталось символов',
+    public: 'Анонимный вопрос'
   }
 }

@@ -1,4 +1,4 @@
-import React, {useContext, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {NavDropdown, Nav, Alert} from "react-bootstrap";
 import AuthContext from "../../../context";
 import {messages} from "../../../languages/messages";
@@ -10,6 +10,7 @@ import Button from "react-bootstrap/Button";
 import useRequest from "../../../hooks/useRequest";
 import LogIn from "../../../API/LogIn";
 import classes from './Ask.module.css'
+import Teachers from "../../../API/Teachers";
 
 
 const Ask = () => {
@@ -20,10 +21,31 @@ const Ask = () => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    const [question, setQuestion] = useState();
+    const [question, setQuestion] = useState("");
     const [reciever, setReciever] = useState();
     const [isTryToAsk, setIsTryToAsk] = useState(false);
 
+    const [teachers, setTeachers] = useState(
+        [
+            {
+                'id': 1,
+                'last_name': '1',
+                'first_name': '2',
+                'middle_name': '3',
+            }
+        ]
+    );
+
+    const [request_teachers] = useRequest(async () => {
+        await Teachers.get(setTeachers, setReciever, setIsTryToAsk)
+    })
+
+    useEffect(() => {
+        request_teachers()
+    }, [])
+    useEffect(() => {
+        console.log(reciever)
+    }, [reciever])
     // const [request] = useRequest(async () => {
     //     await LogIn.post(email, password, setIsAuth, setIsTryToAuth, handleClose)
     // })
@@ -62,25 +84,47 @@ const Ask = () => {
                                 required
                                 autoFocus
                                 as='textarea'
+                                maxlength='50'
+
                                 className={classes.inputInfo}
                                 onChange={(e) => {
                                     setQuestion(e.target.value)
                                 }}
                             />
+                            <Form.Label>
+                                <FormattedMessage id='max_length'/>
+                                {": "}
+                                {50 - question.length}
+                            </Form.Label>
                         </Form.Group>
                         <Form.Group
                             className="mb-3"
                             controlId="exampleForm.ControlInput1"
                         >
-                            <Form.Label><FormattedMessage id='position'/></Form.Label>
+                            <Form.Label><FormattedMessage id='reciever'/></Form.Label>
                             <Form.Select aria-label="Default select example" className={classes.inputInfo}
                                          onChange={(e) => {
                                              setReciever(e.target.value)
                                          }}>
-                                <option disabled={true}><FormattedMessage id='position_info'/></option>
-                                <option value="1"><FormattedMessage id='teacher'/></option>
-                                <option value="2"><FormattedMessage id='student'/></option>
+                                <option disabled={true}><FormattedMessage id='reciever_info'/></option>
+                                {teachers.map(teachers => (
+                                    <option value={teachers["id"]}>
+                                        {teachers["last_name"]} {teachers["first_name"]} {teachers["middle_name"]}
+                                    </option>
+                                ))}
+                                {/*<option value="1"><FormattedMessage id='teacher'/></option>*/}
+                                {/*<option value="2"><FormattedMessage id='student'/></option>*/}
                             </Form.Select>
+                        </Form.Group>
+                        <Form.Group className={classes.formSwitch}>
+                            <Form.Check
+                                type="switch"
+                                id="custom-switch"
+                                label={<FormattedMessage id='public'/>}
+                                className={classes.form_switch}
+                            >
+
+                            </Form.Check>
                         </Form.Group>
                         <Alert variant='danger' show={isTryToAsk}>
                             <div className={classes.alertText}>
