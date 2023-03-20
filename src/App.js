@@ -15,7 +15,7 @@ function App() {
     // console.log(intl)
     const [isAuth, setIsAuth] = useState(false)
     useEffect(() => {
-        localStorage.clear()
+        // localStorage.clear()
         localStorage.setItem('error', '')
         if (localStorage.getItem('accessToken') !== "" && localStorage.getItem('accessToken') !== null) {
             setIsAuth(true)

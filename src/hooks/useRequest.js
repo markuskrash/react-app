@@ -8,7 +8,7 @@ const useRequest = (callback) => {
 
     const request = async () =>{
             setIsLoading(true)
-            await callback()
+            await callback(localStorage.getItem("accessToken"))
             setIsLoading(false)
     }
     return [request]

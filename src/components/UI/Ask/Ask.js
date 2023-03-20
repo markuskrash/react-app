@@ -11,6 +11,7 @@ import useRequest from "../../../hooks/useRequest";
 import LogIn from "../../../API/LogIn";
 import classes from './Ask.module.css'
 import Teachers from "../../../API/Teachers";
+import APIAsk from "../../../API/Ask"
 
 
 const Ask = () => {
@@ -19,10 +20,14 @@ const Ask = () => {
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const handleShow = () => {
+        request_teachers()
+        setShow(true);
+    }
 
     const [question, setQuestion] = useState("");
     const [reciever, setReciever] = useState();
+    const [anonymous, setAnonymous] = useState(false);
     const [isTryToAsk, setIsTryToAsk] = useState(false);
 
     const [teachers, setTeachers] = useState(
@@ -40,18 +45,14 @@ const Ask = () => {
         await Teachers.get(setTeachers, setReciever, setIsTryToAsk)
     })
 
-    useEffect(() => {
-        request_teachers()
-    }, [])
-    useEffect(() => {
-        console.log(reciever)
-    }, [reciever])
-    // const [request] = useRequest(async () => {
-    //     await LogIn.post(email, password, setIsAuth, setIsTryToAuth, handleClose)
-    // })
+
+
+    const [request] = useRequest(async (access_token) => {
+        await APIAsk.post(access_token, setIsTryToAsk, question, anonymous, reciever)
+    })
 
     const ask = (event) => {
-        // request()
+        request()
     }
 
     const sumbit = (event) => {
@@ -118,12 +119,16 @@ const Ask = () => {
                         </Form.Group>
                         <Form.Group className={classes.formSwitch}>
                             <Form.Check
-                                type="switch"
-                                id="custom-switch"
-                                label={<FormattedMessage id='public'/>}
+                                // type=""
+                                // id="custom-switch"
+                                // label={<FormattedMessage id='public'/>}
                                 className={classes.form_switch}
+                                onChange={(e) => {
+                                    setAnonymous(e.target.value)
+                                }}
                             >
-
+                                <Form.Check.Input type="checkbox" className={classes.form_switch_input}/>
+                                <Form.Check.Label className={classes.form_switch_label}>{<FormattedMessage id='public'/>}</Form.Check.Label>
                             </Form.Check>
                         </Form.Group>
                         <Alert variant='danger' show={isTryToAsk}>

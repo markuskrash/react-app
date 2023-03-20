@@ -1,27 +1,41 @@
-.inputInfo:focus{
+.inputInfo:focus {
     box-shadow: none;
     border-color: black;
 }
 
-.ask{
+.ask {
     display: flex;
     justify-content: end;
 }
 
-.ask_btn{
+.ask_btn {
     margin: 15px
 }
 
-.form_switch > input  {
-    margin-top: 6px;
+/*.form_switch > input  {*/
+/*    margin-top: 6px;*/
+/*}*/
+
+/*.form_switch > input:focus {*/
+/*    box-shadow: none;*/
+/*    border-color: black;*/
+/*}*/
+
+/*.form_switch > input:checked {*/
+/*    background-color: black;*/
+/*    border-color: black;*/
+/*    }*/
+
+.form_switch_input{
+    margin-top: 5.5px;
 }
 
-.form_switch > input:focus {
+.form_switch_input:focus {
     box-shadow: none;
     border-color: black;
 }
 
-.form_switch > input:checked {
+.form_switch_input:checked {
     background-color: black;
     border-color: black;
-    }
+}

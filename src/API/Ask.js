@@ -1,22 +1,21 @@
 import axios from "axios";
 
 class SignUp {
-    static async post(email, password, surname, first_name, second_name, standing, setIsAuth, setIsTryToSign, handleClose) {
+    static async post(access_token, setIsTryToAsk, text, anonymous, reciever) {
 
         try {
-            setIsTryToSign(true)
-            const register = await axios.post('http://127.0.0.1:8000/api/register', {
-                'email': email,
-                'password': password,
-                'last_name': surname,
-                'first_name': first_name,
-                'middle_name': second_name,
-                'sub': standing
-            })
+            setIsTryToAsk(true)
+                const question = await axios.post('http://127.0.0.1:8000/api/questions/post/', {
+                'text': text,
+                'status': 0,
+                'owner': 7,
+                'reciever': reciever,
+                'public': !anonymous,
+            }, {"Authorization": "Bearer "+access_token})
 
-            handleClose()
-            localStorage.setItem('email', email)
-            localStorage.setItem('error', '')
+            // handleClose()
+            // localStorage.setItem('email', email)
+            // localStorage.setItem('error', '')
 
             // return 0;
 
@@ -24,7 +23,7 @@ class SignUp {
             // setValidated(false)
             // event.stopPropagation()
             //
-            setIsAuth(false)
+            // setIsAuth(false)
             localStorage.setItem('error', event.message)
         }
     }
