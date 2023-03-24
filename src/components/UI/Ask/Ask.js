@@ -19,7 +19,10 @@ const Ask = () => {
 
     const [show, setShow] = useState(false);
 
-    const handleClose = () => setShow(false);
+    const handleClose = () => {
+        setQuestion("")
+        setShow(false);
+    }
     const handleShow = () => {
         request_teachers()
         setShow(true);
@@ -42,13 +45,13 @@ const Ask = () => {
     );
 
     const [request_teachers] = useRequest(async () => {
-        await Teachers.get(setTeachers, setReciever, setIsTryToAsk)
+        await Teachers.get(setTeachers, setReciever)
     })
 
 
 
     const [request] = useRequest(async (access_token) => {
-        await APIAsk.post(access_token, setIsTryToAsk, question, anonymous, reciever)
+        await APIAsk.post(access_token, setIsTryToAsk, question, anonymous, reciever, handleClose)
     })
 
     const ask = (event) => {
@@ -134,7 +137,7 @@ const Ask = () => {
                         <Alert variant='danger' show={isTryToAsk}>
                             <div className={classes.alertText}>
                                 {isTryToAsk
-                                    ? <FormattedMessage id='alert'/>
+                                    ? <FormattedMessage id='ask_alert'/>
                                     : ''
                                 }
                             </div>

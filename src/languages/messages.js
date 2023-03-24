@@ -25,7 +25,8 @@ export const messages = {
     reciever_info: 'Who do you want to ask the question to',
     answer: 'Answer',
     max_length: 'Symbols left',
-    public: 'Anonymous question'
+    public: 'Anonymous question',
+    ask_alert: 'Enter your question',
   },
   [LOCALES.RUSSIAN]: {
     login: "Вход",
@@ -51,6 +52,7 @@ export const messages = {
     reciever_info: 'Кому вы хотите задать вопрос',
     answer: 'Ответ',
     max_length: 'Осталось символов',
-    public: 'Анонимный вопрос'
+    public: 'Анонимный вопрос',
+    ask_alert: 'Введите ваш вопрос',
   }
 }

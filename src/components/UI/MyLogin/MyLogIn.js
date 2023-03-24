@@ -12,6 +12,9 @@ import DropdownMenu from "react-bootstrap/DropdownMenu";
 import DropdownToggle from "react-bootstrap/DropdownToggle";
 import {FormattedMessage} from "react-intl";
 import {messages} from "../../../languages/messages";
+import Teachers from "../../../API/Teachers";
+import GetPersonId from "../../../API/GetPersonId";
+import Persons from "../../../API/Persons";
 
 
 const MyLogIn = () => {
@@ -63,6 +66,20 @@ const MyLogIn = () => {
 
     }
 
+    const [personId, setPersonId] = useState('');
+    const [persons, setPersons] = useState('');
+
+    const [request_id] = useRequest(async (access_token) => {
+        await GetPersonId.get(access_token, setPersonId)
+    })
+
+
+    useEffect(() => {
+        if (isAuth) {
+            request_id()
+        }
+    }, [isAuth])
+
 
     return (
         <>
@@ -79,7 +96,7 @@ const MyLogIn = () => {
                     :
                     <NavDropdown
                         id="nav-dropdown-dark-example"
-                        title={email}
+                        title={personId}
                         menuVariant="dark"
                         variant="red"
                         align={{lg: 'end'}}
@@ -102,7 +119,7 @@ const MyLogIn = () => {
                     </Modal.Header>
                     <Modal.Body>
                         <Form.Group className="mb-3" controlId="validationCustom02">
-                            <Form.Label><FormattedMessage id='email_address' /></Form.Label>
+                            <Form.Label><FormattedMessage id='email_address'/></Form.Label>
                             <Form.Control
                                 value={email}
                                 required
@@ -118,7 +135,7 @@ const MyLogIn = () => {
                             className="mb-3"
                             controlId="exampleForm.ControlInput1"
                         >
-                            <Form.Label><FormattedMessage id='password' /></Form.Label>
+                            <Form.Label><FormattedMessage id='password'/></Form.Label>
                             <Form.Control
                                 required
                                 value={password}
@@ -132,7 +149,7 @@ const MyLogIn = () => {
                         <Alert variant='danger' show={isTryToAuth && isAuth === false}>
                             <div className={classes.alertText}>
                                 {isTryToAuth && isAuth === false
-                                    ? <FormattedMessage id='login_alert' />
+                                    ? <FormattedMessage id='login_alert'/>
                                     : ''
                                 }
                             </div>
@@ -140,7 +157,7 @@ const MyLogIn = () => {
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="dark" type='submit'>
-                            <FormattedMessage id='login' />
+                            <FormattedMessage id='login'/>
                         </Button>
                     </Modal.Footer>
                 </Form>
