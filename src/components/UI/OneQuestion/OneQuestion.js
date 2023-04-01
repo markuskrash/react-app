@@ -8,8 +8,8 @@ import {FormattedMessage} from "react-intl";
 import Button from "react-bootstrap/Button";
 
 
-const OneQuestion = () => {
-    const {isAuth, setIsAuth, isLoading, setIsLoading, locale, setLocale} = useContext(AuthContext)
+const OneQuestion = ({text, status, reciever}) => {
+    const {isAuth, setIsAuth, isLoading, setIsLoading, locale, setLocale, renderQuestions, setRenderQuestions} = useContext(AuthContext)
 
     const [show, setShow] = useState(false);
 
@@ -19,6 +19,7 @@ const OneQuestion = () => {
 
     return (
         <div className={classes.question}>
+            <h1>text</h1>
             <div className={classes.answer}>
                 <Button className={classes.answer_btn} variant='light' onClick={handleShow}>
                     <FormattedMessage id='answer'/>

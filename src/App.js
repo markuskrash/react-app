@@ -8,6 +8,7 @@ import {LOCALES} from "./languages/locales";
 import {messages} from "./languages/messages";
 import Ask from "./components/UI/Ask/Ask";
 import OneQuestion from "./components/UI/OneQuestion/OneQuestion";
+import Questions from "./components/UI/Questions/Questions";
 
 
 function App() {
@@ -28,6 +29,8 @@ function App() {
 
     const [locale, setLocale] = useState(LOCALES.RUSSIAN)
 
+    const [renderQuestions, setRenderQuestions] = useState(false);
+
     return (
         <IntlProvider messages={messages[locale]} locale={locale} defaultLocale={LOCALES.ENGLISH}>
             <AuthContext.Provider value={{
@@ -37,7 +40,8 @@ function App() {
                 setIsLoading,
                 locale,
                 setLocale,
-                // intl
+                renderQuestions,
+                setRenderQuestions,
             }}>
                 <Header/>
                 {isLoading
@@ -48,7 +52,7 @@ function App() {
                 {/*    : <></>*/}
                 {/*}*/}
                 <Ask/>
-                <OneQuestion/>
+                <Questions/>
             </AuthContext.Provider>
          </IntlProvider>
     )
