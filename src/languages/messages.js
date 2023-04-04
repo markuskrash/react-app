@@ -27,6 +27,8 @@ export const messages = {
     max_length: 'Symbols left',
     public: 'Anonymous question',
     ask_alert: 'Enter your question',
+    close: 'Close',
+    wait_answer: 'The teacher has not answered your question yet, expect',
   },
   [LOCALES.RUSSIAN]: {
     login: "Вход",
@@ -54,5 +56,7 @@ export const messages = {
     max_length: 'Осталось символов',
     public: 'Анонимный вопрос',
     ask_alert: 'Введите ваш вопрос',
+    close: 'Закрыть',
+    wait_answer: 'Преподователь еще не ответил на ваш вопрос, ожидайте',
   }
 }

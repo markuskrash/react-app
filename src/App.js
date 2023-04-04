@@ -15,11 +15,15 @@ function App() {
     // const intl = useIntl()
     // console.log(intl)
     const [isAuth, setIsAuth] = useState(false)
+
+    const [renderQuestions, setRenderQuestions] = useState(0);
+
     useEffect(() => {
         // localStorage.clear()
         localStorage.setItem('error', '')
         if (localStorage.getItem('accessToken') !== "" && localStorage.getItem('accessToken') !== null) {
             setIsAuth(true)
+            setRenderQuestions(renderQuestions + 1)
         } else {
             setIsAuth(false)
         }
@@ -29,7 +33,7 @@ function App() {
 
     const [locale, setLocale] = useState(LOCALES.RUSSIAN)
 
-    const [renderQuestions, setRenderQuestions] = useState(false);
+
 
     return (
         <IntlProvider messages={messages[locale]} locale={locale} defaultLocale={LOCALES.ENGLISH}>

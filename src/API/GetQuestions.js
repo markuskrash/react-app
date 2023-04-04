@@ -3,9 +3,8 @@ import {useContext} from "react";
 import AuthContext from "../context";
 
 class GetQuestions {
-    static async get(access_token, setQuestions, setRenderQuestions) {
+    static async get(access_token, setQuestions) {
         try {
-            setRenderQuestions(true)
             const s = "Bearer "+access_token
             const person_id = await axios.get('http://127.0.0.1:8000/api/token/get/', {headers: {"Authorization": s}})
             const questions = await axios.get('http://127.0.0.1:8000/api/questions/', {headers: {"Authorization": s}})
@@ -14,7 +13,7 @@ class GetQuestions {
                 if(questions.data[i]["owner"] === person_id.data)
                     person_questions.push(questions.data[i])
             }
-            setRenderQuestions(false)
+
             setQuestions(person_questions)
             // localStorage.setItem('email', email)
             // localStorage.setItem('error', '')

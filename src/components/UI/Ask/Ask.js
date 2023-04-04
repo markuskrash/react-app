@@ -15,7 +15,16 @@ import APIAsk from "../../../API/Ask"
 
 
 const Ask = () => {
-    const {isAuth, setIsAuth, isLoading, setIsLoading, locale, setLocale} = useContext(AuthContext)
+    const {
+        isAuth,
+        setIsAuth,
+        isLoading,
+        setIsLoading,
+        locale,
+        setLocale,
+        renderQuestions,
+        setRenderQuestions
+    } = useContext(AuthContext)
 
     const [show, setShow] = useState(false);
 
@@ -51,7 +60,8 @@ const Ask = () => {
 
 
     const [request] = useRequest(async (access_token) => {
-        await APIAsk.post(access_token, setIsTryToAsk, question, anonymous, reciever, handleClose)
+        await APIAsk.post(access_token, setIsTryToAsk, question, anonymous, reciever, handleClose,renderQuestions,
+        setRenderQuestions)
     })
 
     const ask = (event) => {

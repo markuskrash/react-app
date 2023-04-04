@@ -3,21 +3,29 @@
     border-radius: 15px;
     background-color: #212529;
     border-width: 2px;
-    min-height: 300px;
+    /*min-height: 300px;*/
     margin: 15px;
-    display: flex;
-    position: relative;
+    /*display: flex;*/
+    /*position: relative;*/
 }
 
 .answer {
-    bottom: 0;
+    /*bottom: 0;*/
     height: 67.6px;
     width: 100%;
     display: flex;
     justify-content: end;
-    position: absolute;
+    /*position: absolute;*/
 }
 
 .answer_btn {
     margin: 15px;
+}
+
+.question_text{
+    height: calc(100% - 67px);
+    min-height: 150px;
+    margin: 15px;
+    width: 100%;
+    color: white;
 }

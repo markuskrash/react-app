@@ -26,23 +26,22 @@ const Questions = () => {
     const [questions, setQuestions] = useState([]);
 
     const [request_questions] = useRequest(async (access_token) => {
-        await GetQuestions.get(access_token, setQuestions, setRenderQuestions)
+        await GetQuestions.get(access_token, setQuestions, renderQuestions, setRenderQuestions)
     })
 
     useEffect(() => {
         if (isAuth) {
-            console.log(1)
             request_questions()
-            console.log(questions)
         }
-    }, [renderQuestions, []])
+    }, [renderQuestions, isAuth])
 
 
     return (
         <div>
             {isAuth === true ?
                 questions.map(question => (
-                    <OneQuestion text={question['text']} status={question['status']}/>
+                    <OneQuestion text={question['text']} status={question['status']} reciever={question['reciever']}
+                                 id={question['id']}/>
                 ))
 
                 : ""
