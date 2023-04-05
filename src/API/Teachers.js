@@ -1,11 +1,12 @@
 import axios from "axios";
 
 class Teachers {
-    static async get(setTeachers, setReciever) {
+    static async get(access_token, setTeachers, setReciever) {
 
 
         try {
-            const persons = await axios.get('http://127.0.0.1:8000/api/persons/')
+            const s = "Bearer "+access_token
+            const persons = await axios.get('http://127.0.0.1:8000/api/persons/', {headers: {"Authorization": s}})
             const teachers = []
             for (let i = 0; i < persons.data.length; i++) {
                 if (persons.data[i]["is_staff"] === true) {

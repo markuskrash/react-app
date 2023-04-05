@@ -25,7 +25,7 @@ class SignUp {
             // event.stopPropagation()
             //
             setIsAuth(false)
-            localStorage.setItem('error', event.message)
+            // localStorage.setItem('error', event.message)
         }
     }
 }

@@ -9,14 +9,20 @@ import {messages} from "./languages/messages";
 import Ask from "./components/UI/Ask/Ask";
 import OneQuestion from "./components/UI/OneQuestion/OneQuestion";
 import Questions from "./components/UI/Questions/Questions";
+import {useTimer} from 'use-timer';
+import useRequest from "./hooks/useRequest";
+import APIAsk from "./API/Ask";
+import TimeToken from "./API/TimeToken";
+import RefreshToken from "./components/RefreshToken/RefreshToken";
 
 
-function App() {
+const App = () => {
     // const intl = useIntl()
     // console.log(intl)
     const [isAuth, setIsAuth] = useState(false)
 
     const [renderQuestions, setRenderQuestions] = useState(0);
+
 
     useEffect(() => {
         // localStorage.clear()
@@ -34,7 +40,6 @@ function App() {
     const [locale, setLocale] = useState(LOCALES.RUSSIAN)
 
 
-
     return (
         <IntlProvider messages={messages[locale]} locale={locale} defaultLocale={LOCALES.ENGLISH}>
             <AuthContext.Provider value={{
@@ -47,18 +52,25 @@ function App() {
                 renderQuestions,
                 setRenderQuestions,
             }}>
-                <Header/>
-                {isLoading
-                    ? <Loading isLoading={isLoading}/>
-                    : <></>}
-                {/*{isAuth*/}
-                {/*    ? <h3>Вы вошли в аккаунт</h3>*/}
-                {/*    : <></>*/}
-                {/*}*/}
-                <Ask/>
-                <Questions/>
+                {localStorage.getItem('error') !== "" ?
+                    <h>{localStorage.getItem('error')}</h>
+                    :
+                    <>
+                        <RefreshToken/>
+                        <Header/>
+                        {isLoading
+                            ? <Loading isLoading={isLoading}/>
+                            : <></>}
+                        {/*{isAuth*/}
+                        {/*    ? <h3>Вы вошли в аккаунт</h3>*/}
+                        {/*    : <></>*/}
+                        {/*}*/}
+                        <Ask/>
+                        <Questions/>
+                    </>
+                }
             </AuthContext.Provider>
-         </IntlProvider>
+        </IntlProvider>
     )
         ;
 }

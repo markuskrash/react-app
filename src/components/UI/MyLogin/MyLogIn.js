@@ -34,10 +34,6 @@ const MyLogIn = () => {
         await LogIn.post(email, password, setIsAuth, setIsTryToAuth, handleClose)
     })
 
-    // useEffect(() => {
-    //     console.log(isAuth)
-    //     setValidated(true)
-    // }, [isAuth, x])
 
     const login = (event) => {
         request()
@@ -46,7 +42,6 @@ const MyLogIn = () => {
     const logout = (event) => {
         localStorage.setItem('accessToken', "")
         localStorage.setItem('refreshToken', "")
-        localStorage.setItem('email', "")
         setIsAuth(false)
         setIsTryToAuth(false)
     }

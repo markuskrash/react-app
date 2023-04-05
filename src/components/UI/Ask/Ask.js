@@ -58,10 +58,9 @@ const Ask = () => {
     })
 
 
-
     const [request] = useRequest(async (access_token) => {
-        await APIAsk.post(access_token, setIsTryToAsk, question, anonymous, reciever, handleClose,renderQuestions,
-        setRenderQuestions)
+        await APIAsk.post(access_token, setIsTryToAsk, question, anonymous, reciever, handleClose, renderQuestions,
+            setRenderQuestions)
     })
 
     const ask = (event) => {
@@ -82,85 +81,92 @@ const Ask = () => {
 
     return (
         <>
-            <div className={classes.ask}>
-                <Button className={classes.ask_btn} variant='dark' onClick={handleShow}>
-                    <FormattedMessage id='ask'/>
-                </Button>
-            </div>
-            <Modal show={show} onHide={handleClose} animation={false}>
-                <Form noValidate onSubmit={sumbit}>
-                    <Modal.Header closeButton>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <Form.Group className="mb-3" controlId="validationCustom02">
-                            <Form.Label><FormattedMessage id='question'/></Form.Label>
-                            <Form.Control
-                                required
-                                autoFocus
-                                as='textarea'
-                                maxlength='50'
-
-                                className={classes.inputInfo}
-                                onChange={(e) => {
-                                    setQuestion(e.target.value)
-                                }}
-                            />
-                            <Form.Label>
-                                <FormattedMessage id='max_length'/>
-                                {": "}
-                                {50 - question.length}
-                            </Form.Label>
-                        </Form.Group>
-                        <Form.Group
-                            className="mb-3"
-                            controlId="exampleForm.ControlInput1"
-                        >
-                            <Form.Label><FormattedMessage id='reciever'/></Form.Label>
-                            <Form.Select aria-label="Default select example" className={classes.inputInfo}
-                                         onChange={(e) => {
-                                             setReciever(e.target.value)
-                                         }}>
-                                <option disabled={true}><FormattedMessage id='reciever_info'/></option>
-                                {teachers.map(teachers => (
-                                    <option value={teachers["id"]}>
-                                        {teachers["last_name"]} {teachers["first_name"]} {teachers["middle_name"]}
-                                    </option>
-                                ))}
-                                {/*<option value="1"><FormattedMessage id='teacher'/></option>*/}
-                                {/*<option value="2"><FormattedMessage id='student'/></option>*/}
-                            </Form.Select>
-                        </Form.Group>
-                        <Form.Group className={classes.formSwitch}>
-                            <Form.Check
-                                // type=""
-                                // id="custom-switch"
-                                // label={<FormattedMessage id='public'/>}
-                                className={classes.form_switch}
-                                onChange={(e) => {
-                                    setAnonymous(e.target.value)
-                                }}
-                            >
-                                <Form.Check.Input type="checkbox" className={classes.form_switch_input}/>
-                                <Form.Check.Label className={classes.form_switch_label}>{<FormattedMessage id='public'/>}</Form.Check.Label>
-                            </Form.Check>
-                        </Form.Group>
-                        <Alert variant='danger' show={isTryToAsk}>
-                            <div className={classes.alertText}>
-                                {isTryToAsk
-                                    ? <FormattedMessage id='ask_alert'/>
-                                    : ''
-                                }
-                            </div>
-                        </Alert>
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Button variant="dark" type='submit'>
+            {isAuth ?
+                <>
+                    <div className={classes.ask}>
+                        <Button className={classes.ask_btn} variant='dark' onClick={handleShow}>
                             <FormattedMessage id='ask'/>
                         </Button>
-                    </Modal.Footer>
-                </Form>
-            </Modal>
+                    </div>
+                    <Modal show={show} onHide={handleClose} animation={false}>
+                        <Form noValidate onSubmit={sumbit}>
+                            <Modal.Header closeButton>
+                            </Modal.Header>
+                            <Modal.Body>
+                                <Form.Group className="mb-3" controlId="validationCustom02">
+                                    <Form.Label><FormattedMessage id='question'/></Form.Label>
+                                    <Form.Control
+                                        required
+                                        autoFocus
+                                        as='textarea'
+                                        maxlength='50'
+
+                                        className={classes.inputInfo}
+                                        onChange={(e) => {
+                                            setQuestion(e.target.value)
+                                        }}
+                                    />
+                                    <Form.Label>
+                                        <FormattedMessage id='max_length'/>
+                                        {": "}
+                                        {50 - question.length}
+                                    </Form.Label>
+                                </Form.Group>
+                                <Form.Group
+                                    className="mb-3"
+                                    controlId="exampleForm.ControlInput1"
+                                >
+                                    <Form.Label><FormattedMessage id='reciever'/></Form.Label>
+                                    <Form.Select aria-label="Default select example" className={classes.inputInfo}
+                                                 onChange={(e) => {
+                                                     setReciever(e.target.value)
+                                                 }}>
+                                        <option disabled={true}><FormattedMessage id='reciever_info'/></option>
+                                        {teachers.map(teachers => (
+                                            <option value={teachers["id"]}>
+                                                {teachers["last_name"]} {teachers["first_name"]} {teachers["middle_name"]}
+                                            </option>
+                                        ))}
+                                        {/*<option value="1"><FormattedMessage id='teacher'/></option>*/}
+                                        {/*<option value="2"><FormattedMessage id='student'/></option>*/}
+                                    </Form.Select>
+                                </Form.Group>
+                                <Form.Group className={classes.formSwitch}>
+                                    <Form.Check
+                                        // type=""
+                                        // id="custom-switch"
+                                        // label={<FormattedMessage id='public'/>}
+                                        className={classes.form_switch}
+                                        onChange={(e) => {
+                                            setAnonymous(e.target.value)
+                                        }}
+                                    >
+                                        <Form.Check.Input type="checkbox" className={classes.form_switch_input}/>
+                                        <Form.Check.Label className={classes.form_switch_label}>{<FormattedMessage
+                                            id='public'/>}</Form.Check.Label>
+                                    </Form.Check>
+                                </Form.Group>
+                                <Alert variant='danger' show={isTryToAsk}>
+                                    <div className={classes.alertText}>
+                                        {isTryToAsk
+                                            ? <FormattedMessage id='ask_alert'/>
+                                            : ''
+                                        }
+                                    </div>
+                                </Alert>
+                            </Modal.Body>
+                            <Modal.Footer>
+                                <Button variant="dark" type='submit'>
+                                    <FormattedMessage id='ask'/>
+                                </Button>
+                            </Modal.Footer>
+                        </Form>
+                    </Modal>
+                </>
+                : ""
+            }
         </>
+
     )
 }
 
