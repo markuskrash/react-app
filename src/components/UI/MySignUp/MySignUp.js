@@ -159,7 +159,7 @@ const MySignUp = () => {
                                          }}>
                                 <option disabled={true}><FormattedMessage id='position_info'/></option>
                                 <option value="1"><FormattedMessage id='teacher'/></option>
-                                <option value="2"><FormattedMessage id='student'/></option>
+                                <option value="0"><FormattedMessage id='student'/></option>
                             </Form.Select>
                         </Form.Group>
                         <Alert variant='danger' show={isTryToSign && isAuth === false}>

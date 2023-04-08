@@ -53,8 +53,8 @@ const Ask = () => {
         ]
     );
 
-    const [request_teachers] = useRequest(async () => {
-        await Teachers.get(setTeachers, setReciever)
+    const [request_teachers] = useRequest(async (access_token) => {
+        await Teachers.get(access_token, setTeachers, setReciever)
     })
 
 

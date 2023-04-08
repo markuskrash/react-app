@@ -10,7 +10,7 @@ class APIAsk {
             const question = await axios.post('http://127.0.0.1:8000/api/questions/post/', {
                 'text': text,
                 'status': 0,
-                'owner': 7,
+                // 'owner': 7,
                 'reciever': reciever,
                 'public': !anonymous,
             }, {headers: {"Authorization": s}})
@@ -27,7 +27,7 @@ class APIAsk {
             // event.stopPropagation()
             //
             // setIsAuth(false)
-            localStorage.setItem('error', event.message)
+            // localStorage.setItem('error', event.message)
         }
     }
 }

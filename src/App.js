@@ -14,6 +14,8 @@ import useRequest from "./hooks/useRequest";
 import APIAsk from "./API/Ask";
 import TimeToken from "./API/TimeToken";
 import RefreshToken from "./components/RefreshToken/RefreshToken";
+import {BrowserRouter, Route, Switch} from "react-router-dom";
+import Page from "./components/UI/Page/Page";
 
 
 const App = () => {
@@ -41,36 +43,45 @@ const App = () => {
 
 
     return (
-        <IntlProvider messages={messages[locale]} locale={locale} defaultLocale={LOCALES.ENGLISH}>
-            <AuthContext.Provider value={{
-                isAuth,
-                setIsAuth,
-                isLoading,
-                setIsLoading,
-                locale,
-                setLocale,
-                renderQuestions,
-                setRenderQuestions,
-            }}>
-                {localStorage.getItem('error') !== "" ?
-                    <h>{localStorage.getItem('error')}</h>
-                    :
-                    <>
-                        <RefreshToken/>
-                        <Header/>
-                        {isLoading
-                            ? <Loading isLoading={isLoading}/>
-                            : <></>}
-                        {/*{isAuth*/}
-                        {/*    ? <h3>Вы вошли в аккаунт</h3>*/}
-                        {/*    : <></>*/}
-                        {/*}*/}
-                        <Ask/>
-                        <Questions/>
-                    </>
-                }
-            </AuthContext.Provider>
-        </IntlProvider>
+        <BrowserRouter>
+            <IntlProvider messages={messages[locale]} locale={locale} defaultLocale={LOCALES.ENGLISH}>
+                <AuthContext.Provider value={{
+                    isAuth,
+                    setIsAuth,
+                    isLoading,
+                    setIsLoading,
+                    locale,
+                    setLocale,
+                    renderQuestions,
+                    setRenderQuestions,
+                }}>
+                    <Switch>
+                        <Route path='/' component={Page} />
+                            {/*{localStorage.getItem('error') !== "" ?*/}
+                            {/*    <h>{localStorage.getItem('error')}</h>*/}
+                            {/*    :*/}
+                            {/*    <>*/}
+                            {/*        <RefreshToken/>*/}
+                            {/*        <Header/>*/}
+                            {/*        {isLoading*/}
+                            {/*            ? <Loading isLoading={isLoading}/>*/}
+                            {/*            : <></>}*/}
+                            {/*        /!*{isAuth*!/*/}
+                            {/*        /!*    ? <h3>Вы вошли в аккаунт</h3>*!/*/}
+                            {/*        /!*    : <></>*!/*/}
+                            {/*        /!*}*!/*/}
+                            {/*        <Ask/>*/}
+                            {/*        <Questions/>*/}
+                            {/*    </>*/}
+                            {/*}*/}
+                        {/*/!*</Route>*!/*/}
+                        {/*<Route path='/uuid?='>*/}
+                        {/*    <></>*/}
+                        {/*</Route>*/}
+                    </Switch>
+                </AuthContext.Provider>
+            </IntlProvider>
+        </BrowserRouter>
     )
         ;
 }
