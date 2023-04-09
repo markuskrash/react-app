@@ -6,7 +6,6 @@ class GetAnswers {
     static async get(access_token, setAnswer, id) {
         try {
             const s = "Bearer "+access_token
-            // const person_id = await axios.get('http://127.0.0.1:8000/api/token/get/', {headers: {"Authorization": s}})
             const answers = await axios.get('http://127.0.0.1:8000/api/answers/', {headers: {"Authorization": s}})
             for (let i = 0; i < answers.data.length; i++) {
                 if(answers.data[i]["question"] === id) {

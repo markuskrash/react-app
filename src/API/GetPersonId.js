@@ -1,6 +1,5 @@
 import axios from "axios";
-import useRequest from "../hooks/useRequest";
-import Persons from "./Persons";
+
 
 class GetPersonId {
     static async get(access_token, setPersonId) {

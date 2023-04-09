@@ -14,7 +14,6 @@ import {FormattedMessage} from "react-intl";
 import {messages} from "../../../languages/messages";
 import Teachers from "../../../API/Teachers";
 import GetPersonId from "../../../API/GetPersonId";
-import Persons from "../../../API/Persons";
 
 
 const MyLogIn = () => {

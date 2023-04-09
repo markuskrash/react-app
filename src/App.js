@@ -14,8 +14,9 @@ import useRequest from "./hooks/useRequest";
 import APIAsk from "./API/Ask";
 import TimeToken from "./API/TimeToken";
 import RefreshToken from "./components/RefreshToken/RefreshToken";
-import {BrowserRouter, Route, Switch} from "react-router-dom";
-import Page from "./components/UI/Page/Page";
+import {BrowserRouter, Route} from "react-router-dom";
+import {Routes} from "react-router/dist"
+import VerifyEmail from "./components/UI/VerifyEmail/VerifyEmail";
 
 
 const App = () => {
@@ -55,30 +56,28 @@ const App = () => {
                     renderQuestions,
                     setRenderQuestions,
                 }}>
-                    <Switch>
-                        <Route path='/' component={Page} />
-                            {/*{localStorage.getItem('error') !== "" ?*/}
-                            {/*    <h>{localStorage.getItem('error')}</h>*/}
-                            {/*    :*/}
-                            {/*    <>*/}
-                            {/*        <RefreshToken/>*/}
-                            {/*        <Header/>*/}
-                            {/*        {isLoading*/}
-                            {/*            ? <Loading isLoading={isLoading}/>*/}
-                            {/*            : <></>}*/}
-                            {/*        /!*{isAuth*!/*/}
-                            {/*        /!*    ? <h3>Вы вошли в аккаунт</h3>*!/*/}
-                            {/*        /!*    : <></>*!/*/}
-                            {/*        /!*}*!/*/}
-                            {/*        <Ask/>*/}
-                            {/*        <Questions/>*/}
-                            {/*    </>*/}
-                            {/*}*/}
-                        {/*/!*</Route>*!/*/}
-                        {/*<Route path='/uuid?='>*/}
-                        {/*    <></>*/}
-                        {/*</Route>*/}
-                    </Switch>
+                    <Routes>
+                        <Route exact path='/' element={
+                            <>
+                                {localStorage.getItem('error') !== "" ?
+                                    <h>{localStorage.getItem('error')}</h>
+                                    :
+                                    <>
+                                        <RefreshToken/>
+                                        <Header/>
+                                        {isLoading
+                                            ? <Loading isLoading={isLoading}/>
+                                            : <></>}
+                                        <Ask/>
+                                        <Questions/>
+                                    </>
+                                }
+                            </>
+                        }/>
+                        <Route path='/:uuid' element={
+                            <VerifyEmail/>
+                        }/>
+                    </Routes>
                 </AuthContext.Provider>
             </IntlProvider>
         </BrowserRouter>
