@@ -29,6 +29,7 @@ export const messages = {
     ask_alert: 'Enter your question',
     close: 'Close',
     wait_answer: 'The teacher has not answered your question yet, expect',
+    make_answer: 'Answer',
   },
   [LOCALES.RUSSIAN]: {
     login: "Вход",
@@ -58,5 +59,6 @@ export const messages = {
     ask_alert: 'Введите ваш вопрос',
     close: 'Закрыть',
     wait_answer: 'Преподователь еще не ответил на ваш вопрос, ожидайте',
+    make_answer: 'Ответить',
   }
 }

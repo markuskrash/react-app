@@ -23,7 +23,9 @@ const Ask = () => {
         locale,
         setLocale,
         renderQuestions,
-        setRenderQuestions
+        setRenderQuestions,
+        isTeacher,
+        setIsTeacher,
     } = useContext(AuthContext)
 
     const [show, setShow] = useState(false);
@@ -81,7 +83,7 @@ const Ask = () => {
 
     return (
         <>
-            {isAuth ?
+            {isAuth && isTeacher === false?
                 <>
                     <div className={classes.ask}>
                         <Button className={classes.ask_btn} variant='dark' onClick={handleShow}>

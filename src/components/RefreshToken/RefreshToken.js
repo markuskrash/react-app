@@ -7,6 +7,7 @@ import useRequest from "../../hooks/useRequest";
 import APIAsk from "../../API/Ask";
 import {useTimer} from "use-timer";
 import TimeToken from "../../API/TimeToken";
+import APIIsTeacher from "../../API/APIIsTeacher";
 
 
 const RefreshToken = () => {
@@ -18,13 +19,14 @@ const RefreshToken = () => {
         locale,
         setLocale,
         renderQuestions,
-        setRenderQuestions
+        setRenderQuestions,
+        isTeacher,
+        setIsTeacher,
     } = useContext(AuthContext)
 
     const {time, start, pause, reset, status} = useTimer({
         endTime: 250,
         onTimeOver: () => {
-            console.log('Time is updated', time);
             request_refresh();
             reset();
             start();
@@ -44,7 +46,16 @@ const RefreshToken = () => {
         await TimeToken.post(access_token)
     })
 
+    const [request_id] = useRequest(async (access_token) => {
+        await APIIsTeacher.get(access_token, setIsTeacher)
+    })
 
+    useEffect(() => {
+        if (isAuth === true) {
+            request_id()
+
+        }
+    }, [isAuth])
 
 
     // return(

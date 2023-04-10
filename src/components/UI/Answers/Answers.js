@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from "react";
-import classes from "./Questions.module.css"
+import classes from "./Answers.module.css"
 import {NavDropdown, Nav} from "react-bootstrap";
 import AuthContext from "../../../context";
 import {messages} from "../../../languages/messages";
@@ -9,9 +9,11 @@ import Button from "react-bootstrap/Button";
 import OneQuestion from "../OneQuestion/OneQuestion";
 import useRequest from "../../../hooks/useRequest";
 import GetQuestions from "../../../API/GetQuestions";
+import OneAnswer from "../OneAnswer/OneAnswer";
+import GetQuestionsForAnswer from "../../../API/GetQuestionsForAnswer";
 
 
-const Questions = () => {
+const Answers = () => {
     const {
         isAuth,
         setIsAuth,
@@ -28,21 +30,21 @@ const Questions = () => {
     const [questions, setQuestions] = useState([]);
 
     const [request_questions] = useRequest(async (access_token) => {
-        await GetQuestions.get(access_token, setQuestions)
+        await GetQuestionsForAnswer.get(access_token, setQuestions, renderQuestions, setRenderQuestions)
     })
 
-    useEffect(() => {
-        if (isAuth) {
-            request_questions()
-        }
-    }, [renderQuestions, isAuth])
+    // useEffect(() => {
+    //     if (isAuth) {
+    //         request_questions()
+    //     }
+    // }, [renderQuestions, isAuth])
 
 
     return (
         <div>
-            {isAuth === true  && isTeacher === false?
+            {isAuth === true  && isTeacher === true?
                 questions.map(question => (
-                    <OneQuestion text={question['text']} status={question['status']} reciever={question['reciever']}
+                    <OneAnswer text={question['text']} reciever={question['reciever']}
                                  id={question['id']}/>
                 ))
 
@@ -53,4 +55,4 @@ const Questions = () => {
     )
 }
 
-export default Questions
+export default Answers

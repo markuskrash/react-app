@@ -1,18 +1,21 @@
 import axios from "axios";
 
 
-class GetPersonId {
-    static async get(access_token, setPersonEmail) {
+class APIIsTeacher {
+    static async get(access_token, setIsTeacher) {
         try {
             const s = "Bearer " + access_token
             const person_id = await axios.get('http://127.0.0.1:8000/api/token/get/', {headers: {"Authorization": s}})
             const persons = await axios.get('http://127.0.0.1:8000/api/persons/')
-            // console.log(person_id, persons)
             for (let i = 0; i < persons.data.length; i++) {
-                if(persons.data[i]["id"] === person_id.data)
-                    setPersonEmail(persons.data[i]["email"])
+                if(persons.data[i]["id"] === person_id.data) {
+                    if (persons.data[i]["sub"] === "1") {
+                        setIsTeacher(true)
+                    }else if(persons.data[i]["sub"] === "0"){
+                        setIsTeacher(false)
+                    }
+                }
             }
-
             return 0;
 
         } catch (event) {
@@ -25,4 +28,4 @@ class GetPersonId {
     }
 }
 
-export default GetPersonId
+export default APIIsTeacher

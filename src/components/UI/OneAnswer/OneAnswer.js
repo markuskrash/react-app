@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from "react";
-import classes from "./OneQuestion.module.css"
+import classes from "./OneAnswer.module.css"
 import {NavDropdown, Nav, Modal, Alert} from "react-bootstrap";
 import AuthContext from "../../../context";
 import {messages} from "../../../languages/messages";
@@ -31,23 +31,23 @@ const OneQuestion = ({text, status, reciever, id}) => {
     const handleShow = () => {
         setShow(true);
         if (status === "1") {
-            request_answers();
+            request_make_answer();
         }
     }
 
     const [answer, setAnswer] = useState("");
 
-    const [request_answers] = useRequest(async (access_token) => {
+    const [request_make_answer] = useRequest(async (access_token) => {
         await GetAnswers.get(access_token, setAnswer, id)
     })
 
     return (
         <div>
-            <div className={classes.question}>
-                <p className={classes.question_text}>{text}</p>
-                <div className={classes.answer}>
-                    <Button className={classes.answer_btn} variant='light' onClick={handleShow}>
-                        <FormattedMessage id='answer'/>
+            <div className={classes.answer}>
+                <p className={classes.answer_text}>{text}</p>
+                <div className={classes.make_answer}>
+                    <Button className={classes.make_answer_btn} variant='light' onClick={handleShow}>
+                        <FormattedMessage id='make_answer'/>
                     </Button>
                 </div>
             </div>

@@ -3,7 +3,18 @@ import {useContext, useState} from "react";
 import AuthContext from "../context";
 
 const useRequest = (callback) => {
-    const {isAuth, setIsAuth, isLoading, setIsLoading} = useContext(AuthContext)
+   const {
+        isAuth,
+        setIsAuth,
+        isLoading,
+        setIsLoading,
+        locale,
+        setLocale,
+        renderQuestions,
+        setRenderQuestions,
+        isTeacher,
+        setIsTeacher,
+    } = useContext(AuthContext)
     // async const error = ''
 
     const request = async () =>{

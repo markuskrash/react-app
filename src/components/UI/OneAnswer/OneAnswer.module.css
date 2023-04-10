@@ -1,0 +1,31 @@
+.answer {
+    border: solid;
+    border-radius: 15px;
+    background-color: #212529;
+    border-width: 2px;
+    /*min-height: 300px;*/
+    margin: 15px;
+    /*display: flex;*/
+    /*position: relative;*/
+}
+
+.make_answer {
+    /*bottom: 0;*/
+    height: 67.6px;
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    /*position: absolute;*/
+}
+
+.make_answer_btn {
+    margin: 15px;
+}
+
+.answer_text{
+    height: calc(100% - 67px);
+    min-height: 150px;
+    margin: 15px;
+    width: 100%;
+    color: white;
+}

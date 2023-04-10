@@ -60,17 +60,17 @@ const MyLogIn = () => {
 
     }
 
-    const [personId, setPersonId] = useState('');
+    const [personEmail, setPersonEmail] = useState('');
     const [persons, setPersons] = useState('');
 
-    const [request_id] = useRequest(async (access_token) => {
-        await GetPersonId.get(access_token, setPersonId)
+    const [request_email] = useRequest(async (access_token) => {
+        await GetPersonId.get(access_token, setPersonEmail)
     })
 
 
     useEffect(() => {
         if (isAuth) {
-            request_id()
+            request_email()
         }
     }, [isAuth])
 
@@ -90,7 +90,7 @@ const MyLogIn = () => {
                     :
                     <NavDropdown
                         id="nav-dropdown-dark-example"
-                        title={personId}
+                        title={personEmail}
                         menuVariant="dark"
                         variant="red"
                         align={{lg: 'end'}}

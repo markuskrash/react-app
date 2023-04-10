@@ -17,6 +17,10 @@ import RefreshToken from "./components/RefreshToken/RefreshToken";
 import {BrowserRouter, Route} from "react-router-dom";
 import {Routes} from "react-router/dist"
 import VerifyEmail from "./components/UI/VerifyEmail/VerifyEmail";
+import GetPersonId from "./API/GetPersonId";
+import APIIsTeacher from "./API/APIIsTeacher";
+import Answers from "./components/UI/Answers/Answers";
+import OneAnswer from "./components/UI/OneAnswer/OneAnswer";
 
 
 const App = () => {
@@ -26,9 +30,9 @@ const App = () => {
 
     const [renderQuestions, setRenderQuestions] = useState(0);
 
+    const [isTeacher, setIsTeacher] = useState(false);
 
     useEffect(() => {
-        // localStorage.clear()
         localStorage.setItem('error', '')
         if (localStorage.getItem('accessToken') !== "" && localStorage.getItem('accessToken') !== null) {
             setIsAuth(true)
@@ -37,6 +41,9 @@ const App = () => {
             setIsAuth(false)
         }
     }, [])
+
+
+
 
     const [isLoading, setIsLoading] = useState(false);
 
@@ -55,6 +62,8 @@ const App = () => {
                     setLocale,
                     renderQuestions,
                     setRenderQuestions,
+                    isTeacher,
+                    setIsTeacher,
                 }}>
                     <Routes>
                         <Route exact path='/' element={
@@ -70,6 +79,8 @@ const App = () => {
                                             : <></>}
                                         <Ask/>
                                         <Questions/>
+                                        <Answers/>
+                                        <OneAnswer/>
                                     </>
                                 }
                             </>
