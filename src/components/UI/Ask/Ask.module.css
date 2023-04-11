@@ -12,6 +12,10 @@
     margin: 15px
 }
 
+.alertText{
+    text-align: center;
+}
+
 /*.form_switch > input  {*/
 /*    margin-top: 6px;*/
 /*}*/

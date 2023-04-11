@@ -27,9 +27,12 @@ export const messages = {
     max_length: 'Symbols left',
     public: 'Anonymous question',
     ask_alert: 'Enter your question',
+    answer_alert: 'Enter your answer',
     close: 'Close',
     wait_answer: 'The teacher has not answered your question yet, expect',
     make_answer: 'Answer',
+    your_answer: 'Your answer',
+    student_question: 'Question',
   },
   [LOCALES.RUSSIAN]: {
     login: "Вход",
@@ -57,8 +60,11 @@ export const messages = {
     max_length: 'Осталось символов',
     public: 'Анонимный вопрос',
     ask_alert: 'Введите ваш вопрос',
+    answer_alert: 'Введите ваш ответ',
     close: 'Закрыть',
     wait_answer: 'Преподователь еще не ответил на ваш вопрос, ожидайте',
     make_answer: 'Ответить',
+    your_answer: 'Ваш ответ',
+    student_question: 'Вопрос',
   }
 }

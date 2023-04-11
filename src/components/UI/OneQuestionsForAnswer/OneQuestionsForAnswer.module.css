@@ -29,3 +29,36 @@
     width: 100%;
     color: white;
 }
+
+.inputInfo:focus {
+    box-shadow: none;
+    border-color: black;
+}
+
+.ask {
+    display: flex;
+    justify-content: end;
+}
+
+.ask_btn {
+    margin: 15px
+}
+
+.alertText{
+    text-align: center;
+}
+
+
+/*.form_switch_input{*/
+/*    margin-top: 5.5px;*/
+/*}*/
+
+/*.form_switch_input:focus {*/
+/*    box-shadow: none;*/
+/*    border-color: black;*/
+/*}*/
+
+/*.form_switch_input:checked {*/
+/*    background-color: black;*/
+/*    border-color: black;*/
+/*}*/

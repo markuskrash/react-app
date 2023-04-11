@@ -20,7 +20,7 @@ import VerifyEmail from "./components/UI/VerifyEmail/VerifyEmail";
 import GetPersonId from "./API/GetPersonId";
 import APIIsTeacher from "./API/APIIsTeacher";
 import Answers from "./components/UI/Answers/Answers";
-import OneAnswer from "./components/UI/OneAnswer/OneAnswer";
+import OneAnswer from "./components/UI/OneQuestionsForAnswer/OneQuestionsForAnswer";
 
 
 const App = () => {
@@ -80,7 +80,6 @@ const App = () => {
                                         <Ask/>
                                         <Questions/>
                                         <Answers/>
-                                        <OneAnswer/>
                                     </>
                                 }
                             </>

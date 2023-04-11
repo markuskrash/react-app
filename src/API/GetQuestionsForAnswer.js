@@ -14,7 +14,7 @@ class GetQuestionsForAnswer {
                     teacher_questions.push(questions.data[i])
             }
 
-            setQuestions(teacher_questions)
+            setQuestions(teacher_questions.reverse())
             return 0;
 
         } catch (event) {
