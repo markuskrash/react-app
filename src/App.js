@@ -29,6 +29,7 @@ const App = () => {
     const [isAuth, setIsAuth] = useState(false)
 
     const [renderQuestions, setRenderQuestions] = useState(0);
+    const [renderAnswers, setRenderAnswers] = useState(0);
 
     const [isTeacher, setIsTeacher] = useState(false);
 
@@ -41,8 +42,6 @@ const App = () => {
             setIsAuth(false)
         }
     }, [])
-
-
 
 
     const [isLoading, setIsLoading] = useState(false);
@@ -64,15 +63,17 @@ const App = () => {
                     setRenderQuestions,
                     isTeacher,
                     setIsTeacher,
+                    renderAnswers,
+                    setRenderAnswers,
                 }}>
                     <Routes>
                         <Route exact path='/' element={
                             <>
+                                <RefreshToken/>
                                 {localStorage.getItem('error') !== "" ?
                                     <h>{localStorage.getItem('error')}</h>
                                     :
                                     <>
-                                        <RefreshToken/>
                                         <Header/>
                                         {isLoading
                                             ? <Loading isLoading={isLoading}/>

@@ -9,6 +9,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import useRequest from "../../../hooks/useRequest";
 import GetAnswers from "../../../API/GetAnswers";
+import GetPersonId from "../../../API/GetPersonId";
 
 
 const OneQuestion = ({text, status, reciever, id}) => {
@@ -32,6 +33,7 @@ const OneQuestion = ({text, status, reciever, id}) => {
         setShow(true);
         if (status === "1") {
             request_answers();
+            request_email()
         }
     }
 
@@ -39,6 +41,12 @@ const OneQuestion = ({text, status, reciever, id}) => {
 
     const [request_answers] = useRequest(async (access_token) => {
         await GetAnswers.get(access_token, setAnswer, id)
+    })
+
+    const [personEmail, setPersonEmail] = useState('');
+
+    const [request_email] = useRequest(async (access_token) => {
+        await GetPersonId.get(access_token, setPersonEmail)
     })
 
     return (
@@ -52,20 +60,25 @@ const OneQuestion = ({text, status, reciever, id}) => {
                 </div>
             </div>
             <Modal show={show} onHide={handleClose} animation={false}>
-                    <Modal.Header closeButton>
-                    </Modal.Header>
-                    <Modal.Body>
-                        {status === "0"?
-                            <FormattedMessage id='wait_answer'/>
+                <Modal.Header closeButton>
+                </Modal.Header>
+                <Modal.Body>
+                    {status === "0" ?
+                        <FormattedMessage id='wait_answer'/>
                         :
-                            answer
-                        }
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Button variant="dark" type='submit' onClick={handleClose}>
-                            <FormattedMessage id='close'/>
-                        </Button>
-                    </Modal.Footer>
+                        <>
+                            <FormattedMessage id='teacher_answer'/> {personEmail}:
+
+                            <br/>
+                            {answer}
+                        </>
+                    }
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="dark" type='submit' onClick={handleClose}>
+                        <FormattedMessage id='close'/>
+                    </Button>
+                </Modal.Footer>
             </Modal>
         </div>
     )

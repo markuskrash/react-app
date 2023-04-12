@@ -25,6 +25,8 @@ const Answers = () => {
         setRenderQuestions,
         isTeacher,
         setIsTeacher,
+        renderAnswers,
+        setRenderAnswers,
     } = useContext(AuthContext)
 
     const [questions, setQuestions] = useState([]);
@@ -36,16 +38,17 @@ const Answers = () => {
     useEffect(() => {
         if (isAuth) {
             request_questions()
+            console.log("as")
         }
-    }, [isAuth])
+    }, [isAuth, renderAnswers])
 
 
     return (
         <div>
-            {isAuth === true  && isTeacher === true?
+            {isAuth === true && isTeacher === true ?
                 questions.map(question => (
                     <OneQuestionsForAnswer text={question['text']} status={question['status']} owner={question['owner']}
-                                 id={question['id']}/>
+                                           id={question['id']}/>
                 ))
 
                 : ""

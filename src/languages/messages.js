@@ -32,7 +32,10 @@ export const messages = {
     wait_answer: 'The teacher has not answered your question yet, expect',
     make_answer: 'Answer',
     your_answer: 'Your answer',
-    student_question: 'Question',
+    student_question: 'Question from',
+    teacher_answer: 'Answer from',
+    change_answer: 'Edit answer',
+    save_changes: 'Save changes',
   },
   [LOCALES.RUSSIAN]: {
     login: "Вход",
@@ -65,6 +68,9 @@ export const messages = {
     wait_answer: 'Преподователь еще не ответил на ваш вопрос, ожидайте',
     make_answer: 'Ответить',
     your_answer: 'Ваш ответ',
-    student_question: 'Вопрос',
+    student_question: 'Вопрос от',
+    teacher_answer: 'Ответ от',
+    change_answer: 'Редактировать ответ',
+    save_changes: 'Сохранить изменение',
   }
 }
