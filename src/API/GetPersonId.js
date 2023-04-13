@@ -6,7 +6,7 @@ class GetPersonId {
         try {
             const s = "Bearer " + access_token
             const person_id = await axios.get('http://127.0.0.1:8000/api/token/get/', {headers: {"Authorization": s}})
-            const persons = await axios.get('http://127.0.0.1:8000/api/persons/')
+            const persons = await axios.get('http://127.0.0.1:8000/api/persons/', {headers: {"Authorization": s}})
             // console.log(person_id, persons)
             for (let i = 0; i < persons.data.length; i++) {
                 if(persons.data[i]["id"] === person_id.data)
@@ -20,7 +20,7 @@ class GetPersonId {
             // event.stopPropagation()
             //
             // setIsAuth(false)
-            localStorage.setItem('error', event.message)
+            localStorage.setItem('error', event.response.data)
         }
     }
 }

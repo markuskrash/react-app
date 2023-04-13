@@ -2,7 +2,7 @@ import axios from "axios";
 
 class APIAsk {
     static async post(access_token, setIsTryToAsk, text, anonymous, reciever, handleClose, renderQuestions,
-                      setRenderQuestions) {
+                      setRenderQuestions, setAnonymous) {
 
         try {
             setIsTryToAsk(true)
@@ -17,6 +17,7 @@ class APIAsk {
             setRenderQuestions(renderQuestions + 1)
             handleClose()
             setIsTryToAsk(false)
+            setAnonymous(false)
             // localStorage.setItem('email', email)
             // localStorage.setItem('error', '')
 

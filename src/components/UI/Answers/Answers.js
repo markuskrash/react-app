@@ -38,7 +38,6 @@ const Answers = () => {
     useEffect(() => {
         if (isAuth) {
             request_questions()
-            console.log("as")
         }
     }, [isAuth, renderAnswers])
 
@@ -48,7 +47,7 @@ const Answers = () => {
             {isAuth === true && isTeacher === true ?
                 questions.map(question => (
                     <OneQuestionsForAnswer text={question['text']} status={question['status']} owner={question['owner']}
-                                           id={question['id']}/>
+                                           id={question['id']} is_anonymous={question['public']}/>
                 ))
 
                 : ""

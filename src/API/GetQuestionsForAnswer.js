@@ -22,7 +22,7 @@ class GetQuestionsForAnswer {
             // event.stopPropagation()
             //
             // setIsAuth(false)
-            localStorage.setItem('error', event.message)
+            localStorage.setItem('error', event.response.data)
         }
     }
 }

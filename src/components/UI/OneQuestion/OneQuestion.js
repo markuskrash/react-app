@@ -10,6 +10,7 @@ import Form from "react-bootstrap/Form";
 import useRequest from "../../../hooks/useRequest";
 import GetAnswers from "../../../API/GetAnswers";
 import GetPersonId from "../../../API/GetPersonId";
+import GetTeacherId from "../../../API/GetTeacherId";
 
 
 const OneQuestion = ({text, status, reciever, id}) => {
@@ -46,7 +47,7 @@ const OneQuestion = ({text, status, reciever, id}) => {
     const [personEmail, setPersonEmail] = useState('');
 
     const [request_email] = useRequest(async (access_token) => {
-        await GetPersonId.get(access_token, setPersonEmail)
+        await GetTeacherId.get(access_token, setPersonEmail, reciever)
     })
 
     return (

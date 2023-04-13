@@ -62,7 +62,7 @@ const Ask = () => {
 
     const [request] = useRequest(async (access_token) => {
         await APIAsk.post(access_token, setIsTryToAsk, question, anonymous, reciever, handleClose, renderQuestions,
-            setRenderQuestions)
+            setRenderQuestions, setAnonymous)
     })
 
     const ask = (event) => {
@@ -83,7 +83,7 @@ const Ask = () => {
 
     return (
         <>
-            {isAuth && isTeacher === false?
+            {isAuth && isTeacher === false ?
                 <>
                     <div className={classes.ask}>
                         <Button className={classes.ask_btn} variant='dark' onClick={handleShow}>
@@ -139,11 +139,12 @@ const Ask = () => {
                                         // id="custom-switch"
                                         // label={<FormattedMessage id='public'/>}
                                         className={classes.form_switch}
-                                        onChange={(e) => {
-                                            setAnonymous(e.target.value)
-                                        }}
                                     >
-                                        <Form.Check.Input type="checkbox" className={classes.form_switch_input}/>
+                                        <Form.Check.Input type="checkbox"
+                                                          className={classes.form_switch_input}
+                                                          onChange={(e) => {
+                                                              setAnonymous(e.target.checked)
+                                                          }}/>
                                         <Form.Check.Label className={classes.form_switch_label}>{<FormattedMessage
                                             id='public'/>}</Form.Check.Label>
                                     </Form.Check>

@@ -96,10 +96,10 @@ const MyLogIn = () => {
                         align={{lg: 'end'}}
                         className={classes.dropdown}
                     >
-                        <NavDropdown.Item as="button" className={classes.dropdown_toggle}>
-                            <FormattedMessage id='my_accaunt'/>
-                        </NavDropdown.Item>
-                        <NavDropdown.Divider/>
+                        {/*<NavDropdown.Item as="button" className={classes.dropdown_toggle}>*/}
+                        {/*    <FormattedMessage id='my_accaunt'/>*/}
+                        {/*</NavDropdown.Item>*/}
+                        {/*<NavDropdown.Divider/>*/}
                         <NavDropdown.Item as="button" onClick={logout} className={classes.dropdown_toggle_out}>
                             <FormattedMessage id='logout'/>
                         </NavDropdown.Item>

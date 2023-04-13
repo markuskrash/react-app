@@ -12,9 +12,10 @@ import GetAnswers from "../../../API/GetAnswers";
 import PostAnswer from "../../../API/PostAnswer";
 import GetPersonId from "../../../API/GetPersonId";
 import Status from "../../../API/Status";
+import GetTeacherId from "../../../API/GetTeacherId";
 
 
-const OneQuestionsForAnswer = ({text, status, owner, id}) => {
+const OneQuestionsForAnswer = ({text, status, owner, id, is_anonymous}) => {
     const {
         isAuth,
         setIsAuth,
@@ -68,7 +69,7 @@ const OneQuestionsForAnswer = ({text, status, owner, id}) => {
     const [personEmail, setPersonEmail] = useState('');
 
     const [request_email] = useRequest(async (access_token) => {
-        await GetPersonId.get(access_token, setPersonEmail)
+        await GetTeacherId.get(access_token, setPersonEmail, owner)
     })
 
     // const [status, setStatus] = useState('');
@@ -109,9 +110,19 @@ const OneQuestionsForAnswer = ({text, status, owner, id}) => {
                     </Modal.Header>
                     <Modal.Body>
                         <Form.Group className="mb-3" controlId="validationCustom02">
-                            <FormattedMessage id='student_question'/> {personEmail}:
-                            <br/>
-                            {text}
+                            {is_anonymous ?
+                                <>
+                                    <FormattedMessage id='student_question'/> {personEmail}:
+                                    <br/>
+                                    {text}
+                                </>
+                                :
+                                <>
+                                    <FormattedMessage id='student_anonymous_question'/>:
+                                    <br/>
+                                    {text}
+                                </>
+                            }
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="validationCustom02">
                             <Form.Label><FormattedMessage id='your_answer'/></Form.Label>
