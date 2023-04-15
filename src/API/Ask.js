@@ -1,4 +1,5 @@
 import axios from "axios";
+import host from '../settings/host'
 
 class APIAsk {
     static async post(access_token, setIsTryToAsk, text, anonymous, reciever, handleClose, renderQuestions,
@@ -7,7 +8,7 @@ class APIAsk {
         try {
             setIsTryToAsk(true)
             const s = "Bearer " + access_token
-            const question = await axios.post('http://127.0.0.1:8000/api/questions/post/', {
+            const question = await axios.post(`${host}/api/questions/post/`, {
                 'text': text,
                 'status': 0,
                 // 'owner': 7,

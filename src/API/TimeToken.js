@@ -1,12 +1,11 @@
 import axios from "axios";
-import {useContext} from "react";
-import AuthContext from "../context";
+import host from '../settings/host'
 
 class TimeToken {
     static async post(access_token) {
         try {
             const s = "Bearer " + access_token
-            const token = await axios.post('http://127.0.0.1:8000/api/token/refresh/',
+            const token = await axios.post(`${host}/api/token/refresh/`,
                 {"refresh": localStorage.getItem('refreshToken')},
                 {headers: {"Authorization": s}})
             localStorage.setItem('accessToken', token.data['access'])

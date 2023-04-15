@@ -1,12 +1,11 @@
 import axios from "axios";
-import {useContext} from "react";
-import AuthContext from "../context";
+import host from '../settings/host'
 
 class GetAnswers {
     static async get(access_token, setAnswer, id) {
         try {
             const s = "Bearer "+access_token
-            const answers = await axios.get('http://127.0.0.1:8000/api/answers/', {headers: {"Authorization": s}})
+            const answers = await axios.get(`${host}/api/answers/`, {headers: {"Authorization": s}})
             for (let i = 0; i < answers.data.length; i++) {
                 if(answers.data[i]["question"] === id) {
                     setAnswer(answers.data[i]["text"])

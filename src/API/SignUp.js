@@ -1,11 +1,12 @@
 import axios from "axios";
+import host from '../settings/host'
 
 class SignUp {
     static async post(email, password, surname, first_name, second_name, position, setIsAuth, setIsTryToSign, handleClose) {
 
         try {
             setIsTryToSign(true)
-            const register = await axios.post('http://127.0.0.1:8000/api/register', {
+            const register = await axios.post(`${host}/api/register`, {
                 'email': email,
                 'password': password,
                 'last_name': surname,

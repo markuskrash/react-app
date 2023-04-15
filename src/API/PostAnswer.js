@@ -1,20 +1,19 @@
 import axios from "axios";
-import {useContext} from "react";
-import AuthContext from "../context";
+import host from '../settings/host'
 
 class PostAnswer {
     static async post(access_token, text, owner, question, setIsTryToAnswer, handleClose, setTextAnswer, renderAnswers, setRenderAnswers) {
         try {
             const s = "Bearer " + access_token
             setIsTryToAnswer(true)
-            const answer = await axios.post('http://127.0.0.1:8000/api/answers/post/',
+            const answer = await axios.post(`${host}/api/answers/post/`,
                 {
                     text: text,
                     owner: owner,
                     question: question,
                 },
                 {headers: {"Authorization": s}})
-            const status = await axios.post(`http://127.0.0.1:8000/api/questions/post/${question}/`, {}, {headers: {"Authorization": s}})
+            const status = await axios.post(`${host}/api/questions/post/${question}/`, {}, {headers: {"Authorization": s}})
             setRenderAnswers(renderAnswers + 1)
             setIsTryToAnswer(false)
             setTextAnswer('')

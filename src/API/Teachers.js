@@ -1,4 +1,5 @@
 import axios from "axios";
+import host from '../settings/host'
 
 class Teachers {
     static async get(access_token, setTeachers, setReciever) {
@@ -6,7 +7,7 @@ class Teachers {
 
         try {
             const s = "Bearer "+access_token
-            const persons = await axios.get('http://127.0.0.1:8000/api/persons/', {headers: {"Authorization": s}})
+            const persons = await axios.get(`${host}/api/persons/`, {headers: {"Authorization": s}})
             const teachers = []
             for (let i = 0; i < persons.data.length; i++) {
                 if (persons.data[i]["sub"] === "1") {
