@@ -6,8 +6,8 @@ class LogIn {
 
         try {
             setIsTryToAuth(true)
-            console.log(host)
             const persons = await axios.post(`${host}/api/token/`, {'email': email, 'password': password})
+            const valid = await axios.post(`${host}/api/login/`, {'email': email, 'password': password})
             handleClose()
             localStorage.setItem('accessToken', persons.data['access'])
             localStorage.setItem('refreshToken', persons.data['refresh'])

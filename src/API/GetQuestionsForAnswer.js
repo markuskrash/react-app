@@ -2,7 +2,7 @@ import axios from "axios";
 import host from '../settings/host'
 
 class GetQuestionsForAnswer {
-    static async get(access_token, setQuestions) {
+    static async get(access_token, setQuestions, setError) {
         try {
             const s = "Bearer "+access_token
             const teacher_id = await axios.get(`${host}/api/token/get/`, {headers: {"Authorization": s}})
@@ -21,7 +21,7 @@ class GetQuestionsForAnswer {
             // event.stopPropagation()
             //
             // setIsAuth(false)
-            localStorage.setItem('error', event.response.data)
+            setError(event)
         }
     }
 }

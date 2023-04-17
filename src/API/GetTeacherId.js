@@ -2,7 +2,7 @@ import axios from "axios";
 import host from '../settings/host'
 
 class GetTeacherId {
-    static async get(access_token, setPersonEmail, id) {
+    static async get(access_token, setPersonEmail, id, setError) {
         try {
             const s = "Bearer " + access_token
             const persons = await axios.get(`${host}/api/persons/`, {headers: {"Authorization": s}})
@@ -19,7 +19,7 @@ class GetTeacherId {
             // event.stopPropagation()
             //
             // setIsAuth(false)
-            localStorage.setItem('error', event.response.data)
+            setError(event)
         }
     }
 }

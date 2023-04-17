@@ -2,7 +2,7 @@ import axios from "axios";
 import host from '../settings/host'
 
 class GetAnswers {
-    static async get(access_token, setAnswer, id) {
+    static async get(access_token, setAnswer, id, setError) {
         try {
             const s = "Bearer "+access_token
             const answers = await axios.get(`${host}/api/answers/`, {headers: {"Authorization": s}})
@@ -23,7 +23,7 @@ class GetAnswers {
             // event.stopPropagation()
             //
             // setIsAuth(false)
-            localStorage.setItem('error', event.response.data)
+            setError(event)
         }
     }
 }

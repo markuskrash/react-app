@@ -24,7 +24,22 @@ const MyLogIn = () => {
     }
     const handleShow = () => setShow(true);
 
-    const {isAuth, setIsAuth, isLoading, setIsLoading, locale, setLocale} = useContext(AuthContext)
+    const {
+        isAuth,
+        setIsAuth,
+        isLoading,
+        setIsLoading,
+        locale,
+        setLocale,
+        renderQuestions,
+        setRenderQuestions,
+        isTeacher,
+        setIsTeacher,
+        renderAnswers,
+        setRenderAnswers,
+        error,
+        setError
+    } = useContext(AuthContext)
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -64,7 +79,7 @@ const MyLogIn = () => {
     const [persons, setPersons] = useState('');
 
     const [request_email] = useRequest(async (access_token) => {
-        await GetPersonId.get(access_token, setPersonEmail)
+        await GetPersonId.get(access_token, setPersonEmail, setError)
     })
 
 

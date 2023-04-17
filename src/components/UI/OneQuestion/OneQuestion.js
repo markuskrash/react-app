@@ -25,6 +25,10 @@ const OneQuestion = ({text, status, reciever, id}) => {
         setRenderQuestions,
         isTeacher,
         setIsTeacher,
+        renderAnswers,
+        setRenderAnswers,
+        error,
+        setError
     } = useContext(AuthContext)
 
     const [show, setShow] = useState(false);
@@ -41,13 +45,13 @@ const OneQuestion = ({text, status, reciever, id}) => {
     const [answer, setAnswer] = useState("");
 
     const [request_answers] = useRequest(async (access_token) => {
-        await GetAnswers.get(access_token, setAnswer, id)
+        await GetAnswers.get(access_token, setAnswer, id, setError)
     })
 
     const [personEmail, setPersonEmail] = useState('');
 
     const [request_email] = useRequest(async (access_token) => {
-        await GetTeacherId.get(access_token, setPersonEmail, reciever)
+        await GetTeacherId.get(access_token, setPersonEmail, reciever, setError)
     })
 
     return (

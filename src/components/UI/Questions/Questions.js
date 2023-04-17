@@ -23,12 +23,16 @@ const Questions = () => {
         setRenderQuestions,
         isTeacher,
         setIsTeacher,
+        renderAnswers,
+        setRenderAnswers,
+        error,
+        setError
     } = useContext(AuthContext)
 
     const [questions, setQuestions] = useState([]);
 
     const [request_questions] = useRequest(async (access_token) => {
-        await GetQuestions.get(access_token, setQuestions)
+        await GetQuestions.get(access_token, setQuestions, setError)
     })
 
     useEffect(() => {
@@ -40,7 +44,7 @@ const Questions = () => {
 
     return (
         <div>
-            {isAuth === true  && isTeacher === false?
+            {isAuth === true && isTeacher === false ?
                 questions.map(question => (
                     <OneQuestion text={question['text']} status={question['status']} reciever={question['reciever']}
                                  id={question['id']}/>

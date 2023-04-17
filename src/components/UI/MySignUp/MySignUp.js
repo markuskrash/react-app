@@ -21,7 +21,22 @@ const MySignUp = () => {
     }
     const handleShow = () => setShow(true);
 
-    const {isAuth, setIsAuth, isLoading, setIsLoading, locale, setLocale} = useContext(AuthContext)
+    const {
+        isAuth,
+        setIsAuth,
+        isLoading,
+        setIsLoading,
+        locale,
+        setLocale,
+        renderQuestions,
+        setRenderQuestions,
+        isTeacher,
+        setIsTeacher,
+        renderAnswers,
+        setRenderAnswers,
+        error,
+        setError
+    } = useContext(AuthContext)
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [surname, setSurname] = useState('');

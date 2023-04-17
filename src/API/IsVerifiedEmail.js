@@ -1,11 +1,12 @@
 import axios from "axios";
 import host from '../settings/host'
 
-class APIVerifyEmail {
-    static async post(uuid, setError) {
+class IsVerifiedEmail {
+    static async get(uuid, setError, setIsVerifiedEmail) {
 
         try {
-            const verify = await axios.post(`${host}/api/verifyemail/${uuid}`)
+            const is_verified = await axios.get(`${host}/api/verifyemail/${uuid}`)
+            setIsVerifiedEmail(is_verified.data)
             return 0;
 
         } catch (event) {
@@ -18,4 +19,4 @@ class APIVerifyEmail {
     }
 }
 
-export default APIVerifyEmail
+export default IsVerifiedEmail

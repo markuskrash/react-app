@@ -2,7 +2,7 @@ import axios from "axios";
 import host from '../settings/host'
 
 class TimeToken {
-    static async post(access_token) {
+    static async post(access_token, setError) {
         try {
             const s = "Bearer " + access_token
             const token = await axios.post(`${host}/api/token/refresh/`,
@@ -17,7 +17,7 @@ class TimeToken {
             // event.stopPropagation()
             //
             // setIsAuth(false)
-            localStorage.setItem('error', event.response.data)
+            setError(event)
         }
     }
 }

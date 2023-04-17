@@ -29,6 +29,8 @@ const OneQuestionsForAnswer = ({text, status, owner, id, is_anonymous}) => {
         setIsTeacher,
         renderAnswers,
         setRenderAnswers,
+        error,
+        setError
     } = useContext(AuthContext)
 
     const [show, setShow] = useState(false);
@@ -69,7 +71,7 @@ const OneQuestionsForAnswer = ({text, status, owner, id, is_anonymous}) => {
     const [personEmail, setPersonEmail] = useState('');
 
     const [request_email] = useRequest(async (access_token) => {
-        await GetTeacherId.get(access_token, setPersonEmail, owner)
+        await GetTeacherId.get(access_token, setPersonEmail, owner, setError)
     })
 
     // const [status, setStatus] = useState('');
@@ -87,7 +89,7 @@ const OneQuestionsForAnswer = ({text, status, owner, id, is_anonymous}) => {
 
 
     const [request_last_answer] = useRequest(async (access_token) => {
-        await GetAnswers.get(access_token, setTextAnswer, id)
+        await GetAnswers.get(access_token, setTextAnswer, id, setError)
     })
 
     return (

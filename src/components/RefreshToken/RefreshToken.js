@@ -22,6 +22,8 @@ const RefreshToken = () => {
         setRenderQuestions,
         isTeacher,
         setIsTeacher,
+        error,
+        setError
     } = useContext(AuthContext)
 
     const {time, start, pause, reset, status} = useTimer({
@@ -43,11 +45,11 @@ const RefreshToken = () => {
     }, [isAuth])
 
     const [request_refresh] = useRequest(async (access_token) => {
-        await TimeToken.post(access_token)
+        await TimeToken.post(access_token, setError)
     })
 
     const [request_id] = useRequest(async (access_token) => {
-        await APIIsTeacher.get(access_token, setIsTeacher)
+        await APIIsTeacher.get(access_token, setIsTeacher, setError)
     })
 
     useEffect(() => {

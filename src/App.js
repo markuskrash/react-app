@@ -21,6 +21,8 @@ import GetPersonId from "./API/GetPersonId";
 import APIIsTeacher from "./API/APIIsTeacher";
 import Answers from "./components/UI/Answers/Answers";
 import OneAnswer from "./components/UI/OneQuestionsForAnswer/OneQuestionsForAnswer";
+import {Alert} from "react-bootstrap";
+import classes from "./App.css";
 
 
 const App = () => {
@@ -33,8 +35,10 @@ const App = () => {
 
     const [isTeacher, setIsTeacher] = useState(false);
 
+    const [error, setError] = useState('');
+
     useEffect(() => {
-        localStorage.setItem('error', '')
+
         if (localStorage.getItem('accessToken') !== "" && localStorage.getItem('accessToken') !== null) {
             setIsAuth(true)
             setRenderQuestions(renderQuestions + 1)
@@ -42,6 +46,11 @@ const App = () => {
             setIsAuth(false)
         }
     }, [])
+
+    useEffect(() => {
+        if (error)
+            console.log(error.response.data)
+    }, [error])
 
 
     const [isLoading, setIsLoading] = useState(false);
@@ -65,13 +74,19 @@ const App = () => {
                     setIsTeacher,
                     renderAnswers,
                     setRenderAnswers,
+                    error,
+                    setError,
                 }}>
                     <Routes>
                         <Route exact path='/' element={
                             <>
                                 <RefreshToken/>
-                                {localStorage.getItem('error') !== "" ?
-                                    <h>{localStorage.getItem('error')}</h>
+                                {error !== "" ?
+                                    <>
+                                        <div className={classes.alert}>
+                                            <Alert variant='danger'>{error.response.data['detail']}</Alert>
+                                        </div>
+                                    </>
                                     :
                                     <>
                                         <Header/>

@@ -2,7 +2,7 @@ import axios from "axios";
 import host from '../settings/host'
 
 class Teachers {
-    static async get(access_token, setTeachers, setReciever) {
+    static async get(access_token, setTeachers, setReciever, setError) {
 
 
         try {
@@ -24,7 +24,7 @@ class Teachers {
             // setValidated(false)
             // event.stopPropagation()
             //
-            localStorage.setItem('error', event.response.data)
+            setError(event)
         }
     }
 }

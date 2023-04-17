@@ -26,6 +26,10 @@ const Ask = () => {
         setRenderQuestions,
         isTeacher,
         setIsTeacher,
+        renderAnswers,
+        setRenderAnswers,
+        error,
+        setError
     } = useContext(AuthContext)
 
     const [show, setShow] = useState(false);
@@ -56,7 +60,7 @@ const Ask = () => {
     );
 
     const [request_teachers] = useRequest(async (access_token) => {
-        await Teachers.get(access_token, setTeachers, setReciever)
+        await Teachers.get(access_token, setTeachers, setReciever, setError)
     })
 
 

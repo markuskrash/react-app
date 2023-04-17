@@ -2,7 +2,7 @@ import axios from "axios";
 import host from '../settings/host'
 
 class GetPersonId {
-    static async get(access_token, setPersonEmail) {
+    static async get(access_token, setPersonEmail, setError) {
         try {
             const s = "Bearer " + access_token
             const person_id = await axios.get(`${host}/api/token/get/`, {headers: {"Authorization": s}})
@@ -20,7 +20,7 @@ class GetPersonId {
             // event.stopPropagation()
             //
             // setIsAuth(false)
-            localStorage.setItem('error', event.response.data)
+            setError(event)
         }
     }
 }

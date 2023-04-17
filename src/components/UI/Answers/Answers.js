@@ -27,12 +27,14 @@ const Answers = () => {
         setIsTeacher,
         renderAnswers,
         setRenderAnswers,
+        error,
+        setError
     } = useContext(AuthContext)
 
     const [questions, setQuestions] = useState([]);
 
     const [request_questions] = useRequest(async (access_token) => {
-        await GetQuestionsForAnswer.get(access_token, setQuestions)
+        await GetQuestionsForAnswer.get(access_token, setQuestions, setError)
     })
 
     useEffect(() => {
