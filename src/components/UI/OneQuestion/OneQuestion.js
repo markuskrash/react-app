@@ -57,7 +57,10 @@ const OneQuestion = ({text, status, reciever, id}) => {
     return (
         <div>
             <div className={classes.question}>
-                <p className={classes.question_text}>{text}</p>
+                <p className={classes.question_text}>
+                    <FormattedMessage id='your_question'/>
+                    {text}
+                </p>
                 <div className={classes.answer}>
                     <Button className={classes.answer_btn} variant='light' onClick={handleShow}>
                         <FormattedMessage id='answer'/>

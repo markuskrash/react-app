@@ -23,6 +23,7 @@ import Answers from "./components/UI/Answers/Answers";
 import OneAnswer from "./components/UI/OneQuestionsForAnswer/OneQuestionsForAnswer";
 import {Alert} from "react-bootstrap";
 import classes from "./App.css";
+import MainPage from "./components/UI/MainPage/MainPage";
 
 
 const App = () => {
@@ -49,7 +50,7 @@ const App = () => {
 
     useEffect(() => {
         if (error)
-            console.log(error.response.data)
+            localStorage.clear()
     }, [error])
 
 
@@ -79,26 +80,7 @@ const App = () => {
                 }}>
                     <Routes>
                         <Route exact path='/' element={
-                            <>
-                                <RefreshToken/>
-                                {error !== "" ?
-                                    <>
-                                        <div className={classes.alert}>
-                                            <Alert variant='danger'>{error.response.data['detail']}</Alert>
-                                        </div>
-                                    </>
-                                    :
-                                    <>
-                                        <Header/>
-                                        {isLoading
-                                            ? <Loading isLoading={isLoading}/>
-                                            : <></>}
-                                        <Ask/>
-                                        <Questions/>
-                                        <Answers/>
-                                    </>
-                                }
-                            </>
+                            <MainPage/>
                         }/>
                         <Route path='/:uuid' element={
                             <VerifyEmail/>
