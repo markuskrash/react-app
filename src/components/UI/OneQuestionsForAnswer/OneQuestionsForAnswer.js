@@ -12,7 +12,7 @@ import GetAnswers from "../../../API/GetAnswers";
 import PostAnswer from "../../../API/PostAnswer";
 import GetPersonId from "../../../API/GetPersonId";
 import Status from "../../../API/Status";
-import GetTeacherId from "../../../API/GetTeacherId";
+import GetTeacherName from "../../../API/GetTeacherName";
 
 
 const OneQuestionsForAnswer = ({text, status, owner, id, is_anonymous}) => {
@@ -38,16 +38,25 @@ const OneQuestionsForAnswer = ({text, status, owner, id, is_anonymous}) => {
     const handleClose = () => setShow(false);
     const handleShow = () => {
         setShow(true);
-        request_email()
+    }
+
+    useEffect(() => {
+        request_name()
         if (status === '1') {
             request_last_answer()
         }
-    }
+    }, [])
+
+    useEffect(() => {
+        if (status === '1') {
+            request_last_answer()
+        }
+    }, [renderAnswers])
 
     const [textAnswer, setTextAnswer] = useState("");
 
     const [request_make_answer] = useRequest(async (access_token) => {
-        await PostAnswer.post(access_token, textAnswer, owner, id, setIsTryToAnswer, handleClose, setTextAnswer, renderAnswers, setRenderAnswers)
+        await PostAnswer.post(access_token, textAnswer, owner, id, setIsTryToAnswer, handleClose, setTextAnswer, renderAnswers, setRenderAnswers, status)
     })
 
     const [isTryToAnswer, setIsTryToAnswer] = useState(false);
@@ -68,10 +77,10 @@ const OneQuestionsForAnswer = ({text, status, owner, id, is_anonymous}) => {
 
     }
 
-    const [personEmail, setPersonEmail] = useState('');
+    const [personName, setPersonName] = useState('');
 
-    const [request_email] = useRequest(async (access_token) => {
-        await GetTeacherId.get(access_token, setPersonEmail, owner, setError)
+    const [request_name] = useRequest(async (access_token) => {
+        await GetTeacherName.get(access_token, setPersonName, owner, setError)
     })
 
     // const [status, setStatus] = useState('');
@@ -95,7 +104,20 @@ const OneQuestionsForAnswer = ({text, status, owner, id, is_anonymous}) => {
     return (
         <div>
             <div className={classes.answer}>
-                <p className={classes.answer_text}>{text}</p>
+                <div>
+                    <p className={classes.question_text}>
+                        {personName} <FormattedMessage id='student_question'/>:{' '}
+                        {text}
+                    </p>
+                    {status === '1' ?
+                        <p className={classes.answer_text}>
+                            <FormattedMessage id='your_answer'/>{' '}
+                            {textAnswer}
+                        </p>
+                        :
+                        ''
+                    }
+                </div>
                 <div className={classes.make_answer}>
                     <Button className={classes.make_answer_btn} variant='light' onClick={handleShow}>
                         {status === '1' ?
@@ -114,8 +136,7 @@ const OneQuestionsForAnswer = ({text, status, owner, id, is_anonymous}) => {
                         <Form.Group className="mb-3" controlId="validationCustom02">
                             {is_anonymous ?
                                 <>
-                                    <FormattedMessage id='student_question'/> {personEmail}:
-                                    <br/>
+                                    <FormattedMessage id='student_question'/> {personName}:{' '}
                                     {text}
                                 </>
                                 :

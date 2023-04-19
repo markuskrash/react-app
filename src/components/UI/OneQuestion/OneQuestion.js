@@ -10,7 +10,7 @@ import Form from "react-bootstrap/Form";
 import useRequest from "../../../hooks/useRequest";
 import GetAnswers from "../../../API/GetAnswers";
 import GetPersonId from "../../../API/GetPersonId";
-import GetTeacherId from "../../../API/GetTeacherId";
+import GetTeacherName from "../../../API/GetTeacherName";
 
 
 const OneQuestion = ({text, status, reciever, id}) => {
@@ -31,16 +31,14 @@ const OneQuestion = ({text, status, reciever, id}) => {
         setError
     } = useContext(AuthContext)
 
-    const [show, setShow] = useState(false);
 
-    const handleClose = () => setShow(false);
-    const handleShow = () => {
-        setShow(true);
+
+    useEffect (() => {
         if (status === "1") {
             request_answers();
-            request_email()
+            request_name()
         }
-    }
+    }, [])
 
     const [answer, setAnswer] = useState("");
 
@@ -48,10 +46,10 @@ const OneQuestion = ({text, status, reciever, id}) => {
         await GetAnswers.get(access_token, setAnswer, id, setError)
     })
 
-    const [personEmail, setPersonEmail] = useState('');
+    const [personName, setPersonName] = useState('');
 
-    const [request_email] = useRequest(async (access_token) => {
-        await GetTeacherId.get(access_token, setPersonEmail, reciever, setError)
+    const [request_name] = useRequest(async (access_token) => {
+        await GetTeacherName.get(access_token, setPersonName, reciever, setError)
     })
 
     return (
@@ -61,33 +59,39 @@ const OneQuestion = ({text, status, reciever, id}) => {
                     <FormattedMessage id='your_question'/>
                     {text}
                 </p>
-                <div className={classes.answer}>
-                    <Button className={classes.answer_btn} variant='light' onClick={handleShow}>
-                        <FormattedMessage id='answer'/>
-                    </Button>
-                </div>
-            </div>
-            <Modal show={show} onHide={handleClose} animation={false}>
-                <Modal.Header closeButton>
-                </Modal.Header>
-                <Modal.Body>
+                <div className={classes.answer_text}>
                     {status === "0" ?
                         <FormattedMessage id='wait_answer'/>
                         :
                         <>
-                            <FormattedMessage id='teacher_answer'/> {personEmail}:
-
-                            <br/>
+                            {personName} <FormattedMessage id='teacher_answer'/>:{' '}
+                            {/*<br/>*/}
                             {answer}
                         </>
                     }
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="dark" type='submit' onClick={handleClose}>
-                        <FormattedMessage id='close'/>
-                    </Button>
-                </Modal.Footer>
-            </Modal>
+                </div>
+            </div>
+            {/*<Modal show={show} onHide={handleClose} animation={false}>*/}
+            {/*    <Modal.Header closeButton>*/}
+            {/*    </Modal.Header>*/}
+            {/*    <Modal.Body>*/}
+            {/*        {status === "0" ?*/}
+            {/*            <FormattedMessage id='wait_answer'/>*/}
+            {/*            :*/}
+            {/*            <>*/}
+            {/*                <FormattedMessage id='teacher_answer'/> {personEmail}:*/}
+
+            {/*                <br/>*/}
+            {/*                {answer}*/}
+            {/*            </>*/}
+            {/*        }*/}
+            {/*    </Modal.Body>*/}
+            {/*    <Modal.Footer>*/}
+            {/*        <Button variant="dark" type='submit' onClick={handleClose}>*/}
+            {/*            <FormattedMessage id='close'/>*/}
+            {/*        </Button>*/}
+            {/*    </Modal.Footer>*/}
+            {/*</Modal>*/}
         </div>
     )
 }

@@ -22,9 +22,17 @@
     margin: 15px;
 }
 
+.question_text{
+    height: calc((100% - 67px )* 0.5);
+    min-height: 50px;
+    margin: 15px;
+    width: 100%;
+    color: white;
+}
+
 .answer_text{
-    height: calc(100% - 67px);
-    min-height: 150px;
+    height: calc((100% - 67px )* 0.5);
+    min-height: 50px;
     margin: 15px;
     width: 100%;
     color: white;

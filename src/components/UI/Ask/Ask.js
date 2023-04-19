@@ -100,7 +100,7 @@ const Ask = () => {
                             </Modal.Header>
                             <Modal.Body>
                                 <Form.Group className="mb-3" controlId="validationCustom02">
-                                    <Form.Label><FormattedMessage id='question'/></Form.Label>
+                                    <Form.Label><FormattedMessage id='your_question'/></Form.Label>
                                     <Form.Control
                                         required
                                         autoFocus
