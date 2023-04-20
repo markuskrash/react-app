@@ -134,7 +134,7 @@ const OneQuestionsForAnswer = ({text, status, owner, id, is_anonymous}) => {
                     </Modal.Header>
                     <Modal.Body>
                         <Form.Group className="mb-3" controlId="validationCustom02">
-                            {is_anonymous ?
+                            {!is_anonymous ?
                                 <>
                                     <FormattedMessage id='student_question'/> {personName}:{' '}
                                     {text}

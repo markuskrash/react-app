@@ -3,7 +3,7 @@ import host from '../settings/host'
 
 class APIAsk {
     static async post(access_token, setIsTryToAsk, text, anonymous, reciever, handleClose, renderQuestions,
-                      setRenderQuestions, setAnonymous) {
+                      setRenderQuestions, setAnonymous, isPublic, setIsPublic) {
 
         try {
             setIsTryToAsk(true)
@@ -13,12 +13,14 @@ class APIAsk {
                 'status': 0,
                 // 'owner': 7,
                 'reciever': reciever,
-                'public': !anonymous,
+                'public': isPublic,
+                'anonymous': anonymous,
             }, {headers: {"Authorization": s}})
             setRenderQuestions(renderQuestions + 1)
             handleClose()
             setIsTryToAsk(false)
             setAnonymous(false)
+            setIsPublic(false)
             // localStorage.setItem('email', email)
             // localStorage.setItem('error', '')
 

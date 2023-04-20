@@ -25,7 +25,8 @@ export const messages = {
     reciever_info: 'Who do you want to ask the question to',
     answer: 'Answer',
     max_length: 'Symbols left',
-    public: 'Anonymous question',
+    public: 'Public question',
+    anonymous: 'Anonymous question',
     ask_alert: 'Enter your question',
     answer_alert: 'Enter your answer',
     close: 'Close',
@@ -38,6 +39,7 @@ export const messages = {
     teacher_answer: 'answer',
     change_answer: 'Edit answer',
     save_changes: 'Save changes',
+    alert: 'Something went wrong, the page is unavailable.'
   },
   [LOCALES.RUSSIAN]: {
     login: "Вход",
@@ -63,7 +65,8 @@ export const messages = {
     reciever_info: 'Кому вы хотите задать вопрос',
     answer: 'Ответ',
     max_length: 'Осталось символов',
-    public: 'Анонимный вопрос',
+    public: 'Публичный вопрос',
+    anonymous: 'Анонимный вопрос',
     ask_alert: 'Введите ваш вопрос',
     answer_alert: 'Введите ваш ответ',
     close: 'Закрыть',
@@ -76,5 +79,6 @@ export const messages = {
     teacher_answer: 'отвечает',
     change_answer: 'Редактировать ответ',
     save_changes: 'Сохранить изменение',
+    alert: 'Что-то пошло не так, страница недоступна.'
   }
 }

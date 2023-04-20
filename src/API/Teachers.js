@@ -7,17 +7,9 @@ class Teachers {
 
         try {
             const s = "Bearer "+access_token
-            const persons = await axios.get(`${host}/api/persons/`, {headers: {"Authorization": s}})
-            const teachers = []
-            for (let i = 0; i < persons.data.length; i++) {
-                if (persons.data[i]["sub"] === "1") {
-                    teachers.push(persons.data[i])
-                }
-            }
-            setTeachers(teachers)
-            setReciever(teachers[0]["id"])
-            localStorage.setItem('error', '')
-
+            const teachers = await axios.get(`${host}/api/persons/teachers/`, {headers: {"Authorization": s}})
+            setTeachers(teachers.data)
+            setReciever(teachers.data[0]["id"])
             // return 0;
 
         } catch (event) {

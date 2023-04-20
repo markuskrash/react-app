@@ -45,6 +45,7 @@ const Ask = () => {
 
     const [question, setQuestion] = useState("");
     const [reciever, setReciever] = useState();
+    const [isPublic, setIsPublic] = useState(false);
     const [anonymous, setAnonymous] = useState(false);
     const [isTryToAsk, setIsTryToAsk] = useState(false);
 
@@ -66,7 +67,7 @@ const Ask = () => {
 
     const [request] = useRequest(async (access_token) => {
         await APIAsk.post(access_token, setIsTryToAsk, question, anonymous, reciever, handleClose, renderQuestions,
-            setRenderQuestions, setAnonymous)
+            setRenderQuestions, setAnonymous, isPublic, setIsPublic)
     })
 
     const ask = (event) => {
@@ -137,22 +138,30 @@ const Ask = () => {
                                         {/*<option value="2"><FormattedMessage id='student'/></option>*/}
                                     </Form.Select>
                                 </Form.Group>
-                                <Form.Group className={classes.formSwitch}>
-                                    <Form.Check
-                                        // type=""
-                                        // id="custom-switch"
-                                        // label={<FormattedMessage id='public'/>}
-                                        className={classes.form_switch}
-                                    >
+                                <Form.Group>
+                                    <Form.Check>
                                         <Form.Check.Input type="checkbox"
                                                           className={classes.form_switch_input}
                                                           onChange={(e) => {
-                                                              setAnonymous(e.target.checked)
+                                                              setIsPublic(e.target.checked)
                                                           }}/>
-                                        <Form.Check.Label className={classes.form_switch_label}>{<FormattedMessage
-                                            id='public'/>}</Form.Check.Label>
+                                        <Form.Check.Label><FormattedMessage id='public'/></Form.Check.Label>
                                     </Form.Check>
                                 </Form.Group>
+                                {isPublic?
+                                    <Form.Group>
+                                        <Form.Check>
+                                            <Form.Check.Input type="checkbox"
+                                                              className={classes.form_switch_input}
+                                                              onChange={(e) => {
+                                                                  setAnonymous(e.target.checked)
+                                                              }}/>
+                                            <Form.Check.Label><FormattedMessage id='anonymous'/></Form.Check.Label>
+                                        </Form.Check>
+                                    </Form.Group>
+                                    :
+                                    ''
+                                }
                                 <Alert variant='danger' show={isTryToAsk}>
                                     <div className={classes.alertText}>
                                         {isTryToAsk

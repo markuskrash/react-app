@@ -8,6 +8,7 @@ import Header from "../Header/Header";
 import RefreshToken from "../../RefreshToken/RefreshToken";
 import AuthContext from "../../../context";
 import Ask from "../Ask/Ask";
+import {FormattedMessage} from "react-intl";
 
 
 const MainPage = () => {
@@ -33,7 +34,7 @@ const MainPage = () => {
             {error !== "" ?
                 <>
                     <div className={classes.alert}>
-                        <Alert variant='danger'>{error.response.data['detail']}</Alert>
+                        <Alert variant='danger'><FormattedMessage id='alert'/></Alert>
                     </div>
                 </>
                 :

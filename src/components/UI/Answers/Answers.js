@@ -49,7 +49,7 @@ const Answers = () => {
             {isAuth === true && isTeacher === true ?
                 questions.map(question => (
                     <OneQuestionsForAnswer text={question['text']} status={question['status']} owner={question['owner']}
-                                           id={question['id']} is_anonymous={question['public']}/>
+                                           id={question['id']} is_anonymous={question['anonymous']}/>
                 ))
 
                 : ""

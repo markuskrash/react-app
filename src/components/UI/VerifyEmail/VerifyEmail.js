@@ -7,6 +7,7 @@ import AuthContext from "../../../context";
 import IsVerifiedEmail from "../../../API/IsVerifiedEmail";
 import {Alert} from "react-bootstrap";
 import classes from "./VerifyEmail.module.css";
+import {FormattedMessage} from "react-intl";
 
 
 const VerifyEmail = () => {
@@ -50,12 +51,12 @@ const VerifyEmail = () => {
     return (
         <div className={classes.alert}>
             {error !== "" ?
-                <Alert>{error.response.data[0]}</Alert>
+                <Alert><FormattedMessage id='alert'/></Alert>
                 :
                 isVerified === 0 ?
                     <Alert variant='success'>Вы подтвердили регистрацию</Alert>
                     :
-                    <Alert variant='dark'>Вы уже подтверждали регистрацию</Alert>
+                    <Alert><FormattedMessage id='alert'/></Alert>
 
             }
         </div>
