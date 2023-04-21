@@ -44,8 +44,10 @@ const VerifyEmail = () => {
     }, [])
 
     useEffect(() => {
-        if(isVerified === 0)
+        if(isVerified === 0) {
             request_verify()
+            // console.l
+        }
     }, [isVerified])
 
     return (
@@ -53,8 +55,12 @@ const VerifyEmail = () => {
             {error !== "" ?
                 <Alert><FormattedMessage id='alert'/></Alert>
                 :
-                isVerified === 0 ?
-                    <Alert variant='success'>Вы подтвердили регистрацию</Alert>
+                isVerified === 0?
+                    <Alert variant='success'>
+                        <FormattedMessage id='success_verify'/>
+                        &nbsp;
+                        <a href={'http://localhost:3000/'}><FormattedMessage id='success_verify_text'/></a>
+                    </Alert>
                     :
                     <Alert><FormattedMessage id='alert'/></Alert>
 

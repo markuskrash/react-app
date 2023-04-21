@@ -48,21 +48,6 @@ const RefreshToken = () => {
         await TimeToken.post(access_token, setError)
     })
 
-    const [request_id] = useRequest(async (access_token) => {
-        await APIIsTeacher.get(access_token, setIsTeacher, setError)
-    })
-
-    useEffect(() => {
-        if (isAuth === true) {
-            request_id()
-
-        }
-    }, [isAuth])
-
-
-    // return(
-        // <h>{time}</h>
-    // );
 
 };
 

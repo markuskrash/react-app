@@ -17,7 +17,7 @@ import RefreshToken from "./components/RefreshToken/RefreshToken";
 import {BrowserRouter, Route} from "react-router-dom";
 import {Routes} from "react-router/dist"
 import VerifyEmail from "./components/UI/VerifyEmail/VerifyEmail";
-import GetPersonId from "./API/GetPersonId";
+import GetPersonId from "./API/GetNameWithoutId";
 import APIIsTeacher from "./API/APIIsTeacher";
 import Answers from "./components/UI/Answers/Answers";
 import OneAnswer from "./components/UI/OneQuestionsForAnswer/OneQuestionsForAnswer";

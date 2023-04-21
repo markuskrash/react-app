@@ -16,7 +16,6 @@ class PostAnswer {
             const change_status = await axios.post(`${host}/api/questions/post/${question}/`, {}, {headers: {"Authorization": s}})
             setRenderAnswers(renderAnswers + 1)
             setIsTryToAnswer(false)
-            setTextAnswer('')
             handleClose()
             // for (let i = 0; i < answers.data.length; i++) {
             //     if(answers.data[i]["question"] === id) {

@@ -1,11 +1,12 @@
 import axios from "axios";
 import host from '../settings/host'
 
-class GetTeacherName {
-    static async get(access_token, setPersonName, id, setError) {
+class GetNameWithoutId {
+    static async get(access_token, setPersonName, setError) {
         try {
             const s = "Bearer " + access_token
-            const person = await axios.get(`${host}/api/persons/${id}`, {headers: {"Authorization": s}})
+            const person_id = await axios.get(`${host}/api/token/get/`, {headers: {"Authorization": s}})
+            const person = await axios.get(`${host}/api/persons/${person_id.data}`, {headers: {"Authorization": s}})
             setPersonName(person.data["last_name"] + ' ' + person.data["first_name"] + ' ' + person.data["middle_name"])
             return 0;
 
@@ -19,4 +20,4 @@ class GetTeacherName {
     }
 }
 
-export default GetTeacherName
+export default GetNameWithoutId

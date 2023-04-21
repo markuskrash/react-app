@@ -39,7 +39,10 @@ export const messages = {
     teacher_answer: 'answer',
     change_answer: 'Edit answer',
     save_changes: 'Save changes',
-    alert: 'Something went wrong, the page is unavailable.'
+    alert: 'Something went wrong, the page is unavailable.',
+    is_edited: 'Edited',
+    success_verify: 'You have confirmed the registration, you can go to the site by following the',
+    success_verify_text: 'link',
   },
   [LOCALES.RUSSIAN]: {
     login: "Вход",
@@ -79,6 +82,9 @@ export const messages = {
     teacher_answer: 'отвечает',
     change_answer: 'Редактировать ответ',
     save_changes: 'Сохранить изменение',
-    alert: 'Что-то пошло не так, страница недоступна.'
+    alert: 'Что-то пошло не так, страница недоступна.',
+    is_edited: 'Редактировано',
+    success_verify: 'Вы подтвердили регистрацию, можете перейти на сайт по',
+    success_verify_text : 'ссылке',
   }
 }

@@ -13,7 +13,7 @@ import DropdownToggle from "react-bootstrap/DropdownToggle";
 import {FormattedMessage} from "react-intl";
 import {messages} from "../../../languages/messages";
 import Teachers from "../../../API/Teachers";
-import GetPersonId from "../../../API/GetPersonId";
+import GetNameWithoutId from "../../../API/GetNameWithoutId";
 
 
 const MyLogIn = () => {
@@ -79,7 +79,7 @@ const MyLogIn = () => {
     const [persons, setPersons] = useState('');
 
     const [request_email] = useRequest(async (access_token) => {
-        await GetPersonId.get(access_token, setPersonEmail, setError)
+        await GetNameWithoutId.get(access_token, setPersonEmail, setError)
     })
 
 

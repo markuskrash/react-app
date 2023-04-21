@@ -10,9 +10,9 @@ import Form from "react-bootstrap/Form";
 import useRequest from "../../../hooks/useRequest";
 import GetAnswers from "../../../API/GetAnswers";
 import PostAnswer from "../../../API/PostAnswer";
-import GetPersonId from "../../../API/GetPersonId";
+import GetPersonId from "../../../API/GetNameWithoutId";
 import Status from "../../../API/Status";
-import GetTeacherName from "../../../API/GetTeacherName";
+import GetName from "../../../API/GetName";
 
 
 const OneQuestionsForAnswer = ({text, status, owner, id, is_anonymous}) => {
@@ -51,7 +51,7 @@ const OneQuestionsForAnswer = ({text, status, owner, id, is_anonymous}) => {
         if (status === '1') {
             request_last_answer()
         }
-    }, [renderAnswers])
+    }, [status, renderQuestions])
 
     const [textAnswer, setTextAnswer] = useState("");
 
@@ -80,7 +80,7 @@ const OneQuestionsForAnswer = ({text, status, owner, id, is_anonymous}) => {
     const [personName, setPersonName] = useState('');
 
     const [request_name] = useRequest(async (access_token) => {
-        await GetTeacherName.get(access_token, setPersonName, owner, setError)
+        await GetName.get(access_token, setPersonName, owner, setError)
     })
 
     // const [status, setStatus] = useState('');

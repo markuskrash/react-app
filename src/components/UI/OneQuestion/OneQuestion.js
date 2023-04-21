@@ -9,8 +9,9 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import useRequest from "../../../hooks/useRequest";
 import GetAnswers from "../../../API/GetAnswers";
-import GetPersonId from "../../../API/GetPersonId";
-import GetTeacherName from "../../../API/GetTeacherName";
+import GetPersonId from "../../../API/GetNameWithoutId";
+import GetName from "../../../API/GetName";
+import CountAnswers from "../../../API/CountAnswers";
 
 
 const OneQuestion = ({text, status, reciever, id}) => {
@@ -32,11 +33,11 @@ const OneQuestion = ({text, status, reciever, id}) => {
     } = useContext(AuthContext)
 
 
-
-    useEffect (() => {
+    useEffect(() => {
         if (status === "1") {
             request_answers();
             request_name()
+            request_count()
         }
     }, [])
 
@@ -49,7 +50,13 @@ const OneQuestion = ({text, status, reciever, id}) => {
     const [personName, setPersonName] = useState('');
 
     const [request_name] = useRequest(async (access_token) => {
-        await GetTeacherName.get(access_token, setPersonName, reciever, setError)
+        await GetName.get(access_token, setPersonName, reciever, setError)
+    })
+
+    const [countAnswers, setCountAnswers] = useState(0);
+
+    const [request_count] = useRequest(async (access_token) => {
+        await CountAnswers.get(access_token, setCountAnswers, id, setError)
     })
 
     return (
@@ -64,7 +71,12 @@ const OneQuestion = ({text, status, reciever, id}) => {
                         <FormattedMessage id='wait_answer'/>
                         :
                         <>
-                            {personName} <FormattedMessage id='teacher_answer'/>:{' '}
+                            {personName} <FormattedMessage id='teacher_answer'/>
+                            {countAnswers > 1 ?
+                                    <h>(<FormattedMessage id='is_edited'/>)</h>
+                                :
+                                ''}
+                            :{' '}
                             {/*<br/>*/}
                             {answer}
                         </>
