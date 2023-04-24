@@ -46,7 +46,7 @@ const MySignUp = () => {
 
 
     const [request] = useRequest(async () => {
-        await SignUp.post(email, password, surname, first_name, second_name, position, setIsAuth, setIsTryToSign, handleClose)
+        await SignUp.post(email, password, surname, first_name, second_name, position, setIsAuth, setIsTryToSign, handleClose, setPosition)
     })
 
     // useEffect(() => {

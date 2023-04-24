@@ -15,7 +15,7 @@ import Status from "../../../API/Status";
 import GetName from "../../../API/GetName";
 
 
-const OneQuestionsForAnswer = ({text, status, owner, id, is_anonymous}) => {
+const OneQuestionsForAnswer = ({text, status, owner, id, is_anonymous, is_public}) => {
     const {
         isAuth,
         setIsAuth,
@@ -105,14 +105,31 @@ const OneQuestionsForAnswer = ({text, status, owner, id, is_anonymous}) => {
         <div>
             <div className={classes.answer}>
                 <div>
-                    <p className={classes.question_text}>
-                        {personName} <FormattedMessage id='student_question'/>:{' '}
-                        {text}
-                    </p>
+                    {is_public ?
+                        is_anonymous ?
+                            <p className={classes.question_text}>
+                                <FormattedMessage id='student_question_public_anonymous'/>:{' '}
+                                <br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;{text}
+                            </p>
+                            :
+                            <p className={classes.question_text}>
+                                {personName} <FormattedMessage id='student_question_public'/>:{' '}
+                                <br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;{text}
+                            </p>
+                        :
+                        <p className={classes.question_text}>
+                            {personName} <FormattedMessage id='student_question'/>:{' '}
+                            <br/>
+                            &nbsp;&nbsp;&nbsp;&nbsp;{text}
+                        </p>
+                    }
                     {status === '1' ?
                         <p className={classes.answer_text}>
                             <FormattedMessage id='your_answer'/>{' '}
-                            {textAnswer}
+                            <br/>
+                            &nbsp;&nbsp;&nbsp;&nbsp;{textAnswer}
                         </p>
                         :
                         ''
@@ -134,16 +151,24 @@ const OneQuestionsForAnswer = ({text, status, owner, id, is_anonymous}) => {
                     </Modal.Header>
                     <Modal.Body>
                         <Form.Group className="mb-3" controlId="validationCustom02">
-                            {!is_anonymous ?
-                                <>
-                                    <FormattedMessage id='student_question'/> {personName}:{' '}
-                                    {text}
-                                </>
+                            {is_public ?
+                                is_anonymous ?
+                                    <>
+                                        <FormattedMessage id='student_question_public_anonymous'/>:{' '}
+                                        <br/>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;{text}
+                                    </>
+                                    :
+                                    <>
+                                        {personName} <FormattedMessage id='student_question_public'/>:{' '}
+                                        <br/>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;{text}
+                                    </>
                                 :
                                 <>
-                                    <FormattedMessage id='student_anonymous_question'/>:
+                                    {personName} <FormattedMessage id='student_question'/>:{' '}
                                     <br/>
-                                    {text}
+                                    &nbsp;&nbsp;&nbsp;&nbsp;{text}
                                 </>
                             }
                         </Form.Group>

@@ -14,7 +14,7 @@ import GetName from "../../../API/GetName";
 import CountAnswers from "../../../API/CountAnswers";
 
 
-const OneQuestion = ({text, status, reciever, id}) => {
+const OneQuestion = ({text, status, reciever, id, is_anonymous, is_public}) => {
     const {
         isAuth,
         setIsAuth,

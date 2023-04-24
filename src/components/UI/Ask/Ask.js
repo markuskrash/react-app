@@ -37,6 +37,7 @@ const Ask = () => {
     const handleClose = () => {
         setQuestion("")
         setShow(false);
+        setIsPublic(false)
     }
     const handleShow = () => {
         request_teachers()
@@ -85,6 +86,11 @@ const Ask = () => {
         ask(event)
 
     }
+
+    useEffect(()=>{
+        if(isPublic === false)
+            setAnonymous(false)
+    }, [isPublic])
 
     return (
         <>

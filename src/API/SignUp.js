@@ -2,7 +2,7 @@ import axios from "axios";
 import host from '../settings/host'
 
 class SignUp {
-    static async post(email, password, surname, first_name, second_name, position, setIsAuth, setIsTryToSign, handleClose) {
+    static async post(email, password, surname, first_name, second_name, position, setIsAuth, setIsTryToSign, handleClose, setPosition) {
 
         try {
             setIsTryToSign(true)
@@ -16,6 +16,7 @@ class SignUp {
             })
             setIsTryToSign(false)
             handleClose()
+            setPosition('1')
             localStorage.setItem('email', email)
             localStorage.setItem('error', '')
 
