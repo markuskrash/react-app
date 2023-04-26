@@ -104,7 +104,7 @@ const OneQuestion = ({text, status, reciever, id, is_anonymous, is_public, owner
                         :
                         is_anonymous ?
                             <p className={classes.question_text}>
-                                <FormattedMessage id='student_question_public_anonymous'/>:{' '}
+                                <FormattedMessage id='another_student_question_public_anonymous'/>:{' '}
                                 <br/>
                                 &nbsp;&nbsp;&nbsp;&nbsp;{text}
                             </p>

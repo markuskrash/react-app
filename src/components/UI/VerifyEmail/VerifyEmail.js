@@ -35,8 +35,10 @@ const VerifyEmail = () => {
     })
 
     const [isVerified, setIsVerified] = useState(1)
+    const [isStaff, setIsStaff] = useState(0)
+    const [sub, setSub] = useState(0)
     const [request_is_verified] = useRequest(async () => {
-        await IsVerifiedEmail.get(uuid, setError, setIsVerified)
+        await IsVerifiedEmail.get(uuid, setError, setIsVerified, setIsStaff, setSub)
     })
 
     useEffect(() => {
@@ -44,9 +46,8 @@ const VerifyEmail = () => {
     }, [])
 
     useEffect(() => {
-        if(isVerified === 0) {
+        if (isVerified === 0) {
             request_verify()
-            // console.l
         }
     }, [isVerified])
 
@@ -55,12 +56,26 @@ const VerifyEmail = () => {
             {error !== "" ?
                 <Alert><FormattedMessage id='alert'/></Alert>
                 :
-                isVerified === 0?
-                    <Alert variant='success'>
-                        <FormattedMessage id='success_verify'/>
-                        &nbsp;
-                        <a href={'http://localhost:3000/'}><FormattedMessage id='success_verify_text'/></a>
-                    </Alert>
+                isVerified === 0 ?
+                    sub === '1' && isStaff === true ?
+                        <Alert variant='success'>
+                            <FormattedMessage id='success_verify_teacher_admin'/>
+                            &nbsp;
+                            <a href={'http://localhost:3000/'}><FormattedMessage id='success_verify_text'/></a>
+                        </Alert>
+                        :
+                        isStaff === true ?
+                            <Alert variant='success'>
+                                <FormattedMessage id='success_verify_teacher'/>
+                                &nbsp;
+                                <a href={'http://localhost:3000/'}><FormattedMessage id='success_verify_text'/></a>
+                            </Alert>
+                            :
+                            <Alert variant='success'>
+                                <FormattedMessage id='success_verify'/>
+                                &nbsp;
+                                <a href={'http://localhost:3000/'}><FormattedMessage id='success_verify_text'/></a>
+                            </Alert>
                     :
                     <Alert><FormattedMessage id='alert'/></Alert>
 
