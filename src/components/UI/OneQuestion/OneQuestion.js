@@ -12,9 +12,10 @@ import GetAnswers from "../../../API/GetAnswers";
 import GetPersonId from "../../../API/GetNameWithoutId";
 import GetName from "../../../API/GetName";
 import CountAnswers from "../../../API/CountAnswers";
+import GetId from "../../../API/GetId";
 
 
-const OneQuestion = ({text, status, reciever, id, is_anonymous, is_public}) => {
+const OneQuestion = ({text, status, reciever, id, is_anonymous, is_public, owner}) => {
     const {
         isAuth,
         setIsAuth,
@@ -36,8 +37,10 @@ const OneQuestion = ({text, status, reciever, id, is_anonymous, is_public}) => {
     useEffect(() => {
         if (status === "1") {
             request_answers();
-            request_name()
             request_count()
+            request_id()
+            request_reciever()
+
         }
     }, [])
 
@@ -47,10 +50,16 @@ const OneQuestion = ({text, status, reciever, id, is_anonymous, is_public}) => {
         await GetAnswers.get(access_token, setAnswer, id, setError)
     })
 
-    const [personName, setPersonName] = useState('');
+    const [recieverName, setRecieverName] = useState('');
 
-    const [request_name] = useRequest(async (access_token) => {
-        await GetName.get(access_token, setPersonName, reciever, setError)
+    const [request_reciever] = useRequest(async (access_token) => {
+        await GetName.get(access_token, setRecieverName, reciever, setError)
+    })
+
+    const [ownerName, setOwnerName] = useState('');
+
+    const [request_owner] = useRequest(async (access_token) => {
+        await GetName.get(access_token, setOwnerName, owner, setError)
     })
 
     const [countAnswers, setCountAnswers] = useState(0);
@@ -59,26 +68,73 @@ const OneQuestion = ({text, status, reciever, id, is_anonymous, is_public}) => {
         await CountAnswers.get(access_token, setCountAnswers, id, setError)
     })
 
+    const [personId, setPersonId] = useState('');
+
+    const [request_id] = useRequest(async (access_token) => {
+        await GetId.get(access_token, setPersonId, setError)
+    })
+
+    useEffect(()=>{
+        if (isAuth)
+            request_id()
+    }, [renderQuestions])
+
+    useEffect(()=>{
+        if (isAuth)
+            request_owner()
+    }, [isAuth])
+
     return (
         <div>
             <div className={classes.question}>
-                <p className={classes.question_text}>
-                    <FormattedMessage id='your_question'/>
-                    {text}
-                </p>
+                {is_public ?
+                    personId === owner ?
+                        is_anonymous ?
+                            <p className={classes.question_text}>
+                                <FormattedMessage id='your_question_public_anonymous'/>:{' '}
+                                <br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;{text}
+                            </p>
+                            :
+                            <p className={classes.question_text}>
+                                <FormattedMessage id='your_question_public'/>:{' '}
+                                <br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;{text}
+                            </p>
+                        :
+                        is_anonymous ?
+                            <p className={classes.question_text}>
+                                <FormattedMessage id='student_question_public_anonymous'/>:{' '}
+                                <br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;{text}
+                            </p>
+                            :
+                            <p className={classes.question_text}>
+                                {ownerName} <FormattedMessage id='student_question_public'/>:{' '}
+                                <br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;{text}
+                            </p>
+                    :
+                    <p className={classes.question_text}>
+                        <FormattedMessage id='your_question'/>:{' '}
+                        <br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;{text}
+                    </p>
+                }
                 <div className={classes.answer_text}>
                     {status === "0" ?
                         <FormattedMessage id='wait_answer'/>
                         :
                         <>
-                            {personName} <FormattedMessage id='teacher_answer'/>
+                            {recieverName} <FormattedMessage id='teacher_answer'/>
                             {countAnswers > 1 ?
-                                    <h>(<FormattedMessage id='is_edited'/>)</h>
+                                <h>(<FormattedMessage id='is_edited'/>)</h>
                                 :
                                 ''}
                             :{' '}
                             {/*<br/>*/}
-                            {answer}
+                            <br/>
+                            &nbsp;&nbsp;&nbsp;&nbsp;{answer}
                         </>
                     }
                 </div>

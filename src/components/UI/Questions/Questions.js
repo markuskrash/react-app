@@ -41,13 +41,18 @@ const Questions = () => {
         }
     }, [renderQuestions, isAuth])
 
+    useEffect(() => {
+        console.log(questions)
+    }, [questions])
+
 
     return (
         <div>
             {isAuth === true && isTeacher === false ?
                 questions.map(question => (
                     <OneQuestion text={question['text']} status={question['status']} reciever={question['reciever']}
-                                 id={question['id']}/>
+                                 id={question['id']} owner={question['owner']} is_anonymous={question['anonymous']}
+                                 is_public={question['public']}/>
                 ))
 
                 : ""
