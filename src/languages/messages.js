@@ -50,6 +50,8 @@ export const messages = {
     success_verify_text: 'link',
     success_verify_teacher_admin: 'You have confirmed your registration, and the admin has also confirmed your registration as a teacher. You can go to the site by following the',
     success_verify_teacher: 'You have confirmed your registration, but the admin has not yet confirmed your registration as a teacher, expect. You can go to the site by following the',
+    answers_info:'There will be questions for you here.',
+    questions_info: 'There will be your questions.',
   },
   [LOCALES.RUSSIAN]: {
     login: "Вход",
@@ -100,5 +102,7 @@ export const messages = {
     success_verify_text : 'ссылке',
     success_verify_teacher_admin: 'Вы подтвердили регистрацию, а также админ подтвердил вашу регистрацию в качестве учителя. Можете перейти на сайт по',
     success_verify_teacher: 'Вы подтвердили регистрацию, но админ еще не подтвердил вашу регистрацию в качестве учителя, ожидайте. Можете перейти на сайт по',
+    answers_info: 'Здесь будут вопросы к вам.',
+    questions_info: 'Здесь будут ваши вопросы.',
   }
 }

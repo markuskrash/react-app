@@ -11,6 +11,8 @@ import Ask from "../Ask/Ask";
 import {FormattedMessage} from "react-intl";
 import useRequest from "../../../hooks/useRequest";
 import APIIsTeacher from "../../../API/APIIsTeacher";
+import Search from "../Search/Search";
+import SearchAndAsk from "../SearchAndAsk/SearchAndAsk";
 
 
 const MainPage = () => {
@@ -46,18 +48,18 @@ const MainPage = () => {
         <>
             <RefreshToken/>
             {error !== "" ?
-                <>
                     <div className={classes.alert}>
                         <Alert variant='danger'><FormattedMessage id='alert'/></Alert>
                     </div>
-                </>
                 :
                 <>
                     <Header/>
                     {isLoading ?
                         <Loading isLoading={isLoading}/>
                         : <></>}
-                    <Ask/>
+                    <SearchAndAsk/>
+                    {/*<Ask/>*/}
+                    {/*<Search/>*/}
                     <Questions/>
                     <Answers/>
                 </>

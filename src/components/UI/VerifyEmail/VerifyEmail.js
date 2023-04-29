@@ -54,7 +54,7 @@ const VerifyEmail = () => {
     return (
         <div className={classes.alert}>
             {error !== "" ?
-                <Alert><FormattedMessage id='alert'/></Alert>
+                <Alert variant='danger'><FormattedMessage id='alert'/></Alert>
                 :
                 isVerified === 0 ?
                     sub === '1' && isStaff === true ?
@@ -77,7 +77,7 @@ const VerifyEmail = () => {
                                 <a href={'http://localhost:3000/'}><FormattedMessage id='success_verify_text'/></a>
                             </Alert>
                     :
-                    <Alert><FormattedMessage id='alert'/></Alert>
+                    <Alert variant='danger' ><FormattedMessage id='alert'/></Alert>
 
             }
         </div>

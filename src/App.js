@@ -56,6 +56,8 @@ const App = () => {
 
     const [isLoading, setIsLoading] = useState(false);
 
+    const [filter, setFilter] = useState('');
+
     const [locale, setLocale] = useState(LOCALES.RUSSIAN)
 
 
@@ -77,6 +79,8 @@ const App = () => {
                     setRenderAnswers,
                     error,
                     setError,
+                    filter,
+                    setFilter,
                 }}>
                     <Routes>
                         <Route exact path='/' element={

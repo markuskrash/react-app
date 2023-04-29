@@ -1,0 +1,20 @@
+.search_input{
+    width: 60%;
+    /*height: 37.6px;*/
+}
+
+.search_input:focus {
+    box-shadow: none;
+    border-color: black;
+}
+
+.search{
+    width: 60%;
+    display: flex;
+    align-items: center;
+    margin: 15px;
+}
+
+.search_label{
+    margin: 15px;
+}
