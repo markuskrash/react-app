@@ -48,9 +48,9 @@ const MainPage = () => {
         <>
             <RefreshToken/>
             {error !== "" ?
-                    <div className={classes.alert}>
-                        <Alert variant='danger'><FormattedMessage id='alert'/></Alert>
-                    </div>
+                <div className={classes.alert}>
+                    <Alert variant='danger'><FormattedMessage id='alert'/></Alert>
+                </div>
                 :
                 <>
                     <Header/>
@@ -62,11 +62,18 @@ const MainPage = () => {
                     {/*<Search/>*/}
                     <Questions/>
                     <Answers/>
+                    {isAuth ?
+                        <></>
+                        :
+                        <div className={classes.info}>
+                            <Alert variant='primary'><FormattedMessage id='main_page_info'/></Alert>
+                        </div>
+                    }
                 </>
             }
-         </>
-)
-;
+        </>
+    )
+        ;
 };
 
 export default MainPage;

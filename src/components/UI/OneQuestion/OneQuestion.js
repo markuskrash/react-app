@@ -128,7 +128,7 @@ const OneQuestion = ({text, status, reciever, id, is_anonymous, is_public, owner
                         <>
                             {recieverName} <FormattedMessage id='teacher_answer'/>
                             {countAnswers > 1 ?
-                                <h>(<FormattedMessage id='is_edited'/>)</h>
+                                <h> (<FormattedMessage id='is_edited'/>)</h>
                                 :
                                 ''}
                             :{' '}

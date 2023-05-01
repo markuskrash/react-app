@@ -44,6 +44,7 @@ const Search = () => {
                 <div className={classes.search}>
 
                     <Form.Control
+                        placeholder={messages[locale]['search']}
                         as='input'
                         className={classes.search_input}
                         maxLength="50"

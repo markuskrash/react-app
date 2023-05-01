@@ -8,3 +8,10 @@
   left: 0;
   right: 0;
 }
+
+.info{
+    display: flex;
+    height: 600px;
+    align-items: center;
+    justify-content: center;
+}
