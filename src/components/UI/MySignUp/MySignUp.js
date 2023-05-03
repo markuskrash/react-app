@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import 'bootstrap/dist/css/bootstrap.min.css'
-import classes from './MySignUp.module.css'
+import classes from './MySignUp.module.scss'
 import AuthContext from "../../../context";
 import useRequest from "../../../hooks/useRequest";
 import LogIn from "../../../API/LogIn";

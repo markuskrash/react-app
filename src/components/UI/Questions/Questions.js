@@ -9,6 +9,7 @@ import Button from "react-bootstrap/Button";
 import OneQuestion from "../OneQuestion/OneQuestion";
 import useRequest from "../../../hooks/useRequest";
 import GetQuestions from "../../../API/GetQuestions";
+import GetQuestionsFilter from "../../../API/GetQuestionsFilter";
 
 
 const Questions = () => {
@@ -38,6 +39,10 @@ const Questions = () => {
         await GetQuestions.get(access_token, setQuestions, setError)
     })
 
+    const [request_questions_filter] = useRequest(async (access_token) => {
+        await GetQuestionsFilter.get(access_token, setQuestionsFilter, filter, setError)
+    })
+
     useEffect(() => {
         if (isAuth) {
             request_questions()
@@ -46,12 +51,11 @@ const Questions = () => {
 
     useEffect(() => {
         setQuestionsFilter(questions)
-        setQuestionsFilter(questions.filter(question => question['text'].indexOf(filter) >= 0))
     }, [questions])
 
     useEffect(() => {
-        console.log(filter)
-        setQuestionsFilter(questions.filter(question => question['text'].indexOf(filter) >= 0))
+        if(isAuth)
+            request_questions_filter();
     }, [filter])
 
 

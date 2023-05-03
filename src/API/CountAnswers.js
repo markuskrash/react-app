@@ -7,7 +7,6 @@ class CountAnswers {
             const s = "Bearer " + access_token
             const count = await axios.get(`${host}/api/answers/count/${question}`, {headers: {"Authorization": s}})
             setCountAnswers(count.data)
-            console.log(count.data)
             return 0;
 
         } catch (event) {

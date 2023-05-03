@@ -11,11 +11,11 @@ import {FormattedMessage} from "react-intl";
 const Header = () => {
     return (
         <>
-            <Navbar variant="dark" expand="lg" bg="dark">
+            <Navbar variant="dark" expand="lg" bg="primary">
                 <Container fluid>
-                    <Navbar.Brand><FormattedMessage id='logo'/></Navbar.Brand>
-                    <Navbar.Toggle aria-controls="navbar-dark-example"/>
-                    <Navbar.Collapse id="navbar-dark-example" className="justify-content-end">
+                    <Navbar.Brand><h2 ><FormattedMessage id='logo'/></h2></Navbar.Brand>
+                    <Navbar.Toggle aria-controls="navbar-primary-example"/>
+                    <Navbar.Collapse id="navbar-primary-example" className="justify-content-end">
                         <Nav className={classes.nav}>
                             <MySignUp/>
                             <MyLogIn/>

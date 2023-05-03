@@ -6,17 +6,9 @@ class APIIsTeacher {
     static async get(access_token, setIsTeacher, setError) {
         try {
             const s = "Bearer " + access_token
-            const person_id = await axios.get(`${host}/api/token/get/`, {headers: {"Authorization": s}})
-            const persons = await axios.get(`${host}/api/persons/`, {headers: {"Authorization": s}})
-            for (let i = 0; i < persons.data.length; i++) {
-                if(persons.data[i]["id"] === person_id.data) {
-                    if (persons.data[i]["sub"] === "1") {
-                        setIsTeacher(true)
-                    }else if(persons.data[i]["sub"] === "0"){
-                        setIsTeacher(false)
-                    }
-                }
-            }
+            const is_teacher = await axios.get(`${host}/api/persons/is_teacher/`, {headers: {"Authorization": s}})
+            console.log(is_teacher.data)
+            setIsTeacher(is_teacher.data)
             return 0;
 
         } catch (event) {

@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useState} from "react";
-import {Alert} from "react-bootstrap";
-import classes from "./MainPage.module.css";
+import {Alert, Card} from "react-bootstrap";
+import classes from "./MainPage.module.scss";
 import Loading from "../Loading/Loading";
 import Questions from "../Questions/Questions";
 import Answers from "../Answers/Answers";
@@ -13,7 +13,7 @@ import useRequest from "../../../hooks/useRequest";
 import APIIsTeacher from "../../../API/APIIsTeacher";
 import Search from "../Search/Search";
 import SearchAndAsk from "../SearchAndAsk/SearchAndAsk";
-
+import sclasses from "../../../custom.scss"
 
 const MainPage = () => {
     const {
@@ -66,8 +66,18 @@ const MainPage = () => {
                         <></>
                         :
                         <div className={classes.info}>
-                            <Alert variant='primary'><FormattedMessage id='main_page_info'/></Alert>
+                            <Card className={classes.info_card} bg='secondary'>
+                                <Card.Body as='Alert'>
+                                    <Card.Title>
+                                        <FormattedMessage id='main_page_title_info'/>
+                                    </Card.Title>
+                                    <Alert><FormattedMessage id='main_page_info'/></Alert>
+                                </Card.Body>
+                            </Card>
                         </div>
+                        // <div className={classes.info}>
+                        //     <Alert variant='primary'><FormattedMessage id='main_page_info'/></Alert>
+                        // </div>
                     }
                 </>
             }

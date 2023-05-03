@@ -1,18 +1,14 @@
 import axios from "axios";
 import host from '../settings/host'
 
-class GetAnswers {
-    static async get(access_token, setAnswer, id, setError) {
+class GetQuestionsFilter {
+    static async get(access_token, setQuestions, filter, setError) {
         try {
             const s = "Bearer "+access_token
-            const answers = await axios.get(`${host}/api/answers/`, {headers: {"Authorization": s}})
-            for (let i = 0; i < answers.data.length; i++) {
-                if(answers.data[i]["question"] === id) {
-                    setAnswer(answers.data[i]["text"])
-                }
-            }
-
-
+            const questions = await axios.post(`${host}/api/questions/for_student/filter/`,{
+                'filter': filter,
+            }, {headers: {"Authorization": s}})
+            setQuestions( questions.data.reverse())
             // localStorage.setItem('email', email)
             // localStorage.setItem('error', '')
 
@@ -28,4 +24,4 @@ class GetAnswers {
     }
 }
 
-export default GetAnswers
+export default GetQuestionsFilter

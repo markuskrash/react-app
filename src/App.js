@@ -1,4 +1,5 @@
 import './App.css';
+// import './custom.scss'
 import Loading from "./components/UI/Loading/Loading";
 import React, {useEffect, useState} from "react";
 import AuthContext from './context/index'
@@ -24,6 +25,7 @@ import OneAnswer from "./components/UI/OneQuestionsForAnswer/OneQuestionsForAnsw
 import {Alert} from "react-bootstrap";
 import classes from "./App.css";
 import MainPage from "./components/UI/MainPage/MainPage";
+import './custom.scss'
 
 
 const App = () => {
@@ -56,7 +58,7 @@ const App = () => {
 
     const [isLoading, setIsLoading] = useState(false);
 
-    const [filter, setFilter] = useState('');
+    const [filter, setFilter] = useState('1');
 
     const [locale, setLocale] = useState(LOCALES.RUSSIAN)
 

@@ -1,12 +1,15 @@
 import axios from "axios";
 import host from '../settings/host'
 
-class GetQuestions {
-    static async get(access_token, setQuestions, setError) {
+class GetAnswer {
+    static async get(access_token, setAnswer, id, setError) {
         try {
             const s = "Bearer "+access_token
-            const questions = await axios.get(`${host}/api/questions/for_student/`, {headers: {"Authorization": s}})
-            setQuestions( questions.data.reverse())
+            const answer = await axios.get(`${host}/api/answers/${id}`, {headers: {"Authorization": s}})
+            setAnswer(answer.data)
+
+
+
             // localStorage.setItem('email', email)
             // localStorage.setItem('error', '')
 
@@ -22,4 +25,4 @@ class GetQuestions {
     }
 }
 
-export default GetQuestions
+export default GetAnswer

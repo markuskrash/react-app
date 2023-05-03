@@ -11,6 +11,8 @@ import useRequest from "../../../hooks/useRequest";
 import GetQuestions from "../../../API/GetQuestions";
 import GetQuestionsForAnswer from "../../../API/GetQuestionsForAnswer";
 import OneQuestionsForAnswer from "../OneQuestionsForAnswer/OneQuestionsForAnswer";
+import GetQuestionsFilter from "../../../API/GetQuestionsFilter";
+import GetQuestionsForAnswerFilter from "../../../API/GetQuestionsForAnswerFilter";
 
 
 const Answers = () => {
@@ -40,6 +42,10 @@ const Answers = () => {
         await GetQuestionsForAnswer.get(access_token, setQuestions, setError)
     })
 
+    const [request_questions_filter] = useRequest(async (access_token) => {
+        await GetQuestionsForAnswerFilter.get(access_token, setQuestionsFilter, filter, setError)
+    })
+
     useEffect(() => {
         if (isAuth) {
             request_questions()
@@ -48,12 +54,11 @@ const Answers = () => {
 
     useEffect(() => {
         setQuestionsFilter(questions)
-        setQuestionsFilter(questions.filter(question => question['text'].indexOf(filter) >= 0))
     }, [questions])
 
     useEffect(() => {
-        console.log(filter)
-        setQuestionsFilter(questions.filter(question => question['text'].indexOf(filter) >= 0))
+        if(isAuth)
+            request_questions_filter();
     }, [filter])
 
 

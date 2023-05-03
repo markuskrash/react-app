@@ -16,6 +16,7 @@ import Teachers from "../../../API/Teachers";
 import GetNameWithoutId from "../../../API/GetNameWithoutId";
 
 
+
 const MyLogIn = () => {
     const [show, setShow] = useState(false);
 
@@ -106,7 +107,7 @@ const MyLogIn = () => {
                     <NavDropdown
                         id="nav-dropdown-dark-example"
                         title={personEmail}
-                        menuVariant="dark"
+                        menuVariant="primary"
                         variant="red"
                         align={{lg: 'end'}}
                         className={classes.dropdown}

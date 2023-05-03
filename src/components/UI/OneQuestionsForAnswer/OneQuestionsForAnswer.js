@@ -8,7 +8,7 @@ import {FormattedMessage} from "react-intl";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import useRequest from "../../../hooks/useRequest";
-import GetAnswers from "../../../API/GetAnswers";
+import GetAnswer from "../../../API/GetAnswer";
 import PostAnswer from "../../../API/PostAnswer";
 import GetPersonId from "../../../API/GetNameWithoutId";
 import Status from "../../../API/Status";
@@ -98,7 +98,7 @@ const OneQuestionsForAnswer = ({text, status, owner, id, is_anonymous, is_public
 
 
     const [request_last_answer] = useRequest(async (access_token) => {
-        await GetAnswers.get(access_token, setTextAnswer, id, setError)
+        await GetAnswer.get(access_token, setTextAnswer, id, setError)
     })
 
     return (

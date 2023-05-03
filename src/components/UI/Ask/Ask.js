@@ -13,7 +13,6 @@ import classes from './Ask.module.css'
 import Teachers from "../../../API/Teachers";
 import APIAsk from "../../../API/Ask"
 
-
 const Ask = () => {
     const {
         isAuth,
@@ -97,7 +96,7 @@ const Ask = () => {
             {isAuth && isTeacher === false ?
                 <>
                     <div className={classes.ask}>
-                        <Button className={classes.ask_btn} variant='dark' onClick={handleShow}>
+                        <Button className={classes.ask_btn} variant='info' onClick={handleShow}>
                             <FormattedMessage id='ask'/>
                         </Button>
                     </div>

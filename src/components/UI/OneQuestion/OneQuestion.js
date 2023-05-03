@@ -8,11 +8,12 @@ import {FormattedMessage} from "react-intl";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import useRequest from "../../../hooks/useRequest";
-import GetAnswers from "../../../API/GetAnswers";
+import GetAnswer from "../../../API/GetAnswer";
 import GetPersonId from "../../../API/GetNameWithoutId";
 import GetName from "../../../API/GetName";
 import CountAnswers from "../../../API/CountAnswers";
 import GetId from "../../../API/GetId";
+
 
 
 const OneQuestion = ({text, status, reciever, id, is_anonymous, is_public, owner}) => {
@@ -47,7 +48,7 @@ const OneQuestion = ({text, status, reciever, id, is_anonymous, is_public, owner
     const [answer, setAnswer] = useState("");
 
     const [request_answers] = useRequest(async (access_token) => {
-        await GetAnswers.get(access_token, setAnswer, id, setError)
+        await GetAnswer.get(access_token, setAnswer, id, setError)
     })
 
     const [recieverName, setRecieverName] = useState('');
