@@ -57,10 +57,13 @@ const App = () => {
 
 
     const [isLoading, setIsLoading] = useState(false);
+    const [isLazyLoading, setIsLazyLoading] = useState(false);
 
-    const [filter, setFilter] = useState('1');
+    const [filter, setFilter] = useState("");
 
     const [locale, setLocale] = useState(LOCALES.RUSSIAN)
+
+    const [lazyQuestion, setLazyQuestion] = useState(-1)
 
 
     return (
@@ -83,6 +86,10 @@ const App = () => {
                     setError,
                     filter,
                     setFilter,
+                    isLazyLoading,
+                    setIsLazyLoading,
+                    lazyQuestion,
+                    setLazyQuestion,
                 }}>
                     <Routes>
                         <Route exact path='/' element={

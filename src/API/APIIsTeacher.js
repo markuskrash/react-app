@@ -7,7 +7,6 @@ class APIIsTeacher {
         try {
             const s = "Bearer " + access_token
             const is_teacher = await axios.get(`${host}/api/persons/is_teacher/`, {headers: {"Authorization": s}})
-            console.log(is_teacher.data)
             setIsTeacher(is_teacher.data)
             return 0;
 

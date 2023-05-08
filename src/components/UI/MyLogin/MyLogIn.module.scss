@@ -1,0 +1,48 @@
+.alertText{
+    text-align: center;
+}
+
+.myButton{
+    margin: 15px 10px;
+}
+
+.inputInfo:focus{
+    box-shadow: none !important;
+    border-color: black !important;
+}
+
+.accauntName{
+    color: white;
+    margin: 0;
+    background: none;
+    border: none;
+}
+
+.accauntName:hover{
+    color: rgba(255,255,255, 0.8);
+}
+
+
+.dropdown_toggle_out{
+    background-color: #cfe2ff;
+}
+
+.dropdown_toggle_out:hover{
+    background-color: #bbcee7 !important;
+}
+
+.dropdown_toggle_out:focus{
+    background-color: #bbcee7 !important;
+}
+
+.dropdown_toggle_out:active{
+    background-color: #6b0606 !important;
+}
+
+
+
+
+.dropdown div{
+    background-color: #cfe2ff !important;
+}
+

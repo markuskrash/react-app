@@ -2,13 +2,15 @@ import axios from "axios";
 import host from '../settings/host'
 
 class GetQuestionsFilter {
-    static async get(access_token, setQuestions, filter, setError) {
+    static async get(access_token, setQuestions, renderQuestion, setRenderQuestion, filter, page, setTotalCount, setError) {
         try {
             const s = "Bearer "+access_token
-            const questions = await axios.post(`${host}/api/questions/for_student/filter/`,{
+            const questions = await axios.post(`${host}/api/questions/for_student/filter/?page=${page}`,{
                 'filter': filter,
             }, {headers: {"Authorization": s}})
-            setQuestions( questions.data.reverse())
+            setQuestions( questions.data['results'].reverse())
+            setRenderQuestion(renderQuestion + 1)
+            setTotalCount(questions.data['count'])
             // localStorage.setItem('email', email)
             // localStorage.setItem('error', '')
 

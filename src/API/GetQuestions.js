@@ -2,11 +2,12 @@ import axios from "axios";
 import host from '../settings/host'
 
 class GetQuestions {
-    static async get(access_token, setQuestions, setError) {
+    static async get(access_token, setQuestions, page, setTotalCount, setError) {
         try {
             const s = "Bearer "+access_token
-            const questions = await axios.get(`${host}/api/questions/for_student/`, {headers: {"Authorization": s}})
-            setQuestions( questions.data.reverse())
+            const questions = await axios.get(`${host}/api/questions/for_student/?page=${page}`, {headers: {"Authorization": s}})
+            setQuestions( questions.data['results'].reverse())
+            setTotalCount(questions.data['count'])
             // localStorage.setItem('email', email)
             // localStorage.setItem('error', '')
 

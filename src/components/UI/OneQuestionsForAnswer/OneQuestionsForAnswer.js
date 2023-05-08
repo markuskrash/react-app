@@ -35,9 +35,14 @@ const OneQuestionsForAnswer = ({text, status, owner, id, is_anonymous, is_public
 
     const [show, setShow] = useState(false);
 
-    const handleClose = () => setShow(false);
+    const handleClose = () => {
+        setShow(false);
+        setTextAnswer(lastTextAnswer)
+        if(status==='0')setLastTextAnswer('')
+    }
     const handleShow = () => {
         setShow(true);
+        if(status==='0')setLastTextAnswer('')
     }
 
     useEffect(() => {
@@ -51,9 +56,15 @@ const OneQuestionsForAnswer = ({text, status, owner, id, is_anonymous, is_public
         if (status === '1') {
             request_last_answer()
         }
-    }, [status, renderQuestions])
+    }, [status, renderAnswers])
 
     const [textAnswer, setTextAnswer] = useState("");
+
+    const [lastTextAnswer, setLastTextAnswer] = useState("");
+
+    useEffect(() => {
+        setTextAnswer(lastTextAnswer)
+    }, [lastTextAnswer])
 
     const [request_make_answer] = useRequest(async (access_token) => {
         await PostAnswer.post(access_token, textAnswer, owner, id, setIsTryToAnswer, handleClose, setTextAnswer, renderAnswers, setRenderAnswers, status)
@@ -98,7 +109,7 @@ const OneQuestionsForAnswer = ({text, status, owner, id, is_anonymous, is_public
 
 
     const [request_last_answer] = useRequest(async (access_token) => {
-        await GetAnswer.get(access_token, setTextAnswer, id, setError)
+        await GetAnswer.get(access_token, setLastTextAnswer, id, setError)
     })
 
     return (
@@ -127,7 +138,7 @@ const OneQuestionsForAnswer = ({text, status, owner, id, is_anonymous, is_public
                     }
                     {status === '1' ?
                         <p className={classes.answer_text}>
-                            <FormattedMessage id='your_answer'/>{' '}
+                            <FormattedMessage id='your_answer'/>:{' '}
                             <br/>
                             &nbsp;&nbsp;&nbsp;&nbsp;{textAnswer}
                         </p>
@@ -136,7 +147,7 @@ const OneQuestionsForAnswer = ({text, status, owner, id, is_anonymous, is_public
                     }
                 </div>
                 <div className={classes.make_answer}>
-                    <Button className={classes.make_answer_btn} variant='light' onClick={handleShow}>
+                    <Button className={classes.make_answer_btn} variant='info' onClick={handleShow}>
                         {status === '1' ?
                             <FormattedMessage id='change_answer'/>
                             :
@@ -205,7 +216,7 @@ const OneQuestionsForAnswer = ({text, status, owner, id, is_anonymous, is_public
                         </Alert>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button variant="dark" type='submit'>
+                        <Button variant="info" type='submit'>
                             {status === '1' ?
                                 <FormattedMessage id='save_changes'/>
                                 :

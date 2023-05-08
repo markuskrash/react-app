@@ -3,18 +3,18 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import 'bootstrap/dist/css/bootstrap.min.css'
-import classes from './MyLogIn.module.css'
+import classes from './MyLogIn.module.scss'
 import AuthContext from "../../../context";
 import useRequest from "../../../hooks/useRequest";
 import LogIn from "../../../API/LogIn";
-import {Alert, FormText, Nav, NavDropdown} from "react-bootstrap";
+import {Alert, Dropdown, DropdownButton, FormText, Nav, NavDropdown} from "react-bootstrap";
 import DropdownMenu from "react-bootstrap/DropdownMenu";
 import DropdownToggle from "react-bootstrap/DropdownToggle";
 import {FormattedMessage} from "react-intl";
 import {messages} from "../../../languages/messages";
 import Teachers from "../../../API/Teachers";
 import GetNameWithoutId from "../../../API/GetNameWithoutId";
-
+import DropdownItem from "react-bootstrap/DropdownItem";
 
 
 const MyLogIn = () => {
@@ -107,18 +107,12 @@ const MyLogIn = () => {
                     <NavDropdown
                         id="nav-dropdown-dark-example"
                         title={personEmail}
-                        menuVariant="primary"
-                        variant="red"
                         align={{lg: 'end'}}
                         className={classes.dropdown}
                     >
-                        {/*<NavDropdown.Item as="button" className={classes.dropdown_toggle}>*/}
-                        {/*    <FormattedMessage id='my_accaunt'/>*/}
-                        {/*</NavDropdown.Item>*/}
-                        {/*<NavDropdown.Divider/>*/}
-                        <NavDropdown.Item as="button" onClick={logout} className={classes.dropdown_toggle_out}>
-                            <FormattedMessage id='logout'/>
-                        </NavDropdown.Item>
+                            <Dropdown.Item as="button" onClick={logout} className={classes.dropdown_toggle_out}>
+                                <FormattedMessage id='logout'/>
+                            </Dropdown.Item>
                     </NavDropdown>
                 }
             </div>
@@ -166,7 +160,7 @@ const MyLogIn = () => {
                         </Alert>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button variant="dark" type='submit'>
+                        <Button variant="info" type='submit'>
                             <FormattedMessage id='login'/>
                         </Button>
                     </Modal.Footer>

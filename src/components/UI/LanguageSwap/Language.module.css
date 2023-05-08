@@ -1,3 +1,26 @@
 .dropdown_toggle:active{
     background: rgba(255,255,255,0.25);
 }
+
+.dropdown_toggle_out{
+    background-color: #cfe2ff;
+}
+
+.dropdown_toggle_out:hover{
+    background-color: #bbcee7 !important;
+}
+
+.dropdown_toggle_out:focus{
+    background-color: #bbcee7 !important;
+}
+
+.dropdown_toggle_out:active{
+    background-color: #062b6b !important;
+}
+
+
+
+
+.dropdown div{
+    background-color: #cfe2ff !important;
+}

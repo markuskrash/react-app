@@ -1,0 +1,83 @@
+.answers_info{
+}
+
+.answers{
+    display: flex;
+    height: 500px;
+    align-items: center;
+    justify-content: center;
+}
+
+.pagination_container {
+  display: flex;
+  justify-content: center;
+  margin: 30px;
+
+
+  .pagination_item {
+    //padding: 0 15px;
+    height: 32px;
+    text-align: center;
+    margin: auto 4px;
+    //color: rgba(0, 0, 0, 0.87);
+    display: flex;
+    box-sizing: border-box;
+    align-items: center;
+    //letter-spacing: 0.01071em;
+    justify-content: center;
+    border-radius: 0.375rem;
+    line-height: 1.43;
+    font-size: 14px;
+    min-width: 45px;
+
+    &.dots {
+      border-color:  #084298 !important;
+      color:  #084298 !important;
+      opacity: 100% !important;
+    }
+    //&:hover {
+    //  background-color: rgba(0, 0, 0, 0.04);
+    //  cursor: pointer;
+    //}
+
+    //&.selected {
+    //  background-color: rgba(0, 0, 0, 0.08);
+    //}
+
+    .arrow {
+      &::before {
+        position: relative;
+        /* top: 3pt; Uncomment this to lower the icons as requested in comments*/
+        content: '';
+        /* By using an em scale, the arrows will size with the font */
+        display: inline-block;
+        width: 0.4em;
+        height: 0.4em;
+        //border-right: 0.12em solid rgba(0, 0, 0, 0.87);
+        //border-top: 0.12em solid rgba(0, 0, 0, 0.87);
+      }
+
+      &.left {
+        //transform: rotate(-135deg) translate(-50%);
+      }
+
+      &.right {
+        //transform: rotate(45deg);
+      }
+    }
+
+    &.disabled {
+      pointer-events: none;
+
+      .arrow::before {
+        border-right: 0.12em solid rgba(0, 0, 0, 0.43);
+        border-top: 0.12em solid rgba(0, 0, 0, 0.43);
+      }
+
+      &:hover {
+        background-color: transparent;
+        cursor: default;
+      }
+    }
+  }
+}

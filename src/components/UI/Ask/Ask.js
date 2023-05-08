@@ -177,7 +177,7 @@ const Ask = () => {
                                 </Alert>
                             </Modal.Body>
                             <Modal.Footer>
-                                <Button variant="dark" type='submit'>
+                                <Button variant="info" type='submit'>
                                     <FormattedMessage id='ask'/>
                                 </Button>
                             </Modal.Footer>

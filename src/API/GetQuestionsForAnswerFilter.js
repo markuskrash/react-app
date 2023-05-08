@@ -2,13 +2,14 @@ import axios from "axios";
 import host from '../settings/host'
 
 class GetQuestionsForAnswerFilter {
-    static async get(access_token, setQuestions, filter, setError) {
+    static async get(access_token, setQuestions, filter, page, setTotalCount, setError) {
         try {
             const s = "Bearer "+access_token
-            const questions = await axios.post(`${host}/api/questions/for_teacher/filter/`,{
+            const questions = await axios.post(`${host}/api/questions/for_teacher/filter/?page=${page}`,{
                 'filter': filter,
             }, {headers: {"Authorization": s}})
-            setQuestions(questions.data.reverse())
+            setQuestions(questions.data['results'].reverse())
+            setTotalCount(questions.data['count'])
             return 0;
 
         } catch (event) {

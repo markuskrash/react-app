@@ -71,7 +71,7 @@ const MainPage = () => {
                                     <Card.Title>
                                         <FormattedMessage id='main_page_title_info'/>
                                     </Card.Title>
-                                    <Alert><FormattedMessage id='main_page_info'/></Alert>
+                                    <FormattedMessage id='main_page_info'/>
                                 </Card.Body>
                             </Card>
                         </div>

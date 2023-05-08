@@ -15,8 +15,6 @@ const LanguageSwap = () => {
         <Nav.Item>
             <NavDropdown
                 id="nav-dropdown-dark-example"
-                menuVariant="dark"
-                variant="red"
                 title={
                     locale === LOCALES.ENGLISH
                         ?
@@ -27,11 +25,11 @@ const LanguageSwap = () => {
                 className={classes.dropdown}
                 align={{lg: 'end'}}
             >
-                <NavDropdown.Item as="button" onClick={()=>{setLocale(LOCALES.RUSSIAN)}} className={classes.dropdown_toggle}>
+                <NavDropdown.Item as="button" onClick={()=>{setLocale(LOCALES.RUSSIAN)}} className={classes.dropdown_toggle_out}>
                     Рус
                 </NavDropdown.Item>
                 <NavDropdown.Divider/>
-                <NavDropdown.Item as="button" onClick={()=>{setLocale(LOCALES.ENGLISH)}} className={classes.dropdown_toggle}>
+                <NavDropdown.Item as="button" onClick={()=>{setLocale(LOCALES.ENGLISH)}} className={classes.dropdown_toggle_out}>
                     Eng
                 </NavDropdown.Item>
             </NavDropdown>

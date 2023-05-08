@@ -32,8 +32,9 @@
 .question {
     border: solid;
     border-radius: 15px;
-    background-color: #212529;
-    border-width: 2px;
+    background-color: #cfe2ff;
+    border-width: 1px;
+    border-color: #b6d4fe;
     /*min-height: 300px;*/
     margin: 15px;
     /*display: flex;*/
@@ -45,7 +46,7 @@
     min-height: 50px;
     width: 100%;
     margin: 15px;
-    color: white;
+    /*color: white;*/
     /*position: absolute;*/
 }
 
@@ -54,5 +55,5 @@
     min-height: 50px;
     margin: 15px;
     width: 100%;
-    color: white;
+    /*color: white;*/
 }

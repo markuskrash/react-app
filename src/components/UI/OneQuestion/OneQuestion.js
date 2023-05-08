@@ -13,10 +13,23 @@ import GetPersonId from "../../../API/GetNameWithoutId";
 import GetName from "../../../API/GetName";
 import CountAnswers from "../../../API/CountAnswers";
 import GetId from "../../../API/GetId";
+import {usePagination} from "../../../hooks/usePagination";
 
 
-
-const OneQuestion = ({text, status, reciever, id, is_anonymous, is_public, owner}) => {
+const OneQuestion = ({
+                         text,
+                         status,
+                         reciever,
+                         id,
+                         is_anonymous,
+                         is_public,
+                         owner,
+                         renderQuestion,
+                         currentPage,
+                         setCurrentPage,
+                         siblingCount = 1,
+                         totalCount,
+                     }) => {
     const {
         isAuth,
         setIsAuth,
@@ -35,8 +48,12 @@ const OneQuestion = ({text, status, reciever, id, is_anonymous, is_public, owner
     } = useContext(AuthContext)
 
 
+
+
+
     useEffect(() => {
         if (status === "1") {
+
             request_answers();
             request_count()
             request_id()
@@ -44,6 +61,17 @@ const OneQuestion = ({text, status, reciever, id, is_anonymous, is_public, owner
 
         }
     }, [])
+
+    useEffect(() => {
+        if (status === "1") {
+
+            request_answers();
+            request_count()
+            request_id()
+            request_reciever()
+
+        }
+    }, [renderQuestion])
 
     const [answer, setAnswer] = useState("");
 
@@ -75,70 +103,69 @@ const OneQuestion = ({text, status, reciever, id, is_anonymous, is_public, owner
         await GetId.get(access_token, setPersonId, setError)
     })
 
-    useEffect(()=>{
+    useEffect(() => {
         if (isAuth)
             request_id()
+
     }, [renderQuestions])
 
-    useEffect(()=>{
+    useEffect(() => {
         if (isAuth)
             request_owner()
     }, [isAuth])
 
     return (
-        <div>
-            <div className={classes.question}>
-                {is_public ?
-                    personId === owner ?
-                        is_anonymous ?
-                            <p className={classes.question_text}>
-                                <FormattedMessage id='your_question_public_anonymous'/>:{' '}
-                                <br/>
-                                &nbsp;&nbsp;&nbsp;&nbsp;{text}
-                            </p>
-                            :
-                            <p className={classes.question_text}>
-                                <FormattedMessage id='your_question_public'/>:{' '}
-                                <br/>
-                                &nbsp;&nbsp;&nbsp;&nbsp;{text}
-                            </p>
-                        :
-                        is_anonymous ?
-                            <p className={classes.question_text}>
-                                <FormattedMessage id='another_student_question_public_anonymous'/>:{' '}
-                                <br/>
-                                &nbsp;&nbsp;&nbsp;&nbsp;{text}
-                            </p>
-                            :
-                            <p className={classes.question_text}>
-                                {ownerName} <FormattedMessage id='student_question_public'/>:{' '}
-                                <br/>
-                                &nbsp;&nbsp;&nbsp;&nbsp;{text}
-                            </p>
-                    :
-                    <p className={classes.question_text}>
-                        <FormattedMessage id='your_question'/>:{' '}
-                        <br/>
-                        &nbsp;&nbsp;&nbsp;&nbsp;{text}
-                    </p>
-                }
-                <div className={classes.answer_text}>
-                    {status === "0" ?
-                        <FormattedMessage id='wait_answer'/>
-                        :
-                        <>
-                            {recieverName} <FormattedMessage id='teacher_answer'/>
-                            {countAnswers > 1 ?
-                                <h> (<FormattedMessage id='is_edited'/>)</h>
-                                :
-                                ''}
-                            :{' '}
-                            {/*<br/>*/}
+        <div className={classes.question}>
+            {is_public ?
+                personId === owner ?
+                    is_anonymous ?
+                        <p className={classes.question_text}>
+                            <FormattedMessage id='your_question_public_anonymous'/>:{' '}
                             <br/>
-                            &nbsp;&nbsp;&nbsp;&nbsp;{answer}
-                        </>
-                    }
-                </div>
+                            &nbsp;&nbsp;&nbsp;&nbsp;{text}
+                        </p>
+                        :
+                        <p className={classes.question_text}>
+                            <FormattedMessage id='your_question_public'/>:{' '}
+                            <br/>
+                            &nbsp;&nbsp;&nbsp;&nbsp;{text}
+                        </p>
+                    :
+                    is_anonymous ?
+                        <p className={classes.question_text}>
+                            <FormattedMessage id='another_student_question_public_anonymous'/>:{' '}
+                            <br/>
+                            &nbsp;&nbsp;&nbsp;&nbsp;{text}
+                        </p>
+                        :
+                        <p className={classes.question_text}>
+                            {ownerName} <FormattedMessage id='student_question_public'/>:{' '}
+                            <br/>
+                            &nbsp;&nbsp;&nbsp;&nbsp;{text}
+                        </p>
+                :
+                <p className={classes.question_text}>
+                    <FormattedMessage id='your_question'/>:{' '}
+                    <br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;{text}
+                </p>
+            }
+            <div className={classes.answer_text}>
+                {status === "0" ?
+                    <FormattedMessage id='wait_answer'/>
+                    :
+                    <>
+                        {recieverName} <FormattedMessage id='teacher_answer'/>
+                        {countAnswers > 1 ?
+                            <h> (<FormattedMessage id='is_edited'/>)</h>
+                            :
+                            ''}
+                        :{' '}
+                        {/*<br/>*/}
+                        <br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;{answer}
+                    </>
+                }
             </div>
             {/*<Modal show={show} onHide={handleClose} animation={false}>*/}
             {/*    <Modal.Header closeButton>*/}
