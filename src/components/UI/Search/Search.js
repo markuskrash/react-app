@@ -50,17 +50,19 @@ const Search = () => {
             {isAuth ?
                 <div className={classes.search}>
                     {/*<Form noValidate onSubmit={sumbit}>*/}
-                    <Form.Control
-                        placeholder={messages[locale]['search']}
-                        as='input'
-                        className={classes.search_input}
-                        maxLength="50"
-                        onChange={(e) => {
-                            setTempFilter(e.target.value)
-                        }}
-                    />
-                    <Button className={classes.search_btn} variant='info' onClick={sumbit}><FormattedMessage
-                        id='search'/></Button>
+                        <Form.Control
+                            placeholder={messages[locale]['search']}
+                            as='input'
+                            className={classes.search_input}
+                            maxLength="50"
+                            onChange={(e) => {
+                                setTempFilter(e.target.value)
+                            }}
+                        />
+                        <Button className={[classes.search_btn, tempFilter.length ? 'btn_white' : '']}
+                                variant={tempFilter.length ? 'info' : 'warning'} onClick={sumbit}><FormattedMessage
+                            id='to_search'/></Button>
+
                     {/*</Form>*/}
                     {/*<Form.Label className={classes.search_label}>*/}
                     {/*    <FormattedMessage id='max_length'/>*/}

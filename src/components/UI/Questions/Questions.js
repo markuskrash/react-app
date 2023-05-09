@@ -45,34 +45,38 @@ const Questions = () => {
     })
 
     const [request_questions_filter] = useRequest(async (access_token) => {
-        await GetQuestionsFilter.get(access_token, setQuestionsFilter, renderQuestion, setRenderQuestion, filter, currentPage, setTotalCount, setError)
+        await GetQuestionsFilter.get(access_token, setQuestionsFilter, renderQuestion, setRenderQuestion, filter, currentPage, null, setTotalCount, setError)
+    })
+
+    const [request_questions_filter2] = useRequest(async (access_token) => {
+        await GetQuestionsFilter.get(access_token, setQuestionsFilter, renderQuestion, setRenderQuestion, filter, currentPage, setCurrentPage, setTotalCount, setError)
     })
 
 
     useEffect(() => {
         if (isAuth && isTeacher === false) {
             request_questions()
-        }else if(!isAuth){
+        } else if (!isAuth) {
             setCurrentPage(1)
+            setFilter('')
         }
     }, [renderQuestions, isAuth, isTeacher])
 
     useEffect(() => {
-        setQuestionsFilter(questions)
-        if (filter)
+        if (isAuth) {
             request_questions_filter();
+        }
     }, [questions])
 
     useEffect(() => {
-        if (isAuth && isTeacher === false) {
-            request_questions_filter();
-            setCurrentPage(1)
+        if (isAuth) {
+            request_questions_filter2();
         }
     }, [filter])
 
 
     const [currentPage, setCurrentPage] = useState(1);
-    const [pageSize, setPageSize] = useState(1);
+    const [pageSize, setPageSize] = useState(2);
     const [totalCount, setTotalCount] = useState(0);
 
     const paginationRange = usePagination({
@@ -92,18 +96,20 @@ const Questions = () => {
     let lastPage = paginationRange[paginationRange.length - 1];
 
     useEffect(() => {
-        if (isAuth && isTeacher === false) {
-            request_questions()
-            setRenderQuestion(renderQuestion + 1)
+        if (isAuth) {
+            request_questions_filter()
+
         }
     }, [currentPage])
 
-    // if (currentPage === 0 || paginationRange.length < 1) {
-    //     return null;
-    // }
+    useEffect(() => {
+        if (isAuth) {
+            setRenderQuestion(renderQuestion + 1)
+        }
+    }, [questionsFilter])
 
     return (
-        <div>
+        <div className={classes.questions}>
             {isAuth === true && isTeacher === false ?
                 questions.length > 0 ?
                     questionsFilter.map(question => (

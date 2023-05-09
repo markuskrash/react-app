@@ -15,7 +15,7 @@ import Status from "../../../API/Status";
 import GetName from "../../../API/GetName";
 
 
-const OneQuestionsForAnswer = ({text, status, owner, id, is_anonymous, is_public}) => {
+const OneQuestionsForAnswer = ({text, status, owner, id, is_anonymous, is_public, renderAnswer}) => {
     const {
         isAuth,
         setIsAuth,
@@ -45,6 +45,9 @@ const OneQuestionsForAnswer = ({text, status, owner, id, is_anonymous, is_public
         if(status==='0')setLastTextAnswer('')
     }
 
+
+
+
     useEffect(() => {
         request_name()
         if (status === '1') {
@@ -56,7 +59,7 @@ const OneQuestionsForAnswer = ({text, status, owner, id, is_anonymous, is_public
         if (status === '1') {
             request_last_answer()
         }
-    }, [status, renderAnswers])
+    }, [status, renderAnswers, renderAnswer])
 
     const [textAnswer, setTextAnswer] = useState("");
 
@@ -147,7 +150,7 @@ const OneQuestionsForAnswer = ({text, status, owner, id, is_anonymous, is_public
                     }
                 </div>
                 <div className={classes.make_answer}>
-                    <Button className={classes.make_answer_btn} variant='info' onClick={handleShow}>
+                    <Button className={[classes.make_answer_btn, 'btn_white']} variant='info' onClick={handleShow}>
                         {status === '1' ?
                             <FormattedMessage id='change_answer'/>
                             :
@@ -216,7 +219,7 @@ const OneQuestionsForAnswer = ({text, status, owner, id, is_anonymous, is_public
                         </Alert>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button variant="info" type='submit'>
+                        <Button className='btn_white' variant="info" type='submit'>
                             {status === '1' ?
                                 <FormattedMessage id='save_changes'/>
                                 :

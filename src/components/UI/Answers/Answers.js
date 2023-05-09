@@ -44,30 +44,38 @@ const Answers = () => {
     })
 
     const [request_questions_filter] = useRequest(async (access_token) => {
-        await GetQuestionsForAnswerFilter.get(access_token, setQuestionsFilter, filter, currentPage, setTotalCount, setError)
+        await GetQuestionsForAnswerFilter.get(access_token, setQuestionsFilter, filter, currentPage,null, setTotalCount, setError)
     })
+
+     const [request_questions_filter2] = useRequest(async (access_token) => {
+        await GetQuestionsForAnswerFilter.get(access_token, setQuestionsFilter, filter, currentPage,setCurrentPage, setTotalCount, setError)
+    })
+
+    const [renderAnswer, setRenderAnswer] = useState(0);
 
     useEffect(() => {
         if (isAuth && isTeacher) {
             request_questions()
         }else if(!isAuth){
             setCurrentPage(1)
+            setFilter('')
         }
-    }, [isAuth, renderAnswers, isTeacher])
+    }, [isAuth , renderAnswers, isTeacher])
 
     useEffect(() => {
-        setQuestionsFilter(questions)
+        if (isAuth) {
+            request_questions_filter();
+        }
     }, [questions])
 
     useEffect(() => {
-        if(isAuth && isTeacher) {
-            request_questions_filter();
-            setCurrentPage(1)
+        if (isAuth) {
+            request_questions_filter2();
         }
     }, [filter])
 
     const [currentPage, setCurrentPage] = useState(1);
-    const [pageSize, setPageSize] = useState(1);
+    const [pageSize, setPageSize] = useState(2);
     const [totalCount, setTotalCount] = useState(0);
 
     const paginationRange = usePagination({
@@ -86,12 +94,18 @@ const Answers = () => {
 
     let lastPage = paginationRange[paginationRange.length - 1];
 
+
     useEffect(() => {
-        if (isAuth && isTeacher) {
-            request_questions()
-            setRenderAnswers(renderAnswers + 1)
+        if (isAuth) {
+            request_questions_filter()
         }
     }, [currentPage])
+
+    useEffect(() => {
+        if (isAuth) {
+            setRenderAnswer(renderAnswer + 1)
+        }
+    }, [questionsFilter])
 
 
     return (
@@ -102,7 +116,9 @@ const Answers = () => {
                         <OneQuestionsForAnswer text={question['text']} status={question['status']}
                                                owner={question['owner']}
                                                id={question['id']} is_anonymous={question['anonymous']}
-                                               is_public={question['public']}/>
+                                               is_public={question['public']}
+                                               renderAnswer={renderAnswer}
+                        />
                     ))
                     :
                     <div className={classes.answers}>

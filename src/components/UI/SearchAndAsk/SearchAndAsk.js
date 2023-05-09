@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from "react";
-import {NavDropdown, Nav, Alert} from "react-bootstrap";
+import {NavDropdown, Nav, Alert, Card} from "react-bootstrap";
 import AuthContext from "../../../context";
 import {messages} from "../../../languages/messages";
 import {LOCALES} from "../../../languages/locales";
@@ -14,6 +14,7 @@ import Teachers from "../../../API/Teachers";
 import APIAsk from "../../../API/Ask"
 import Search from "../Search/Search";
 import Ask from "../Ask/Ask";
+import GetNameWithoutId from "../../../API/GetNameWithoutId";
 
 
 const SearchAndAsk = () => {
@@ -34,73 +35,47 @@ const SearchAndAsk = () => {
         setError
     } = useContext(AuthContext)
 
-    const [show, setShow] = useState(false);
 
-    const handleClose = () => {
-        setQuestion("")
-        setShow(false);
-        setIsPublic(false)
-    }
-    const handleShow = () => {
-        request_teachers()
-        setShow(true);
-    }
+    const [personEmail, setPersonEmail] = useState('');
+    const [persons, setPersons] = useState('');
 
-    const [question, setQuestion] = useState("");
-    const [reciever, setReciever] = useState();
-    const [isPublic, setIsPublic] = useState(false);
-    const [anonymous, setAnonymous] = useState(false);
-    const [isTryToAsk, setIsTryToAsk] = useState(false);
-
-    const [teachers, setTeachers] = useState(
-        [
-            {
-                'id': 1,
-                'last_name': '1',
-                'first_name': '2',
-                'middle_name': '3',
-            }
-        ]
-    );
-
-    const [request_teachers] = useRequest(async (access_token) => {
-        await Teachers.get(access_token, setTeachers, setReciever, setError)
+    const [request_email] = useRequest(async (access_token) => {
+        await GetNameWithoutId.get(access_token, setPersonEmail, setError)
     })
 
 
-    const [request] = useRequest(async (access_token) => {
-        await APIAsk.post(access_token, setIsTryToAsk, question, anonymous, reciever, handleClose, renderQuestions,
-            setRenderQuestions, setAnonymous, isPublic, setIsPublic)
-    })
-
-    const ask = (event) => {
-        request()
-    }
-
-    const sumbit = (event) => {
-        const form = event.currentTarget
-        if (form.checkValidity() === false) {
-            event.preventDefault()
-            event.stopPropagation()
-        } else {
-            event.preventDefault()
+    useEffect(() => {
+        if (isAuth) {
+            request_email()
         }
-        ask(event)
-
-    }
-
-    useEffect(()=>{
-        if(isPublic === false)
-            setAnonymous(false)
-    }, [isPublic])
+    }, [isAuth])
 
     return (
         <>
-            {isAuth?
+            {isAuth ?
+                <div>
+                    <Card className={classes.about} bg='secondary'>
+                        <Card.Body>
+                            <Card.Title className={classes.about_tittle}>
+                                <FormattedMessage id='about_welcome'/>{' ' + personEmail}
+                            </Card.Title>
+                            <div className={classes.about_ask}>
+                                {isTeacher ?
+                                    <FormattedMessage id='about_teacher'/>
+                                    :
+                                    <FormattedMessage id='about_student'/>
+                                }
+                            </div>
+                            <Ask/>
+                        </Card.Body>
+                    </Card>
+
                     <div className={classes.search_and_ask}>
+
                         <Search/>
-                        <Ask/>
+
                     </div>
+                </div>
                 : ""
             }
         </>

@@ -96,7 +96,7 @@ const Ask = () => {
             {isAuth && isTeacher === false ?
                 <>
                     <div className={classes.ask}>
-                        <Button className={classes.ask_btn} variant='info' onClick={handleShow}>
+                        <Button className={[classes.ask_btn, 'btn_white']} variant='info' onClick={handleShow}>
                             <FormattedMessage id='ask'/>
                         </Button>
                     </div>
@@ -177,7 +177,7 @@ const Ask = () => {
                                 </Alert>
                             </Modal.Body>
                             <Modal.Footer>
-                                <Button variant="info" type='submit'>
+                                <Button className='btn_white' variant="info" type='submit'>
                                     <FormattedMessage id='ask'/>
                                 </Button>
                             </Modal.Footer>

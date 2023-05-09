@@ -2,15 +2,27 @@ import axios from "axios";
 import host from '../settings/host'
 
 class GetQuestionsFilter {
-    static async get(access_token, setQuestions, renderQuestion, setRenderQuestion, filter, page, setTotalCount, setError) {
+    static async get(access_token, setQuestions, renderQuestion, setRenderQuestion, filter, page, setPage, setTotalCount, setError) {
         try {
-            const s = "Bearer "+access_token
-            const questions = await axios.post(`${host}/api/questions/for_student/filter/?page=${page}`,{
-                'filter': filter,
-            }, {headers: {"Authorization": s}})
-            setQuestions( questions.data['results'].reverse())
-            setRenderQuestion(renderQuestion + 1)
-            setTotalCount(questions.data['count'])
+
+            const s = "Bearer " + access_token
+            if (setPage) {
+                setPage(1)
+                const questions = await axios.post(`${host}/api/questions/for_student/filter/?page=1`, {
+                    'filter': filter,
+                }, {headers: {"Authorization": s}})
+                setQuestions(questions.data['results'])
+                setRenderQuestion(renderQuestion + 1)
+                setTotalCount(questions.data['count'])
+            } else {
+                const questions = await axios.post(`${host}/api/questions/for_student/filter/?page=${page}`, {
+                    'filter': filter,
+                }, {headers: {"Authorization": s}})
+                setQuestions(questions.data['results'])
+                setRenderQuestion(renderQuestion + 1)
+                setTotalCount(questions.data['count'])
+            }
+
             // localStorage.setItem('email', email)
             // localStorage.setItem('error', '')
 

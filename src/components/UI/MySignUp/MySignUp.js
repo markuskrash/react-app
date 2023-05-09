@@ -187,7 +187,7 @@ const MySignUp = () => {
                         </Alert>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button variant="info" type='submit'>
+                        <Button className='btn_white' variant="info" type='submit'>
                             <FormattedMessage id='signup'/>
                         </Button>
                     </Modal.Footer>

@@ -29,12 +29,28 @@
 /*    width: 100%;*/
 /*    color: white;*/
 /*}*/
-.question {
+.question_with_answer {
+    /*width: 100%;*/
+    /*max-width: 1200px;*/
     border: solid;
     border-radius: 15px;
     background-color: #cfe2ff;
     border-width: 1px;
     border-color: #b6d4fe;
+    /*min-height: 300px;*/
+    margin: 15px;
+    /*display: flex;*/
+    /*position: relative;*/
+}
+
+.question {
+    /*width: 100%;*/
+    /*max-width: 1200px;*/
+    border: solid;
+    border-radius: 15px;
+    background-color: #f1f1f1;
+    border-width: 1px;
+    border-color: rgba(0, 0, 0, 0.1);
     /*min-height: 300px;*/
     margin: 15px;
     /*display: flex;*/
@@ -55,5 +71,12 @@
     min-height: 50px;
     margin: 15px;
     width: 100%;
+    /*background: #0a53be;*/
     /*color: white;*/
 }
+
+/*.my_question{*/
+/*    border-color: #999 !important;*/
+/*}*/
+
+.m{}

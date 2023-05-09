@@ -6,7 +6,7 @@ class GetQuestionsForAnswer {
         try {
             const s = "Bearer "+access_token
             const questions = await axios.get(`${host}/api/questions/for_teacher/?page=${page}`, {headers: {"Authorization": s}})
-            setQuestions(questions.data['results'].reverse())
+            setQuestions(questions.data['results'])
             setTotalCount(questions.data['count'])
             return 0;
 

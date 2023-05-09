@@ -5,15 +5,22 @@
 
 .ask {
     display: flex;
-    justify-content: end;
+    justify-content: center;
+
 }
 
 .ask_btn {
     margin: 15px 0px;
+    width: 50%;
+    /*height: 100px;*/
 }
 
 .alertText{
     text-align: center;
+}
+
+.btn{
+    color: #ffffff !important;
 }
 
 /*.form_switch > input  {*/
@@ -35,11 +42,11 @@
 }
 
 .form_switch_input:focus {
-    box-shadow: none;
-    border-color: black;
+    box-shadow: none !important;
+    border-color: black !important;
 }
 
 .form_switch_input:checked {
-    background-color: black;
-    border-color: black;
+    background-color: black !important;
+    border-color: black !important;
 }

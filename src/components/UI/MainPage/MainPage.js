@@ -57,11 +57,15 @@ const MainPage = () => {
                     {isLoading ?
                         <Loading isLoading={isLoading}/>
                         : <></>}
-                    <SearchAndAsk/>
-                    {/*<Ask/>*/}
-                    {/*<Search/>*/}
-                    <Questions/>
-                    <Answers/>
+                    <div className={classes.about_and_search}>
+                        <div className={classes.about_and_search_item}>
+                            <SearchAndAsk/>
+                            {/*<Ask/>*/}
+                            {/*<Search/>*/}
+                            <Questions/>
+                            <Answers/>
+                        </div>
+                    </div>
                     {isAuth ?
                         <></>
                         :

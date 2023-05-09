@@ -20,3 +20,14 @@
   border-color: #b6d4fe;
   //padding: 15px;
 }
+
+.about_and_search_item{
+  width: 100%;
+  max-width: 1200px;
+}
+
+.about_and_search{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

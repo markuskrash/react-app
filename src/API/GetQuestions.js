@@ -6,7 +6,7 @@ class GetQuestions {
         try {
             const s = "Bearer "+access_token
             const questions = await axios.get(`${host}/api/questions/for_student/?page=${page}`, {headers: {"Authorization": s}})
-            setQuestions( questions.data['results'].reverse())
+            setQuestions( questions.data['results'])
             setTotalCount(questions.data['count'])
             // localStorage.setItem('email', email)
             // localStorage.setItem('error', '')

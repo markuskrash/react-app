@@ -160,7 +160,7 @@ const MyLogIn = () => {
                         </Alert>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button variant="info" type='submit'>
+                        <Button className='btn_white' variant="info" type='submit'>
                             <FormattedMessage id='login'/>
                         </Button>
                     </Modal.Footer>
