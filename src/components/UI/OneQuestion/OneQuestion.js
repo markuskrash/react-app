@@ -59,6 +59,8 @@ const OneQuestion = ({
         }
     }, [])
 
+
+
     useEffect(() => {
         if (status === "1") {
             request_answers();
@@ -71,9 +73,6 @@ const OneQuestion = ({
 
 
     const [answer, setAnswer] = useState("");
-    useEffect(() => {
-        console.log(answer)
-    }, [answer])
 
     const [request_answers] = useRequest(async (access_token) => {
         await GetAnswer.get(access_token, setAnswer, id, setError)
@@ -112,7 +111,7 @@ const OneQuestion = ({
     useEffect(() => {
         if (isAuth)
             request_owner()
-    }, [isAuth])
+    }, [isAuth, renderQuestion])
 
     return (
         status !== '0' ?

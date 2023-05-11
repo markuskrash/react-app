@@ -7,6 +7,7 @@ class GetId {
             const s = "Bearer " + access_token
             const person_id = await axios.get(`${host}/api/token/get/`, {headers: {"Authorization": s}})
             setPersonId(person_id.data)
+
             return 0;
 
         } catch (event) {

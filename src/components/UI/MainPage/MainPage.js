@@ -14,6 +14,7 @@ import APIIsTeacher from "../../../API/APIIsTeacher";
 import Search from "../Search/Search";
 import SearchAndAsk from "../SearchAndAsk/SearchAndAsk";
 import sclasses from "../../../custom.scss"
+import MainPageQuestions from "../MainPageQuestions/MainPageQuestions";
 
 const MainPage = () => {
     const {
@@ -64,25 +65,28 @@ const MainPage = () => {
                             {/*<Search/>*/}
                             <Questions/>
                             <Answers/>
+
+
+                            {isAuth ?
+                                <></>
+                                :
+                                <MainPageQuestions/>
+                                // <div className={classes.info}>
+                                //     <Card className={classes.info_card} bg='secondary'>
+                                //         <Card.Body as='Alert'>
+                                //             <Card.Title>
+                                //                 <FormattedMessage id='main_page_title_info'/>
+                                //             </Card.Title>
+                                //             <FormattedMessage id='main_page_info'/>
+                                //         </Card.Body>
+                                //     </Card>
+                                // </div>
+                                // <div className={classes.info}>
+                                //     <Alert variant='primary'><FormattedMessage id='main_page_info'/></Alert>
+                                // </div>
+                            }
                         </div>
                     </div>
-                    {isAuth ?
-                        <></>
-                        :
-                        <div className={classes.info}>
-                            <Card className={classes.info_card} bg='secondary'>
-                                <Card.Body as='Alert'>
-                                    <Card.Title>
-                                        <FormattedMessage id='main_page_title_info'/>
-                                    </Card.Title>
-                                    <FormattedMessage id='main_page_info'/>
-                                </Card.Body>
-                            </Card>
-                        </div>
-                        // <div className={classes.info}>
-                        //     <Alert variant='primary'><FormattedMessage id='main_page_info'/></Alert>
-                        // </div>
-                    }
                 </>
             }
         </>

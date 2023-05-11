@@ -111,7 +111,7 @@ const Ask = () => {
                                         required
                                         autoFocus
                                         as='textarea'
-                                        maxlength='50'
+                                        maxlength='100'
 
                                         className={classes.inputInfo}
                                         onChange={(e) => {
@@ -121,7 +121,7 @@ const Ask = () => {
                                     <Form.Label>
                                         <FormattedMessage id='max_length'/>
                                         {": "}
-                                        {50 - question.length}
+                                        {100 - question.length}
                                     </Form.Label>
                                 </Form.Group>
                                 <Form.Group

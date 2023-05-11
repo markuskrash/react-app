@@ -5,7 +5,7 @@ class CountAnswers {
     static async get(access_token, setCountAnswers, question, setError) {
         try {
             const s = "Bearer " + access_token
-            const count = await axios.get(`${host}/api/answers/count/${question}`, {headers: {"Authorization": s}})
+            const count = await axios.get(`${host}/api/answers/count/${question}`)
             setCountAnswers(count.data)
             return 0;
 

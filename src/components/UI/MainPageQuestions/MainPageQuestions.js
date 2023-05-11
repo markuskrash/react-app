@@ -1,5 +1,5 @@
 import React, {lazy, useContext, useEffect, useState, Suspense, useRef} from "react";
-import classes from "./Questions.module.scss"
+import classes from "./MainPageQuestions.module.scss"
 import {NavDropdown, Nav, Alert} from "react-bootstrap";
 import AuthContext from "../../../context";
 import {messages} from "../../../languages/messages";
@@ -14,9 +14,12 @@ import LazyOneQuestion from "../LazyOneQuestion/LazyOneQuestion";
 import LazyLoading from "../LazyLoading/LazyLoading";
 import OneQuestion from "../OneQuestion/OneQuestion";
 import {DOTS, usePagination} from "../../../hooks/usePagination";
+import GetMainPageQuestions from "../../../API/GetMainPageQuestions";
+import GetMainPageQuestionsFilter from "../../../API/GetMainPageQuestionsFilter";
+import OneMainPageQuestion from "../OneMainPageQuestion/OneMainPageQuestion";
 
 
-const Questions = () => {
+const MainPageQuestions = () => {
     const {
         isAuth,
         setIsAuth,
@@ -41,37 +44,29 @@ const Questions = () => {
     const [renderQuestion, setRenderQuestion] = useState(0);
 
     const [request_questions] = useRequest(async (access_token) => {
-        await GetQuestions.get(access_token, setQuestions, currentPage, setTotalCount, setError)
+        await GetMainPageQuestions.get(access_token, setQuestions, currentPage, setTotalCount, setError)
     })
 
     const [request_questions_filter] = useRequest(async (access_token) => {
-        await GetQuestionsFilter.get(access_token, setQuestionsFilter, renderQuestion, setRenderQuestion, filter, currentPage, null, setTotalCount, setError)
+        await GetMainPageQuestionsFilter.get(access_token, setQuestionsFilter, renderQuestion, setRenderQuestion, filter, currentPage, null, setTotalCount, setError)
     })
 
     const [request_questions_filter2] = useRequest(async (access_token) => {
-        await GetQuestionsFilter.get(access_token, setQuestionsFilter, renderQuestion, setRenderQuestion, filter, currentPage, setCurrentPage, setTotalCount, setError)
+        await GetMainPageQuestionsFilter.get(access_token, setQuestionsFilter, renderQuestion, setRenderQuestion, filter, currentPage, setCurrentPage, setTotalCount, setError)
     })
 
 
     useEffect(() => {
-        if (isAuth && isTeacher === false) {
-            request_questions()
-        } else if (!isAuth) {
-            setCurrentPage(1)
-            setFilter('')
-        }
+        request_questions()
+
     }, [renderQuestions, isAuth, isTeacher])
 
     useEffect(() => {
-        if (isAuth) {
-            request_questions_filter();
-        }
+        request_questions_filter();
     }, [questions])
 
     useEffect(() => {
-        if (isAuth) {
-            request_questions_filter2();
-        }
+        request_questions_filter2();
     }, [filter])
 
 
@@ -96,41 +91,35 @@ const Questions = () => {
     let lastPage = paginationRange[paginationRange.length - 1];
 
     useEffect(() => {
-        if (isAuth) {
-            request_questions_filter()
+        request_questions_filter()
 
-        }
     }, [currentPage])
 
     useEffect(() => {
-        if (isAuth) {
-            setRenderQuestion(renderQuestion + 1)
-        }
+        setRenderQuestion(renderQuestion + 1)
     }, [questionsFilter])
 
     return (
         <div>
-            {isAuth === true && isTeacher === false ?
-                questions.length > 0 ?
-                    questionsFilter.map(question => (
-                        <OneQuestion text={question['text']} status={question['status']}
-                                     reciever={question['reciever']}
-                                     id={question['id']} owner={question['owner']}
-                                     is_anonymous={question['anonymous']}
-                                     is_public={question['public']}
-                                     renderQuestion={renderQuestion}
-                                     currentPage={currentPage} setCurrentPage={setCurrentPage}
-                                     totalCount={questionsFilter.length / 10}
-                        />
-                    ))
+            {questions.length > 0 ?
+                questionsFilter.map(question => (
+                    <OneMainPageQuestion text={question['text']} status={question['status']}
+                                         reciever={question['reciever']}
+                                         id={question['id']} owner={question['owner']}
+                                         is_anonymous={question['anonymous']}
+                                         is_public={question['public']}
+                                         renderQuestion={renderQuestion}
+                                         currentPage={currentPage} setCurrentPage={setCurrentPage}
+                                         totalCount={questionsFilter.length / 10}
+                    />
+                ))
 
-                    :
-                    <div className={classes.questions}>
-                        <Alert variant='primary'><FormattedMessage id='questions_info'/></Alert>
-                    </div>
-                : ""
+                :
+                <div className={classes.questions}>
+                    <Alert variant='primary'><FormattedMessage id='all_info'/></Alert>
+                </div>
             }
-            {isAuth === true && isTeacher === false && paginationRange.length > 1 ?
+            {paginationRange.length > 1 ?
                 < div className={classes.pagination_container}>
                     <Button
                         className={[
@@ -189,4 +178,4 @@ const Questions = () => {
     )
 }
 
-export default Questions
+export default MainPageQuestions

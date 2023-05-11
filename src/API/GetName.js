@@ -5,7 +5,7 @@ class GetName {
     static async get(access_token, setPersonName, id, setError) {
         try {
             const s = "Bearer " + access_token
-            const person = await axios.get(`${host}/api/persons/${id}`, {headers: {"Authorization": s}})
+            const person = await axios.get(`${host}/api/persons/${id}`)
             setPersonName(person.data["last_name"] + ' ' + person.data["first_name"] + ' ' + person.data["middle_name"])
             return 0;
 

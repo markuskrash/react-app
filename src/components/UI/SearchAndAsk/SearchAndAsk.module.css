@@ -12,6 +12,13 @@ body .about{
 
 }
 
+body .about_all{
+    margin: 30px 15px 30px 15px;
+    border-radius: 15px !important;
+    background-color: rgba(0, 196, 12, 0.3) !important;
+
+}
+
 .about_ask{
     display: flex;
     align-items: center;

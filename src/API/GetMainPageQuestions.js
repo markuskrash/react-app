@@ -1,16 +1,12 @@
 import axios from "axios";
 import host from '../settings/host'
 
-class GetAnswer {
-    static async get(access_token, setAnswer, id, setError) {
+class GetMainPageQuestions {
+    static async get(access_token, setQuestions, page, setTotalCount, setError) {
         try {
-
-            const s = "Bearer " + access_token
-            const answer = await axios.get(`${host}/api/answers/${id}`)
-            setAnswer(answer.data)
-            // console.log(23, id, answer)
-
-
+            const questions = await axios.get(`${host}/api/questions/for_all/?page=${page}`)
+            setQuestions( questions.data['results'])
+            setTotalCount(questions.data['count'])
             // localStorage.setItem('email', email)
             // localStorage.setItem('error', '')
 
@@ -26,4 +22,4 @@ class GetAnswer {
     }
 }
 
-export default GetAnswer
+export default GetMainPageQuestions

@@ -38,14 +38,12 @@ const OneQuestionsForAnswer = ({text, status, owner, id, is_anonymous, is_public
     const handleClose = () => {
         setShow(false);
         setTextAnswer(lastTextAnswer)
-        if(status==='0')setLastTextAnswer('')
+        if (status === '0') setLastTextAnswer('')
     }
     const handleShow = () => {
         setShow(true);
-        if(status==='0')setLastTextAnswer('')
+        if (status === '0') setLastTextAnswer('')
     }
-
-
 
 
     useEffect(() => {
@@ -56,6 +54,7 @@ const OneQuestionsForAnswer = ({text, status, owner, id, is_anonymous, is_public
     }, [])
 
     useEffect(() => {
+        request_name()
         if (status === '1') {
             request_last_answer()
         }
@@ -116,120 +115,236 @@ const OneQuestionsForAnswer = ({text, status, owner, id, is_anonymous, is_public
     })
 
     return (
-        <div>
-            <div className={classes.answer}>
-                <div>
-                    {is_public ?
-                        is_anonymous ?
-                            <p className={classes.question_text}>
-                                <FormattedMessage id='student_question_public_anonymous'/>:{' '}
-                                <br/>
-                                &nbsp;&nbsp;&nbsp;&nbsp;{text}
-                            </p>
-                            :
-                            <p className={classes.question_text}>
-                                {personName} <FormattedMessage id='student_question_public'/>:{' '}
-                                <br/>
-                                &nbsp;&nbsp;&nbsp;&nbsp;{text}
-                            </p>
-                        :
-                        <p className={classes.question_text}>
-                            {personName} <FormattedMessage id='student_question'/>:{' '}
-                            <br/>
-                            &nbsp;&nbsp;&nbsp;&nbsp;{text}
-                        </p>
-                    }
-                    {status === '1' ?
-                        <p className={classes.answer_text}>
-                            <FormattedMessage id='your_answer'/>:{' '}
-                            <br/>
-                            &nbsp;&nbsp;&nbsp;&nbsp;{textAnswer}
-                        </p>
-                        :
-                        ''
-                    }
-                </div>
-                <div className={classes.make_answer}>
-                    <Button className={[classes.make_answer_btn, 'btn_white']} variant='info' onClick={handleShow}>
-                        {status === '1' ?
-                            <FormattedMessage id='change_answer'/>
-                            :
-                            <FormattedMessage id='make_answer'/>
-                        }
-                    </Button>
-                </div>
-            </div>
-            <Modal show={show} onHide={handleClose} animation={false}>
-                <Form noValidate onSubmit={sumbit}>
-                    <Modal.Header closeButton>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <Form.Group className="mb-3" controlId="validationCustom02">
-                            {is_public ?
-                                is_anonymous ?
-                                    <>
-                                        <FormattedMessage id='student_question_public_anonymous'/>:{' '}
-                                        <br/>
-                                        &nbsp;&nbsp;&nbsp;&nbsp;{text}
-                                    </>
-                                    :
-                                    <>
-                                        {personName} <FormattedMessage id='student_question_public'/>:{' '}
-                                        <br/>
-                                        &nbsp;&nbsp;&nbsp;&nbsp;{text}
-                                    </>
-                                :
-                                <>
-                                    {personName} <FormattedMessage id='student_question'/>:{' '}
+        status !== '0' ?
+            <div>
+                <div className={[classes.answer_done]}>
+                    <div>
+                        {is_public ?
+                            is_anonymous ?
+                                <p className={classes.question_text}>
+                                    <FormattedMessage id='student_question_public_anonymous'/>:{' '}
                                     <br/>
                                     &nbsp;&nbsp;&nbsp;&nbsp;{text}
-                                </>
-                            }
-                        </Form.Group>
-                        <Form.Group className="mb-3" controlId="validationCustom02">
-                            <Form.Label><FormattedMessage id='your_answer'/></Form.Label>
-                            <Form.Control
-                                required
-                                autoFocus
-                                as='textarea'
-                                maxlength='50'
-                                value={status === '1' ?
-                                    textAnswer
-                                    :
-                                    null
-                                }
-                                className={classes.inputInfo}
-                                onChange={(e) => {
-                                    setTextAnswer(e.target.value)
-                                }}
-                            />
-                            <Form.Label>
-                                <FormattedMessage id='max_length'/>
-                                {": "}
-                                {50 - textAnswer.length}
-                            </Form.Label>
-                        </Form.Group>
-                        <Alert variant='danger' show={isTryToAnswer}>
-                            <div className={classes.alertText}>
-                                {isTryToAnswer
-                                    ? <FormattedMessage id='answer_alert'/>
-                                    : ''
-                                }
-                            </div>
-                        </Alert>
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Button className='btn_white' variant="info" type='submit'>
+                                </p>
+                                :
+                                <p className={classes.question_text}>
+                                    {personName} <FormattedMessage id='student_question_public'/>:{' '}
+                                    <br/>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;{text}
+                                </p>
+                            :
+                            <p className={classes.question_text}>
+                                {personName} <FormattedMessage id='student_question'/>:{' '}
+                                <br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;{text}
+                            </p>
+                        }
+                        {status === '1' ?
+                            <p className={classes.answer_text}>
+                                <FormattedMessage id='your_answer'/>:{' '}
+                                <br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;{textAnswer}
+                            </p>
+                            :
+                            ''
+                        }
+                    </div>
+                    <div className={classes.make_answer}>
+                        <Button className={[classes.make_answer_btn, 'btn_white']} variant='info' onClick={handleShow}>
                             {status === '1' ?
-                                <FormattedMessage id='save_changes'/>
+                                <FormattedMessage id='change_answer'/>
                                 :
                                 <FormattedMessage id='make_answer'/>
                             }
                         </Button>
-                    </Modal.Footer>
-                </Form>
-            </Modal>
-        </div>
+                    </div>
+                </div>
+                <Modal show={show} onHide={handleClose} animation={false}>
+                    <Form noValidate onSubmit={sumbit}>
+                        <Modal.Header closeButton>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <Form.Group className="mb-3" controlId="validationCustom02">
+                                {is_public ?
+                                    is_anonymous ?
+                                        <>
+                                            <FormattedMessage id='student_question_public_anonymous'/>:{' '}
+                                            <br/>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;{text}
+                                        </>
+                                        :
+                                        <>
+                                            {personName} <FormattedMessage id='student_question_public'/>:{' '}
+                                            <br/>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;{text}
+                                        </>
+                                    :
+                                    <>
+                                        {personName} <FormattedMessage id='student_question'/>:{' '}
+                                        <br/>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;{text}
+                                    </>
+                                }
+                            </Form.Group>
+                            <Form.Group className="mb-3" controlId="validationCustom02">
+                                <Form.Label><FormattedMessage id='your_answer'/></Form.Label>
+                                <Form.Control
+                                    required
+                                    autoFocus
+                                    as='textarea'
+                                    maxlength='100'
+                                    value={status === '1' ?
+                                        textAnswer
+                                        :
+                                        null
+                                    }
+                                    className={classes.inputInfo}
+                                    onChange={(e) => {
+                                        setTextAnswer(e.target.value)
+                                    }}
+                                />
+                                <Form.Label>
+                                    <FormattedMessage id='max_length'/>
+                                    {": "}
+                                    {100 - textAnswer.length}
+                                </Form.Label>
+                            </Form.Group>
+                            <Alert variant='danger' show={isTryToAnswer}>
+                                <div className={classes.alertText}>
+                                    {isTryToAnswer
+                                        ? <FormattedMessage id='answer_alert'/>
+                                        : ''
+                                    }
+                                </div>
+                            </Alert>
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button className='btn_white' variant="info" type='submit'>
+                                {status === '1' ?
+                                    <FormattedMessage id='save_changes'/>
+                                    :
+                                    <FormattedMessage id='make_answer'/>
+                                }
+                            </Button>
+                        </Modal.Footer>
+                    </Form>
+                </Modal>
+            </div>
+            :
+            <div>
+                <div className={classes.answer}>
+                    <div>
+                        {is_public ?
+                            is_anonymous ?
+                                <p className={classes.question_text}>
+                                    <FormattedMessage id='student_question_public_anonymous'/>:{' '}
+                                    <br/>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;{text}
+                                </p>
+                                :
+                                <p className={classes.question_text}>
+                                    {personName} <FormattedMessage id='student_question_public'/>:{' '}
+                                    <br/>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;{text}
+                                </p>
+                            :
+                            <p className={classes.question_text}>
+                                {personName} <FormattedMessage id='student_question'/>:{' '}
+                                <br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;{text}
+                            </p>
+                        }
+                        {status === '1' ?
+                            <p className={classes.answer_text}>
+                                <FormattedMessage id='your_answer'/>:{' '}
+                                <br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;{textAnswer}
+                            </p>
+                            :
+                            ''
+                        }
+                    </div>
+                    <div className={classes.make_answer}>
+                        <Button className={[classes.make_answer_btn, 'btn_white']} variant='info' onClick={handleShow}>
+                            {status === '1' ?
+                                <FormattedMessage id='change_answer'/>
+                                :
+                                <FormattedMessage id='make_answer'/>
+                            }
+                        </Button>
+                    </div>
+                </div>
+                <Modal show={show} onHide={handleClose} animation={false}>
+                    <Form noValidate onSubmit={sumbit}>
+                        <Modal.Header closeButton>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <Form.Group className="mb-3" controlId="validationCustom02">
+                                {is_public ?
+                                    is_anonymous ?
+                                        <>
+                                            <FormattedMessage id='student_question_public_anonymous'/>:{' '}
+                                            <br/>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;{text}
+                                        </>
+                                        :
+                                        <>
+                                            {personName} <FormattedMessage id='student_question_public'/>:{' '}
+                                            <br/>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;{text}
+                                        </>
+                                    :
+                                    <>
+                                        {personName} <FormattedMessage id='student_question'/>:{' '}
+                                        <br/>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;{text}
+                                    </>
+                                }
+                            </Form.Group>
+                            <Form.Group className="mb-3" controlId="validationCustom02">
+                                <Form.Label><FormattedMessage id='your_answer'/></Form.Label>
+                                <Form.Control
+                                    required
+                                    autoFocus
+                                    as='textarea'
+                                    maxlength='100'
+                                    value={status === '1' ?
+                                        textAnswer
+                                        :
+                                        null
+                                    }
+                                    className={classes.inputInfo}
+                                    onChange={(e) => {
+                                        setTextAnswer(e.target.value)
+                                    }}
+                                />
+                                <Form.Label>
+                                    <FormattedMessage id='max_length'/>
+                                    {": "}
+                                    {100 - textAnswer.length}
+                                </Form.Label>
+                            </Form.Group>
+                            <Alert variant='danger' show={isTryToAnswer}>
+                                <div className={classes.alertText}>
+                                    {isTryToAnswer
+                                        ? <FormattedMessage id='answer_alert'/>
+                                        : ''
+                                    }
+                                </div>
+                            </Alert>
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button className='btn_white' variant="info" type='submit'>
+                                {status === '1' ?
+                                    <FormattedMessage id='save_changes'/>
+                                    :
+                                    <FormattedMessage id='make_answer'/>
+                                }
+                            </Button>
+                        </Modal.Footer>
+                    </Form>
+                </Modal>
+            </div>
     )
 }
 

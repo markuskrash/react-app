@@ -54,7 +54,7 @@ const Search = () => {
                             placeholder={messages[locale]['search']}
                             as='input'
                             className={classes.search_input}
-                            maxLength="50"
+                            maxLength="100"
                             onChange={(e) => {
                                 setTempFilter(e.target.value)
                             }}

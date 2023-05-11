@@ -76,7 +76,20 @@ const SearchAndAsk = () => {
 
                     </div>
                 </div>
-                : ""
+                : <Card className={classes.about_all} bg='secondary'>
+                        <Card.Body>
+                            <Card.Title className={classes.about_tittle}>
+                                <FormattedMessage id='about_welcome'/>
+                            </Card.Title>
+                            <div className={classes.about_ask}>
+                                <FormattedMessage id='about_all'/>
+                                <br/>
+                            </div>
+                            <div className={classes.about_ask}>
+                                <FormattedMessage id='about_all_start'/>
+                            </div>
+                        </Card.Body>
+                    </Card>
             }
         </>
 
