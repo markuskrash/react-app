@@ -15,6 +15,9 @@ import Status from "../../../API/Status";
 import GetName from "../../../API/GetName";
 import PutStatus from "../../../API/PutStatus";
 import CountAnswers from "../../../API/CountAnswers";
+import white_eye from '../../../images/white_eye.svg'
+import black_eye from '../../../images/black_eye.svg'
+import white_pencil from '../../../images/white_pencil.svg'
 
 
 const OneQuestionsForAnswer = ({text, status, owner, id, is_anonymous, is_public, renderAnswer, setRenderAnswer}) => {
@@ -187,7 +190,7 @@ const OneQuestionsForAnswer = ({text, status, owner, id, is_anonymous, is_public
                                 >
                                     <Button className={[classes.btn_edit, 'btn_white']} variant='info'
                                             onClick={handleShow}>
-                                        ред
+                                        <img src={white_pencil}/>
                                     </Button>
                                 </OverlayTrigger>
                             </div>
@@ -197,13 +200,21 @@ const OneQuestionsForAnswer = ({text, status, owner, id, is_anonymous, is_public
                                     placement='left'
                                     overlay={
                                         <Tooltip>
-                                            <FormattedMessage id='about_hide'/>
+                                            {status === '2' ?
+                                                <FormattedMessage id='about_hide_off'/>
+                                                :
+                                                <FormattedMessage id='about_hide_on'/>
+                                            }
                                         </Tooltip>
                                     }
                                 >
                                     <Button className={[classes.btn_hide, status === '2' ? '' : 'btn_white']}
                                             variant={status === '2' ? 'warning' : 'info'} onClick={hide_answer}>
-                                        глаз
+                                        {status === '2' ?
+                                            <img src={black_eye}/>
+                                            :
+                                            <img src={white_eye}/>
+                                        }
                                     </Button>
                                 </OverlayTrigger>
                             </div>
@@ -250,13 +261,21 @@ const OneQuestionsForAnswer = ({text, status, owner, id, is_anonymous, is_public
                                     placement='left'
                                     overlay={
                                         <Tooltip>
-                                            <FormattedMessage id='about_hide'/>
+                                            {status === '2' ?
+                                                <FormattedMessage id='about_hide_off'/>
+                                                :
+                                                <FormattedMessage id='about_hide_on'/>
+                                            }
                                         </Tooltip>
                                     }
                                 >
                                     <Button className={[classes.btn_hide, status === '2' ? '' : 'btn_white']}
                                             variant={status === '2' ? 'warning' : 'info'} onClick={hide_answer}>
-                                        глаз
+                                        {status === '2' ?
+                                            <img src={black_eye}/>
+                                            :
+                                            <img src={white_eye}/>
+                                        }
                                     </Button>
                                 </OverlayTrigger>
                             </div>

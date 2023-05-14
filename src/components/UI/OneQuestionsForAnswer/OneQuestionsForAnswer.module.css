@@ -71,9 +71,11 @@
 
 .btn_hide{
     margin: 15px;
+    padding: 2px 3px !important;
 }
 .btn_edit{
     margin: 15px 0 15px 15px;
+    padding: 2px 3px !important;
 }
 
 
