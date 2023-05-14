@@ -20,6 +20,7 @@ class GetQuestionsForAnswerFilter {
                 setQuestions(questions.data['results'])
                 setTotalCount(questions.data['count'])
             }
+
             return 0;
 
         } catch (event) {

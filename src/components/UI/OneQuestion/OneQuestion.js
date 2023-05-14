@@ -50,7 +50,6 @@ const OneQuestion = ({
 
     useEffect(() => {
         if (status === "1") {
-
             request_answers();
             request_count()
             request_id()
@@ -58,7 +57,6 @@ const OneQuestion = ({
 
         }
     }, [])
-
 
 
     useEffect(() => {
@@ -114,9 +112,8 @@ const OneQuestion = ({
     }, [isAuth, renderQuestion])
 
     return (
-        status !== '0' ?
-            <div
-                className={[classes.question_with_answer + ' ' + (personId === owner ? classes.my_question : classes.m)]}>
+        status === '1' ?
+            <div className={classes.question_with_answer}>
                 {is_public ?
                     personId === owner ?
                         is_anonymous ?
@@ -151,7 +148,7 @@ const OneQuestion = ({
                         &nbsp;&nbsp;&nbsp;&nbsp;{text}
                     </p>
                 }
-                <div className={classes.answer_text}>
+                <p className={classes.answer_text}>
                     {status === "0" ?
                         <FormattedMessage id='wait_answer'/>
                         :
@@ -167,10 +164,10 @@ const OneQuestion = ({
                             &nbsp;&nbsp;&nbsp;&nbsp;{answer}
                         </>
                     }
-                </div>
+                </p>
             </div>
             :
-            <div className={[classes.question +' ' + (personId === owner? classes.my_question: classes.m)]}>
+            <div className={classes.question}>
                 {is_public ?
                     personId === owner ?
                         is_anonymous ?
@@ -209,17 +206,23 @@ const OneQuestion = ({
                     {status === "0" ?
                         <FormattedMessage id='wait_answer'/>
                         :
-                        <>
-                            {recieverName} <FormattedMessage id='teacher_answer'/>
-                            {countAnswers > 1 ?
-                                <h> (<FormattedMessage id='is_edited'/>)</h>
-                                :
-                                ''}
-                            :{' '}
-                            {/*<br/>*/}
-                            <br/>
-                            &nbsp;&nbsp;&nbsp;&nbsp;{answer}
-                        </>
+                        status === '2' ?
+                            <>
+                                {recieverName} <FormattedMessage id='hide_student'/>
+                            </>
+
+                            :
+                            <>
+                                {recieverName} <FormattedMessage id='teacher_answer'/>
+                                {countAnswers > 1 ?
+                                    <h> (<FormattedMessage id='is_edited'/>)</h>
+                                    :
+                                    ''}
+                                :{' '}
+                                {/*<br/>*/}
+                                <br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;{answer}
+                            </>
                     }
                 </div>
             </div>

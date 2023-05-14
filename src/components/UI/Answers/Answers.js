@@ -118,6 +118,7 @@ const Answers = () => {
                                                id={question['id']} is_anonymous={question['anonymous']}
                                                is_public={question['public']}
                                                renderAnswer={renderAnswer}
+                                               setRenderAnswer={setRenderAnswer}
                         />
                     ))
                     :

@@ -13,7 +13,7 @@ class PostAnswer {
                     question: question,
                 },
                 {headers: {"Authorization": s}})
-            const change_status = await axios.post(`${host}/api/questions/post/${question}/`, {}, {headers: {"Authorization": s}})
+            const change_status = await axios.post(`${host}/api/questions/post/${question}/to_1/`, {}, {headers: {"Authorization": s}})
             setRenderAnswers(renderAnswers + 1)
             setIsTryToAnswer(false)
             handleClose()

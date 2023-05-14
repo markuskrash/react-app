@@ -40,6 +40,7 @@
     /*min-height: 300px;*/
     margin: 15px;
     /*display: flex;*/
+    /*justify-content: space-between;*/
     /*position: relative;*/
 }
 
@@ -60,7 +61,7 @@
 .answer_text {
     /*bottom: 0;*/
     min-height: 50px;
-    width: 100%;
+    width: auto;
     margin: 15px;
     /*color: white;*/
     /*position: absolute;*/
@@ -70,13 +71,8 @@
 .question_text{
     min-height: 50px;
     margin: 15px;
-    width: 100%;
+    width: auto;
     /*background: #0a53be;*/
     /*color: white;*/
 }
 
-/*.my_question{*/
-/*    border-color: #999 !important;*/
-/*}*/
-
-.m{}

@@ -7,6 +7,7 @@
     /*min-height: 300px;*/
     margin: 15px;
     /*display: flex;*/
+    /*justify-content: space-between;*/
     /*position: relative;*/
 }
 
@@ -22,13 +23,16 @@
     /*min-height: 300px;*/
     margin: 15px;
     /*display: flex;*/
+    /*justify-content: space-between;*/
     /*position: relative;*/
+}
+
+.ans_and_quest{
+    width: 100%;
 }
 
 .make_answer {
     /*bottom: 0;*/
-    height: 67.6px;
-    width: 100%;
     display: flex;
     justify-content: end;
     /*position: absolute;*/
@@ -36,23 +40,43 @@
 
 .make_answer_btn {
     margin: 15px;
+    max-height: 67.6px;
+
 }
 
 .question_text{
-    height: calc((100% - 67px )* 0.5);
+    /*height: calc((100% - 67px )* 0.5);*/
     min-height: 50px;
     margin: 15px;
-    width: 100%;
+    width: auto;
     /*color: white;*/
 }
 
 .answer_text{
-    height: calc((100% - 67px )* 0.5);
+    /*height: calc((100% - 67px )* 0.5);*/
     min-height: 50px;
     margin: 15px;
-    width: 100%;
+    width: auto;
     /*color: white;*/
 }
+
+.without_btn_answer{
+    display: flex;
+    justify-content: end;
+}
+
+.hide_and_edit{
+    display: flex;
+}
+
+.btn_hide{
+    margin: 15px;
+}
+.btn_edit{
+    margin: 15px 0 15px 15px;
+}
+
+
 
 .inputInfo:focus {
     box-shadow: none !important;
